@@ -1,0 +1,19 @@
+# Dependências de Produção:
+1. Express (framework para o backend):
+   npm install express
+
+2. CORS (para habilitar o compartilhamento de recursos entre origens diferentes):
+   npm install cors
+
+3. MSSQL (para conexão com o banco de dados SQL Server):
+   npm install mssql
+
+# Dependências de Desenvolvimento:
+1. Tailwind CSS (para estilização do frontend):
+   npm install -D tailwindcss postcss autoprefixer
+
+# Inicializar a configuração do Tailwind CSS:
+   npx tailwindcss init
+
+# Para reinstalar todas as dependências do projeto:
+   npm install

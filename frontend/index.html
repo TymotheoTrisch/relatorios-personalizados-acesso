@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Principal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans h-screen">
+    <header class="bg-blue-500 text-white py-4">
+        <h1 class="text-3xl font-bold text-center">Menu Principal</h1>
+    </header>
+
+    <main class="container mx-auto px-4 mt-10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Opção 1: Gerar Script SQL -->
+            <a href="gerar-script-sql.html"
+                class="block bg-white shadow rounded-lg p-6 text-center hover:bg-blue-100 transition">
+                <h2 class="text-xl font-bold text-gray-800">Gerar Script SQL</h2>
+                <p class="text-gray-600 mt-2">Crie scripts SQL personalizados para o banco de dados.</p>
+            </a>
+
+            <!-- Opção 2: Gerar Layout SQL -->
+            <a href="gerar-layout-sql.html"
+                class="block bg-white shadow rounded-lg p-6 text-center hover:bg-blue-100 transition">
+                <h2 class="text-xl font-bold text-gray-800">Gerar Layout SQL</h2>
+                <p class="text-gray-600 mt-2">Gere layouts SQL para tabelas e consultas.</p>
+            </a>
+
+            <!-- Opção 3: Consultar Tabelas do Banco -->
+            <a href="consultar-tabelas.html"
+                class="block bg-white shadow rounded-lg p-6 text-center hover:bg-blue-100 transition">
+                <h2 class="text-xl font-bold text-gray-800">Consultar Tabelas do Banco</h2>
+                <p class="text-gray-600 mt-2">Visualize as tabelas e dados do banco de dados.</p>
+            </a>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 inset-x-0 bottom-0 text-white text-center py-4 absolute w-full">
+        <p>&copy; 2025 - Sistema de Integração de Acesso</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dados das Tabelas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Estilos personalizados */
+    .table-container {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .table-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 5px 5px 0 0;
+      transition: background-color 0.3s ease;
+    }
+    .table-title:hover {
+      background-color: #0056b3;
+    }
+    .table-content {
+      display: none;
+      overflow-x: auto;
+      max-height: 300px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px 15px;
+      text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    th {
+      background-color: #f4f4f4;
+      font-weight: bold;
+    }
+    td {
+      background-color: #fff;
+    }
+    .arrow {
+      font-size: 16px;
+      transition: transform 0.3s ease;
+    }
+    .arrow.open {
+      transform: rotate(90deg);
+    }
+  </style>
+</head>
+<body class="bg-gray-100 font-sans">
+  <h1 class="text-3xl font-bold text-center text-gray-800 my-6">Dados das Tabelas</h1>
+  <div id="tables" class="container mx-auto px-4"></div>
+
+  <script>
+    // URL da API
+    const apiUrl = 'http://localhost:3001/all-tables';
+
+    // Função para buscar os dados da API
+    async function fetchTables() {
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        renderTables(data);
+      } catch (error) {
+        console.error('Erro ao buscar os dados:', error);
+      }
+    }
+
+    // Função para renderizar as tabelas no DOM
+    function renderTables(tables) {
+      const tablesContainer = document.getElementById('tables');
+      tables.forEach(table => {
+        // Cria o container para cada tabela
+        const tableContainer = document.createElement('div');
+        tableContainer.classList.add('table-container', 'mb-4', 'bg-white', 'shadow', 'rounded');
+
+        // Adiciona o título da tabela com a seta
+        const tableTitle = document.createElement('div');
+        tableTitle.classList.add('table-title', 'flex', 'justify-between', 'items-center', 'p-4', 'bg-blue-500', 'text-white', 'cursor-pointer', 'rounded-t');
+        tableTitle.innerHTML = `
+          Tabela: ${table.tableName}
+          <span class="arrow">&#9654;</span>
+        `;
+        tableContainer.appendChild(tableTitle);
+
+        // Cria o conteúdo da tabela (inicialmente escondido)
+        const tableContent = document.createElement('div');
+        tableContent.classList.add('table-content', 'overflow-x-auto', 'max-h-80');
+
+        const tableElement = document.createElement('table');
+        tableElement.classList.add('table-auto', 'w-full', 'border-collapse');
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+
+        // Adiciona os cabeçalhos das colunas
+        const headerRow = document.createElement('tr');
+        table.columns.forEach(column => {
+          const th = document.createElement('th');
+          th.textContent = column.columnName;
+          th.classList.add('border', 'px-4', 'py-2', 'bg-gray-200', 'text-left');
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+
+        // Adiciona os dados das colunas
+        table.data.forEach(row => {
+          const dataRow = document.createElement('tr');
+          table.columns.forEach(column => {
+            const td = document.createElement('td');
+            td.textContent = row[column.columnName] || ''; // Preenche com vazio se o valor for nulo
+            td.classList.add('border', 'px-4', 'py-2');
+            dataRow.appendChild(td);
+          });
+          tbody.appendChild(dataRow);
+        });
+
+        tableElement.appendChild(thead);
+        tableElement.appendChild(tbody);
+        tableContent.appendChild(tableElement);
+        tableContainer.appendChild(tableContent);
+
+        // Adiciona o evento de clique para expandir/colapsar
+        tableTitle.addEventListener('click', () => {
+          const arrow = tableTitle.querySelector('.arrow');
+          tableContent.style.display = tableContent.style.display === 'block' ? 'none' : 'block';
+          arrow.classList.toggle('open');
+        });
+
+        // Adiciona o container ao DOM
+        tablesContainer.appendChild(tableContainer);
+      });
+    }
+
+    // Chama a função para buscar os dados ao carregar a página
+    fetchTables();
+  </script>
+</body>
+</html>

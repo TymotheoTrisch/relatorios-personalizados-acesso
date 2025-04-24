@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Relatórios SQL</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+  <header class="bg-blue-500 text-white py-4">
+    <h1 class="text-3xl font-bold text-center">Gerador de Relatórios SQL</h1>
+  </header>
+
+  <main class="container mx-auto px-4 mt-10">
+    <!-- Formulário de Seleção -->
+    <div class="bg-white shadow rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">Configurar Relatório</h2>
+      <form id="sqlForm">
+        <!-- Seleção de Tabelas -->
+        <div class="mb-4">
+          <label for="tables" class="block text-gray-700 font-bold mb-2">Selecione a Tabela:</label>
+          <select id="tables" class="w-full border-gray-300 rounded-lg shadow-sm">
+            <option value="pessoas">Pessoas</option>
+            <option value="eventos_acessos">Eventos Acessos</option>
+            <option value="classificacoes">Classificações</option>
+            <option value="empresas">Empresas</option>
+          </select>
+        </div>
+
+        <!-- Seleção de Colunas -->
+        <div class="mb-4">
+          <label for="columns" class="block text-gray-700 font-bold mb-2">Selecione as Colunas:</label>
+          <select id="columns" multiple class="w-full border-gray-300 rounded-lg shadow-sm">
+            <option value="id">ID</option>
+            <option value="nome">Nome</option>
+            <option value="data">Data</option>
+            <option value="hora">Hora</option>
+            <option value="descricao">Descrição</option>
+          </select>
+        </div>
+
+        <!-- Filtros -->
+        <div class="mb-4">
+          <label for="filters" class="block text-gray-700 font-bold mb-2">Adicione Filtros:</label>
+          <textarea id="filters" rows="3" class="w-full border-gray-300 rounded-lg shadow-sm" placeholder="Exemplo: data BETWEEN '2025-01-01' AND '2025-12-31'"></textarea>
+        </div>
+
+        <!-- Botão Gerar SQL -->
+        <button type="button" id="generateSql" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+          Gerar SQL
+        </button>
+      </form>
+    </div>
+
+    <!-- Área de Visualização e Edição -->
+    <div class="bg-white shadow rounded-lg p-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">SQL Gerado</h2>
+      <textarea id="sqlOutput" rows="10" class="w-full border-gray-300 rounded-lg shadow-sm"></textarea>
+    </div>
+  </main>
+
+  <script>
+    // Função para gerar o SQL
+    document.getElementById('generateSql').addEventListener('click', () => {
+      const table = document.getElementById('tables').value;
+      const columns = Array.from(document.getElementById('columns').selectedOptions).map(option => option.value);
+      const filters = document.getElementById('filters').value;
+
+      // Gera o SQL dinamicamente
+      let sql = `SELECT ${columns.length > 0 ? columns.join(', ') : '*'} FROM ${table}`;
+      if (filters.trim()) {
+        sql += ` WHERE ${filters}`;
+      }
+      sql += ' ORDER BY 1';
+
+      // Exibe o SQL gerado
+      document.getElementById('sqlOutput').value = sql;
+    });
+  </script>
+</body>
+</html>
