@@ -12,37 +12,19 @@
   </header>
 
   <main class="container mx-auto px-4 mt-10">
-    <!-- Formulário de Seleção -->
     <div class="bg-white shadow rounded-lg p-6 mb-6">
       <h2 class="text-xl font-bold text-gray-800 mb-4">Configurar Relatório</h2>
       <form id="sqlForm">
         <!-- Seleção de Tabelas -->
         <div class="mb-4">
-          <label for="tables" class="block text-gray-700 font-bold mb-2">Selecione a Tabela:</label>
-          <select id="tables" class="w-full border-gray-300 rounded-lg shadow-sm">
-            <option value="pessoas">Pessoas</option>
-            <option value="eventos_acessos">Eventos Acessos</option>
-            <option value="classificacoes">Classificações</option>
-            <option value="empresas">Empresas</option>
-          </select>
+          <label for="tables" class="block text-gray-700 font-bold mb-2">Selecione as Tabelas:</label>
+          <select id="tables" multiple class="w-full border-gray-300 rounded-lg shadow-sm"></select>
         </div>
 
         <!-- Seleção de Colunas -->
         <div class="mb-4">
           <label for="columns" class="block text-gray-700 font-bold mb-2">Selecione as Colunas:</label>
-          <select id="columns" multiple class="w-full border-gray-300 rounded-lg shadow-sm">
-            <option value="id">ID</option>
-            <option value="nome">Nome</option>
-            <option value="data">Data</option>
-            <option value="hora">Hora</option>
-            <option value="descricao">Descrição</option>
-          </select>
-        </div>
-
-        <!-- Filtros -->
-        <div class="mb-4">
-          <label for="filters" class="block text-gray-700 font-bold mb-2">Adicione Filtros:</label>
-          <textarea id="filters" rows="3" class="w-full border-gray-300 rounded-lg shadow-sm" placeholder="Exemplo: data BETWEEN '2025-01-01' AND '2025-12-31'"></textarea>
+          <select id="columns" multiple class="w-full border-gray-300 rounded-lg shadow-sm"></select>
         </div>
 
         <!-- Botão Gerar SQL -->
@@ -56,26 +38,70 @@
     <div class="bg-white shadow rounded-lg p-6">
       <h2 class="text-xl font-bold text-gray-800 mb-4">SQL Gerado</h2>
       <textarea id="sqlOutput" rows="10" class="w-full border-gray-300 rounded-lg shadow-sm"></textarea>
+      <button type="button" id="executeSql" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 mt-4">
+        Executar SQL
+      </button>
     </div>
+
+    <!-- Área de Resultados -->
+    <div id="results" class="bg-white shadow rounded-lg p-6 mt-6"></div>
   </main>
 
   <script>
-    // Função para gerar o SQL
-    document.getElementById('generateSql').addEventListener('click', () => {
-      const table = document.getElementById('tables').value;
-      const columns = Array.from(document.getElementById('columns').selectedOptions).map(option => option.value);
-      const filters = document.getElementById('filters').value;
+    const apiBaseUrl = 'http://localhost:3001/api/sql-generator';
 
-      // Gera o SQL dinamicamente
-      let sql = `SELECT ${columns.length > 0 ? columns.join(', ') : '*'} FROM ${table}`;
-      if (filters.trim()) {
-        sql += ` WHERE ${filters}`;
+    // Carrega as tabelas disponíveis
+    async function loadTables() {
+      const response = await fetch(`${apiBaseUrl}/tables`);
+      const tables = await response.json();
+      const tablesSelect = document.getElementById('tables');
+      tables.forEach(table => {
+        const option = document.createElement('option');
+        option.value = table.tableName;
+        option.textContent = table.tableName;
+        tablesSelect.appendChild(option);
+      });
+    }
+
+    // Carrega as colunas da tabela selecionada
+    document.getElementById('tables').addEventListener('change', async () => {
+      const selectedTables = Array.from(document.getElementById('tables').selectedOptions).map(opt => opt.value);
+      const columnsSelect = document.getElementById('columns');
+      columnsSelect.innerHTML = ''; // Limpa as colunas
+      for (const table of selectedTables) {
+        const response = await fetch(`${apiBaseUrl}/columns/${table}`);
+        const columns = await response.json();
+        columns.forEach(column => {
+          const option = document.createElement('option');
+          option.value = `${table}.${column.columnName}`;
+          option.textContent = `${table}.${column.columnName}`;
+          columnsSelect.appendChild(option);
+        });
       }
-      sql += ' ORDER BY 1';
+    });
 
-      // Exibe o SQL gerado
+    // Gera o SQL
+    document.getElementById('generateSql').addEventListener('click', () => {
+      const columns = Array.from(document.getElementById('columns').selectedOptions).map(opt => opt.value);
+      const sql = `SELECT ${columns.join(', ')} FROM ${columns.map(col => col.split('.')[0]).join(', ')}`;
       document.getElementById('sqlOutput').value = sql;
     });
+
+    // Executa o SQL
+    document.getElementById('executeSql').addEventListener('click', async () => {
+      const sqlQuery = document.getElementById('sqlOutput').value;
+      const response = await fetch(`${apiBaseUrl}/execute-sql`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sqlQuery }),
+      });
+      const results = await response.json();
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = `<pre>${JSON.stringify(results, null, 2)}</pre>`;
+    });
+
+    // Inicializa a página
+    loadTables();
   </script>
 </body>
 </html>
