@@ -5,6 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gerador de Relatórios SQL</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+    }
+    .selection-panel, .query-panel {
+      flex: 1;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .query-panel textarea {
+      font-size: 14px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+    .results-panel {
+      display: none;
+      margin-top: 20px;
+    }
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .results-table th, .results-table td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    .results-table th {
+      background-color: #f4f4f4;
+    }
+  </style>
 </head>
 <body class="bg-gray-100 font-sans">
   <header class="bg-blue-500 text-white py-4">
@@ -12,7 +45,8 @@
   </header>
 
   <main class="container mx-auto px-4 mt-10">
-    <div class="bg-white shadow rounded-lg p-6 mb-6">
+    <!-- Painel de Seleção -->
+    <div class="selection-panel bg-white shadow rounded-lg p-6">
       <h2 class="text-xl font-bold text-gray-800 mb-4">Configurar Relatório</h2>
       <form id="sqlForm">
         <!-- Seleção de Tabelas -->
@@ -27,6 +61,12 @@
           <select id="columns" multiple class="w-full border-gray-300 rounded-lg shadow-sm"></select>
         </div>
 
+        <!-- Operadores e Cláusulas -->
+        <div class="mb-4">
+          <label for="conditions" class="block text-gray-700 font-bold mb-2">Condições (WHERE, ORDER BY, etc.):</label>
+          <textarea id="conditions" rows="5" class="w-full border-gray-300 rounded-lg shadow-sm"></textarea>
+        </div>
+
         <!-- Botão Gerar SQL -->
         <button type="button" id="generateSql" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
           Gerar SQL
@@ -34,18 +74,27 @@
       </form>
     </div>
 
-    <!-- Área de Visualização e Edição -->
-    <div class="bg-white shadow rounded-lg p-6">
+    <!-- Painel de Query -->
+    <div class="query-panel bg-white shadow rounded-lg p-6">
       <h2 class="text-xl font-bold text-gray-800 mb-4">SQL Gerado</h2>
       <textarea id="sqlOutput" rows="10" class="w-full border-gray-300 rounded-lg shadow-sm"></textarea>
       <button type="button" id="executeSql" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 mt-4">
         Executar SQL
       </button>
     </div>
-
-    <!-- Área de Resultados -->
-    <div id="results" class="bg-white shadow rounded-lg p-6 mt-6"></div>
   </main>
+
+  <!-- Painel de Resultados -->
+  <div class="results-panel container mx-auto px-4 mt-10 bg-white shadow rounded-lg p-6">
+    <h2 class="text-xl font-bold text-gray-800 mb-4">Resultados</h2>
+    <button id="toggleResults" class="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600 mb-4">
+      Ocultar Resultados
+    </button>
+    <table class="results-table">
+      <thead id="resultsHeader"></thead>
+      <tbody id="resultsBody"></tbody>
+    </table>
+  </div>
 
   <script>
     const apiBaseUrl = 'http://localhost:3001/api/sql-generator';
@@ -83,7 +132,24 @@
     // Gera o SQL
     document.getElementById('generateSql').addEventListener('click', () => {
       const columns = Array.from(document.getElementById('columns').selectedOptions).map(opt => opt.value);
-      const sql = `SELECT ${columns.join(', ')} FROM ${columns.map(col => col.split('.')[0]).join(', ')}`;
+      const tables = Array.from(document.getElementById('tables').selectedOptions).map(opt => opt.value);
+      const conditions = document.getElementById('conditions').value;
+
+      // Gera os INNER JOINs automaticamente
+      let joins = '';
+      if (tables.length > 1) {
+        joins = tables.slice(1).map((table, index) => {
+          return `INNER JOIN ${table} ON ${tables[0]}.id = ${table}.id`; // Ajuste conforme a lógica de chave estrangeira
+        }).join(' ');
+      }
+
+      const sql = `
+        SELECT ${columns.join(', ')}
+        FROM ${tables[0]}
+        ${joins}
+        ${conditions ? `WHERE ${conditions}` : ''}
+      `.trim();
+
       document.getElementById('sqlOutput').value = sql;
     });
 
@@ -96,8 +162,45 @@
         body: JSON.stringify({ sqlQuery }),
       });
       const results = await response.json();
-      const resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = `<pre>${JSON.stringify(results, null, 2)}</pre>`;
+
+      // Exibe os resultados na tabela
+      const resultsHeader = document.getElementById('resultsHeader');
+      const resultsBody = document.getElementById('resultsBody');
+      resultsHeader.innerHTML = '';
+      resultsBody.innerHTML = '';
+
+      if (results.length > 0) {
+        const headers = Object.keys(results[0]);
+        const headerRow = document.createElement('tr');
+        headers.forEach(header => {
+          const th = document.createElement('th');
+          th.textContent = header;
+          headerRow.appendChild(th);
+        });
+        resultsHeader.appendChild(headerRow);
+
+        results.forEach(row => {
+          const rowElement = document.createElement('tr');
+          headers.forEach(header => {
+            const td = document.createElement('td');
+            td.textContent = row[header];
+            rowElement.appendChild(td);
+          });
+          resultsBody.appendChild(rowElement);
+        });
+      }
+
+      document.querySelector('.results-panel').style.display = 'block';
+    });
+
+    // Ocultar/Exibir Resultados
+    document.getElementById('toggleResults').addEventListener('click', () => {
+      const resultsPanel = document.querySelector('.results-panel');
+      if (resultsPanel.style.display === 'none') {
+        resultsPanel.style.display = 'block';
+      } else {
+        resultsPanel.style.display = 'none';
+      }
     });
 
     // Inicializa a página

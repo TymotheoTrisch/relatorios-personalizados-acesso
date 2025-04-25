@@ -17,3 +17,6 @@
 
 # Para reinstalar todas as dependências do projeto:
    npm install
+   
+# Para Liberar scripts no terminal
+   Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
