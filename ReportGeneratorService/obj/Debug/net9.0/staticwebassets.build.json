@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "1JsLstGrzXzda7c1V9MjndM2E6iMlg9Yu2qvI216Z2g=",
+  "Source": "ReportGeneratorService",
+  "BasePath": "_content/ReportGeneratorService",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
