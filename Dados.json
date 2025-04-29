@@ -1,0 +1,4679 @@
+{
+  "agenda_comunicacao": {
+    "description": "Tabela de agendamento de comunicações",
+    "columns": {
+      "id": {
+        "description": "Identificador único da comunicação",
+        "type": "integer"
+      },
+      "tarefa": {
+        "description": "Tipo de tarefa",
+        "type": "tinyint"
+      },
+      "data": {
+        "description": "Data do agendamento",
+        "type": "smalldatetime"
+      },
+      "hora": {
+        "description": "Hora do agendamento",
+        "type": "varchar"
+      },
+      "enviar_data": {
+        "description": "Indica se deve enviar data",
+        "type": "bit"
+      },
+      "enviar_pessoas": {
+        "description": "Indica se deve enviar para pessoas",
+        "type": "bit"
+      },
+      "enviar_horarios": {
+        "description": "Indica se deve enviar horários",
+        "type": "bit"
+      },
+      "enviar_acionamentos": {
+        "description": "Indica se deve enviar acionamentos",
+        "type": "bit"
+      },
+      "receber_registros": {
+        "description": "Indica se deve receber registros",
+        "type": "bit"
+      },
+      "ultima_execucao": {
+        "description": "Data e hora da última execução",
+        "type": "datetime"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou",
+        "type": "integer"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou",
+        "type": "integer"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      },
+      "enviar_digitais": {
+        "description": "Indica se deve enviar digitais",
+        "type": "bit"
+      },
+      "digitais_tipo_acao": {
+        "description": "Tipo de ação para digitais",
+        "type": "tinyint"
+      },
+      "digitais_liberados": {
+        "description": "Indica se digitais estão liberadas",
+        "type": "bit"
+      },
+      "receber_digitais": {
+        "description": "Indica se deve receber digitais",
+        "type": "bit"
+      },
+      "somente_digitais_novas": {
+        "description": "Indica se somente digitais novas",
+        "type": "bit"
+      },
+      "lido": {
+        "description": "Indica se foi lido",
+        "type": "bit"
+      },
+      "resultado_execucao": {
+        "description": "Resultado da execução",
+        "type": "varchar"
+      },
+      "descricao": {
+        "description": "Descrição detalhada",
+        "type": "varchar"
+      },
+      "repeticao_minutos": {
+        "description": "Intervalo de repetição em minutos",
+        "type": "smallint"
+      }
+    }
+  },
+  "agenda_comunicacao_equips": {
+    "description": "Relação entre agendamentos de comunicação e equipamentos",
+    "columns": {
+      "agenda_id": {
+        "description": "ID do agendamento",
+        "type": "integer"
+      },
+      "equipamento_id": {
+        "description": "ID do equipamento",
+        "type": "integer"
+      }
+    }
+  },
+  "agenda_tarefas": {
+    "description": "Tabela de tarefas agendadas",
+    "columns": {
+      "id": {
+        "description": "Identificador único da tarefa",
+        "type": "integer"
+      },
+      "tipo_tarefa": {
+        "description": "Tipo da tarefa",
+        "type": "tinyint"
+      },
+      "tipo_momento": {
+        "description": "Tipo de momento da tarefa",
+        "type": "tinyint"
+      },
+      "data": {
+        "description": "Data do agendamento",
+        "type": "smalldatetime"
+      },
+      "hora": {
+        "description": "Hora do agendamento",
+        "type": "varchar"
+      },
+      "obs": {
+        "description": "Observações",
+        "type": "varchar"
+      },
+      "ultima_execucao": {
+        "description": "Data e hora da última execução",
+        "type": "smalldatetime"
+      },
+      "backup_remoto": {
+        "description": "Indica se faz backup remoto",
+        "type": "bit"
+      },
+      "lido": {
+        "description": "Indica se foi lido",
+        "type": "bit"
+      },
+      "resultado_execucao": {
+        "description": "Resultado da execução",
+        "type": "varchar"
+      },
+      "repeticao_minutos": {
+        "description": "Intervalo de repetição em minutos",
+        "type": "smallint"
+      }
+    }
+  },
+  "agenda_visitas": {
+    "description": "Tabela de agendamento de visitas",
+    "columns": {
+      "id": {
+        "description": "Identificador único da visita",
+        "type": "integer"
+      },
+      "agendamento_data": {
+        "description": "Data do agendamento",
+        "type": "smalldatetime"
+      },
+      "agendamento_hora": {
+        "description": "Hora do agendamento",
+        "type": "varchar"
+      },
+      "visitante_documento": {
+        "description": "Documento do visitante",
+        "type": "varchar"
+      },
+      "visitante_nome": {
+        "description": "Nome do visitante",
+        "type": "varchar"
+      },
+      "visitante_empresa": {
+        "description": "Empresa do visitante",
+        "type": "varchar"
+      },
+      "quem_visitar_id": {
+        "description": "ID de quem será visitado",
+        "type": "integer"
+      },
+      "nivel_acesso_id": {
+        "description": "ID do nível de acesso",
+        "type": "integer"
+      },
+      "validade_data_fim": {
+        "description": "Data final de validade",
+        "type": "smalldatetime"
+      },
+      "validade_hora_fim": {
+        "description": "Hora final de validade",
+        "type": "varchar"
+      },
+      "obs": {
+        "description": "Observações",
+        "type": "varchar"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      },
+      "criacao_pessoa_id": {
+        "description": "ID da pessoa que criou",
+        "type": "integer"
+      },
+      "visitante_tipo_documento": {
+        "description": "Tipo de documento do visitante",
+        "type": "integer"
+      },
+      "visitante_celular": {
+        "description": "Celular do visitante",
+        "type": "varchar"
+      },
+      "visitante_email": {
+        "description": "Email do visitante",
+        "type": "varchar"
+      },
+      "id_global": {
+        "description": "Identificador global único",
+        "type": "uniqueidentifier"
+      },
+      "foto_visitante": {
+        "description": "Foto do visitante",
+        "type": "image"
+      },
+      "visitante_tipo_id": {
+        "description": "Tipo de visitante",
+        "type": "uniqueidentifier"
+      }
+    }
+  },
+  "ambientes": {
+    "description": "Tabela de ambientes",
+    "columns": {
+      "id": {
+        "description": "Identificador único do ambiente",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição do ambiente",
+        "type": "varchar"
+      },
+      "lotacao_maxima": {
+        "description": "Lotação máxima do ambiente",
+        "type": "integer"
+      },
+      "quantidade_atual": {
+        "description": "Quantidade atual no ambiente",
+        "type": "integer"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou",
+        "type": "integer"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou",
+        "type": "integer"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      },
+      "amb_controle_est": {
+        "description": "Indica se controla estacionamento",
+        "type": "bit"
+      },
+      "bloq_acesso_veiculos": {
+        "description": "Indica se bloqueia acesso de veículos",
+        "type": "bit"
+      },
+      "amb_controla_box": {
+        "description": "Indica se controla box",
+        "type": "bit"
+      },
+      "nao_controlar_outras_empresas": {
+        "description": "Indica se não controla outras empresas",
+        "type": "bit"
+      }
+    }
+  },
+  "ambientes_empresas": {
+    "description": "Relação entre ambientes e empresas",
+    "columns": {
+      "ambiente_id": {
+        "description": "ID do ambiente",
+        "type": "integer"
+      },
+      "empresa_id": {
+        "description": "ID da empresa",
+        "type": "integer"
+      },
+      "lotacao_maxima": {
+        "description": "Lotação máxima para a empresa",
+        "type": "integer"
+      },
+      "quantidade_atual": {
+        "description": "Quantidade atual para a empresa",
+        "type": "integer"
+      }
+    }
+  },
+  "ambientes_vagas_lista": {
+    "description": "Lista de vagas em ambientes",
+    "columns": {
+      "id": {
+        "description": "Identificador único",
+        "type": "integer"
+      },
+      "ambiente_id": {
+        "description": "ID do ambiente",
+        "type": "integer"
+      },
+      "pessoa_id": {
+        "description": "ID da pessoa",
+        "type": "integer"
+      },
+      "classificacao_id": {
+        "description": "ID da classificação",
+        "type": "integer"
+      },
+      "estrutura_id": {
+        "description": "ID da estrutura",
+        "type": "integer"
+      },
+      "filtro1_id": {
+        "description": "ID do filtro 1",
+        "type": "integer"
+      },
+      "filtro2_id": {
+        "description": "ID do filtro 2",
+        "type": "integer"
+      }
+    }
+  },
+  "apartamentos": {
+    "description": "Tabela de apartamentos",
+    "columns": {
+      "id": {
+        "description": "Identificador único do apartamento",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição do apartamento",
+        "type": "varchar"
+      },
+      "bloco_id": {
+        "description": "ID do bloco",
+        "type": "integer"
+      },
+      "id_global": {
+        "description": "Identificador global único",
+        "type": "uniqueidentifier"
+      }
+    }
+  },
+  "arquivo_fotos": {
+    "description": "Armazenamento de fotos",
+    "columns": {
+      "chave": {
+        "description": "Chave de identificação",
+        "type": "varchar"
+      },
+      "dados": {
+        "description": "Dados da imagem",
+        "type": "image"
+      }
+    }
+  },
+  "blocos": {
+    "description": "Tabela de blocos",
+    "columns": {
+      "id": {
+        "description": "Identificador único do bloco",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição do bloco",
+        "type": "varchar"
+      },
+      "id_global": {
+        "description": "Identificador global único",
+        "type": "uniqueidentifier"
+      }
+    }
+  },
+  "bloqueios_extras": {
+    "description": "Tabela de bloqueios extras",
+    "columns": {
+      "id": {
+        "description": "Identificador único do bloqueio",
+        "type": "integer"
+      },
+      "pessoa_id": {
+        "description": "ID da pessoa",
+        "type": "integer"
+      },
+      "tipo": {
+        "description": "Tipo de bloqueio",
+        "type": "tinyint"
+      },
+      "data_inicio": {
+        "description": "Data de início",
+        "type": "smalldatetime"
+      },
+      "data_fim": {
+        "description": "Data de fim",
+        "type": "smalldatetime"
+      },
+      "hora_inicio": {
+        "description": "Hora de início",
+        "type": "varchar"
+      },
+      "hora_fim": {
+        "description": "Hora de fim",
+        "type": "varchar"
+      },
+      "obs": {
+        "description": "Observações",
+        "type": "varchar"
+      },
+      "msg_display": {
+        "description": "Mensagem para display",
+        "type": "varchar"
+      },
+      "equipamentos": {
+        "description": "Equipamentos afetados",
+        "type": "varchar"
+      },
+      "grupo_bloqueio_id": {
+        "description": "ID do grupo de bloqueio",
+        "type": "integer"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou",
+        "type": "integer"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou",
+        "type": "integer"
+      },
+      "integracao_id": {
+        "description": "ID de integração",
+        "type": "integer"
+      },
+      "sentido": {
+        "description": "Sentido do bloqueio",
+        "type": "tinyint"
+      }
+    }
+  },
+  "bloqueios_extras_grupo": {
+    "description": "Grupos de bloqueios extras",
+    "columns": {
+      "id": {
+        "description": "Identificador único do grupo",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição do grupo",
+        "type": "varchar"
+      }
+    }
+  },
+  "boxes": {
+    "description": "Tabela de boxes",
+    "columns": {
+      "id": {
+        "description": "Identificador único do box",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição do box",
+        "type": "varchar"
+      },
+      "ocupado": {
+        "description": "Indica se está ocupado",
+        "type": "bit"
+      },
+      "ocupacao_pessoa_id": {
+        "description": "ID da pessoa que ocupa",
+        "type": "integer"
+      }
+    }
+  },
+  "caixas_correios": {
+    "description": "Tabela de caixas de correio",
+    "columns": {
+      "id": {
+        "description": "Identificador único da caixa",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição da caixa",
+        "type": "varchar"
+      },
+      "n_identificador": {
+        "description": "Número identificador",
+        "type": "varchar"
+      },
+      "situacao": {
+        "description": "Situação da caixa",
+        "type": "tinyint"
+      }
+    }
+  },
+  "cameras": {
+    "description": "Tabela de câmeras",
+    "columns": {
+      "id": {
+        "description": "Identificador único da câmera",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição da câmera",
+        "type": "varchar"
+      },
+      "marca_modelo": {
+        "description": "Marca/modelo da câmera",
+        "type": "tinyint"
+      },
+      "ip": {
+        "description": "Endereço IP",
+        "type": "varchar"
+      },
+      "configs": {
+        "description": "Configurações",
+        "type": "varchar"
+      },
+      "numero": {
+        "description": "Número da câmera",
+        "type": "integer"
+      },
+      "porta": {
+        "description": "Porta de comunicação",
+        "type": "integer"
+      }
+    }
+  },
+  "chaves": {
+    "description": "Tabela de chaves",
+    "columns": {
+      "id": {
+        "description": "Identificador único da chave",
+        "type": "integer"
+      },
+      "n_identificador": {
+        "description": "Número identificador",
+        "type": "varchar"
+      },
+      "nome": {
+        "description": "Nome da chave",
+        "type": "varchar"
+      },
+      "local": {
+        "description": "Localização da chave",
+        "type": "varchar"
+      }
+    }
+  },
+  "chaves_registros": {
+    "description": "Registros de uso de chaves",
+    "columns": {
+      "id": {
+        "description": "Identificador único do registro",
+        "type": "integer"
+      },
+      "pessoa_id": {
+        "description": "ID da pessoa",
+        "type": "integer"
+      },
+      "chave_id": {
+        "description": "ID da chave",
+        "type": "integer"
+      },
+      "tipo_acesso": {
+        "description": "Tipo de acesso",
+        "type": "tinyint"
+      },
+      "data": {
+        "description": "Data do registro",
+        "type": "smalldatetime"
+      },
+      "hora": {
+        "description": "Hora do registro",
+        "type": "integer"
+      }
+    }
+  },
+  "classificacao_historico": {
+    "description": "Histórico de classificações",
+    "columns": {
+      "id": {
+        "description": "Identificador único",
+        "type": "integer"
+      },
+      "pessoa_id": {
+        "description": "ID da pessoa",
+        "type": "integer"
+      },
+      "classificacao_id": {
+        "description": "ID da classificação",
+        "type": "integer"
+      },
+      "data_inicio": {
+        "description": "Data de início",
+        "type": "smalldatetime"
+      },
+      "hora_inicio": {
+        "description": "Hora de início",
+        "type": "varchar"
+      },
+      "data_fim": {
+        "description": "Data de fim",
+        "type": "smalldatetime"
+      },
+      "hora_fim": {
+        "description": "Hora de fim",
+        "type": "varchar"
+      }
+    }
+  },
+  "classificacoes": {
+    "description": "Tabela de classificações",
+    "columns": {
+      "id": {
+        "description": "Identificador único da classificação",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição da classificação",
+        "type": "varchar"
+      },
+      "usar_urna": {
+        "description": "Indica se usa urna",
+        "type": "bit"
+      },
+      "estacionamento_vagas_maxima": {
+        "description": "Vagas máximas no estacionamento",
+        "type": "integer"
+      },
+      "estacionamento_vagas_ocupadas": {
+        "description": "Vagas ocupadas no estacionamento",
+        "type": "integer"
+      },
+      "apartamento_obrigatorio": {
+        "description": "Indica se apartamento é obrigatório",
+        "type": "bit"
+      },
+      "box_obrigatorio": {
+        "description": "Indica se box é obrigatório",
+        "type": "bit"
+      },
+      "deposito_obrigatorio": {
+        "description": "Indica se depósito é obrigatório",
+        "type": "bit"
+      },
+      "elevador_perfil": {
+        "description": "Perfil do elevador",
+        "type": "varchar"
+      }
+    }
+  },
+  "comunicados": {
+    "description": "Tabela de comunicados",
+    "columns": {
+      "id": {
+        "description": "Identificador único do comunicado",
+        "type": "uniqueidentifier"
+      },
+      "titulo": {
+        "description": "Título do comunicado",
+        "type": "varchar"
+      },
+      "visivel": {
+        "description": "Indica se está visível",
+        "type": "tinyint"
+      },
+      "visivel_ate": {
+        "description": "Data até quando é visível",
+        "type": "smalldatetime"
+      },
+      "texto": {
+        "description": "Texto do comunicado",
+        "type": "ntext"
+      }
+    }
+  },
+  "config_etiqueta": {
+    "description": "Configurações de etiquetas",
+    "columns": {
+      "id": {
+        "description": "Identificador único",
+        "type": "integer"
+      },
+      "tipo_folha": {
+        "description": "Tipo de folha",
+        "type": "tinyint"
+      },
+      "margem_superior": {
+        "description": "Margem superior",
+        "type": "real"
+      },
+      "margem_esquerda": {
+        "description": "Margem esquerda",
+        "type": "real"
+      },
+      "etiqueta_altura": {
+        "description": "Altura da etiqueta",
+        "type": "real"
+      },
+      "etiqueta_largura": {
+        "description": "Largura da etiqueta",
+        "type": "real"
+      },
+      "etiquetas_horizontais": {
+        "description": "Quantidade horizontal de etiquetas",
+        "type": "tinyint"
+      },
+      "etiquetas_verticais": {
+        "description": "Quantidade vertical de etiquetas",
+        "type": "tinyint"
+      },
+      "posicao": {
+        "description": "Posição",
+        "type": "tinyint"
+      },
+      "impressao_auto": {
+        "description": "Impressão automática",
+        "type": "bit"
+      },
+      "paisagem": {
+        "description": "Orientação paisagem",
+        "type": "bit"
+      },
+      "tipo_visualizacao": {
+        "description": "Tipo de visualização",
+        "type": "tinyint"
+      }
+    }
+  },
+  "configs": {
+    "description": "Configurações do sistema",
+    "columns": {
+      "nome": {
+        "description": "Nome da configuração",
+        "type": "varchar"
+      },
+      "valor": {
+        "description": "Valor da configuração",
+        "type": "varchar"
+      }
+    }
+  },
+  "consumo_conta_corrente": {
+    "description": "Conta corrente de consumo",
+    "columns": {
+      "id": {
+        "description": "Identificador único",
+        "type": "integer"
+      },
+      "data": {
+        "description": "Data do consumo",
+        "type": "smalldatetime"
+      },
+      "hora": {
+        "description": "Hora do consumo",
+        "type": "varchar"
+      },
+      "quantidade": {
+        "description": "Quantidade consumida",
+        "type": "real"
+      },
+      "valor": {
+        "description": "Valor do consumo",
+        "type": "money"
+      },
+      "obs": {
+        "description": "Observações",
+        "type": "varchar"
+      },
+      "pessoa_id": {
+        "description": "ID da pessoa",
+        "type": "integer"
+      },
+      "produto_id": {
+        "description": "ID do produto",
+        "type": "integer"
+      },
+      "tipo_origem": {
+        "description": "Tipo de origem",
+        "type": "tinyint"
+      },
+      "a_vista": {
+        "description": "Indica se foi à vista",
+        "type": "bit"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou",
+        "type": "integer"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou",
+        "type": "integer"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      }
+    }
+  },
+  "consumo_produtos": {
+    "description": "Produtos para consumo",
+    "columns": {
+      "id": {
+        "description": "Identificador único do produto",
+        "type": "integer"
+      },
+      "codigo": {
+        "description": "Código do produto",
+        "type": "varchar"
+      },
+      "descricao": {
+        "description": "Descrição do produto",
+        "type": "varchar"
+      },
+      "tipo_produto_id": {
+        "description": "ID do tipo de produto",
+        "type": "integer"
+      },
+      "valor": {
+        "description": "Valor do produto",
+        "type": "smallmoney"
+      },
+      "qt_disponivel": {
+        "description": "Quantidade disponível",
+        "type": "real"
+      },
+      "qt_minimo": {
+        "description": "Quantidade mínima",
+        "type": "real"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou",
+        "type": "integer"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou",
+        "type": "integer"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      }
+    }
+  },
+  "consumo_tipos_produtos": {
+    "description": "Tipos de produtos para consumo",
+    "columns": {
+      "id": {
+        "description": "Identificador único do tipo",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição do tipo",
+        "type": "varchar"
+      }
+    }
+  },
+  "correspondencias": {
+    "description": "Tabela de correspondências",
+    "columns": {
+      "id": {
+        "description": "Identificador único",
+        "type": "uniqueidentifier"
+      },
+      "data_entrega": {
+        "description": "Data de entrega",
+        "type": "datetime"
+      },
+      "hora_entrega": {
+        "description": "Hora de entrega",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição",
+        "type": "varchar"
+      },
+      "apartamento_id": {
+        "description": "ID do apartamento",
+        "type": "integer"
+      },
+      "destinatario_id": {
+        "description": "ID do destinatário",
+        "type": "integer"
+      },
+      "pessoa_retirada_id": {
+        "description": "ID de quem retirou",
+        "type": "integer"
+      },
+      "data_retirada": {
+        "description": "Data de retirada",
+        "type": "datetime"
+      },
+      "hora_retirada": {
+        "description": "Hora de retirada",
+        "type": "integer"
+      },
+      "status": {
+        "description": "Status",
+        "type": "tinyint"
+      },
+      "senha": {
+        "description": "Senha",
+        "type": "varchar"
+      }
+    }
+  },
+  "criptografia_numeros": {
+    "description": "Criptografia de números",
+    "columns": {
+      "de": {
+        "description": "Valor original",
+        "type": "varchar"
+      },
+      "para": {
+        "description": "Valor criptografado",
+        "type": "varchar"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou",
+        "type": "integer"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou",
+        "type": "integer"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      }
+    }
+  },
+  "depositos": {
+    "description": "Tabela de depósitos",
+    "columns": {
+      "id": {
+        "description": "Identificador único do depósito",
+        "type": "integer"
+      },
+      "descricao": {
+        "description": "Descrição do depósito",
+        "type": "varchar"
+      }
+    }
+  },
+  "elevadores_andares": {
+    "description": "Andares de elevadores",
+    "columns": {
+      "andar": {
+        "description": "Andar",
+        "type": "varchar"
+      },
+      "zona_id": {
+        "description": "ID da zona",
+        "type": "integer"
+      },
+      "template": {
+        "description": "Template",
+        "type": "varchar"
+      }
+    }
+  },
+  "elevadores_configs": {
+    "description": "Configurações de elevadores",
+    "columns": {
+      "id": {
+        "description": "Identificador único",
+        "type": "integer"
+      },
+      "ativar": {
+        "description": "Indica se está ativo",
+        "type": "bit"
+      },
+      "sistema": {
+        "description": "Sistema",
+        "type": "tinyint"
+      },
+      "modo": {
+        "description": "Modo",
+        "type": "tinyint"
+      },
+      "servidor": {
+        "description": "Servidor",
+        "type": "varchar"
+      },
+      "porta_tcp": {
+        "description": "Porta TCP",
+        "type": "integer"
+      },
+      "porta_tcp_bd": {
+        "description": "Porta TCP BD",
+        "type": "integer"
+      },
+      "andar_base": {
+        "description": "Andar base",
+        "type": "varchar"
+      }
+    }
+  },
+  "elevadores_tarefas": {
+    "description": "Tarefas de elevadores",
+    "columns": {
+      "id": {
+        "description": "Identificador único",
+        "type": "integer"
+      },
+      "data_hora": {
+        "description": "Data e hora",
+        "type": "smalldatetime"
+      },
+      "tarefa": {
+        "description": "Tarefa",
+        "type": "tinyint"
+      },
+      "parametros": {
+        "description": "Parâmetros",
+        "type": "varchar"
+      },
+      "feita": {
+        "description": "Indica se foi feita",
+        "type": "bit"
+      },
+      "resposta": {
+        "description": "Resposta",
+        "type": "varchar"
+      }
+    }
+  },
+  "empresas": {
+    "description": "Tabela de empresas",
+    "columns": {
+      "id": {
+        "description": "Identificador único da empresa",
+        "type": "integer"
+      },
+      "nome": {
+        "description": "Nome da empresa",
+        "type": "varchar"
+      },
+      "inscricao": {
+        "description": "Inscrição",
+        "type": "varchar"
+      },
+      "cnpj": {
+        "description": "CNPJ",
+        "type": "varchar"
+      },
+      "endereco": {
+        "description": "Endereço",
+        "type": "varchar"
+      },
+      "bairro": {
+        "description": "Bairro",
+        "type": "varchar"
+      },
+      "cidade": {
+        "description": "Cidade",
+        "type": "varchar"
+      },
+      "cep": {
+        "description": "CEP",
+        "type": "varchar"
+      },
+      "uf": {
+        "description": "UF",
+        "type": "varchar"
+      },
+      "telefone": {
+        "description": "Telefone",
+        "type": "varchar"
+      },
+      "fax": {
+        "description": "Fax",
+        "type": "varchar"
+      },
+      "obs": {
+        "description": "Observações",
+        "type": "varchar"
+      },
+      "responsavel": {
+        "description": "Responsável",
+        "type": "varchar"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou",
+        "type": "integer"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou",
+        "type": "integer"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      },
+      "pais": {
+        "description": "País",
+        "type": "varchar"
+      },
+      "responsavel_cargo": {
+        "description": "Cargo do responsável",
+        "type": "varchar"
+      },
+      "responsavel_email": {
+        "description": "Email do responsável",
+        "type": "varchar"
+      },
+      "elevador_andares": {
+        "description": "Andares do elevador",
+        "type": "varchar"
+      },
+      "tipo_documento": {
+        "description": "Tipo de documento",
+        "type": "integer"
+      }
+    }
+  },
+  "equipamentos": {
+    "description": "Tabela com dados dos equipamentos de controle",
+    "columns": {
+      "id": {
+        "description": "Identificador do equipamento",
+        "type": "int"
+      },
+      "codigo": {
+        "description": "Código do equipamento",
+        "type": "varchar"
+      },
+      "descricao": {
+        "description": "Descrição do equipamento",
+        "type": "varchar"
+      },
+      "tipo": {
+        "description": "Tipo do equipamento",
+        "type": "tinyint"
+      },
+      "estacao": {
+        "description": "Nome da estação",
+        "type": "varchar"
+      },
+      "on_line": {
+        "description": "Indica se está online",
+        "type": "bit"
+      },
+      "velocidade": {
+        "description": "Velocidade de comunicação",
+        "type": "int"
+      },
+      "porta_com": {
+        "description": "Porta de comunicação serial",
+        "type": "smallint"
+      },
+      "tipo_com": {
+        "description": "Tipo de comunicação",
+        "type": "smallint"
+      },
+      "ip": {
+        "description": "Endereço IP",
+        "type": "varchar"
+      },
+      "tempo_acionamento": {
+        "description": "Tempo de acionamento em milissegundos",
+        "type": "int"
+      },
+      "catraca": {
+        "description": "Indica se é uma catraca",
+        "type": "bit"
+      },
+      "ignorar_registro": {
+        "description": "Ignorar registros de acesso",
+        "type": "tinyint"
+      },
+      "lado_automatico": {
+        "description": "Controla lado automático",
+        "type": "bit"
+      },
+      "controlar_giro": {
+        "description": "Indica se controla o giro",
+        "type": "bit"
+      },
+      "solicita_senha": {
+        "description": "Solicita senha para acesso",
+        "type": "bit"
+      },
+      "config": {
+        "description": "Configuração adicional",
+        "type": "varchar"
+      },
+      "controlar_urna": {
+        "description": "Controla urna eletrônica",
+        "type": "bit"
+      },
+      "desativar_visitantes": {
+        "description": "Desativa visitantes",
+        "type": "bit"
+      },
+      "usar_descripto": {
+        "description": "Usa descripto para comunicação",
+        "type": "bit"
+      },
+      "controlar_estacionamento": {
+        "description": "Controla estacionamento",
+        "type": "bit"
+      },
+      "controlar_claviculario": {
+        "description": "Controla claviculário",
+        "type": "bit"
+      },
+      "versao_epron": {
+        "description": "Versão da EPROM",
+        "type": "int"
+      },
+      "tempo_msg": {
+        "description": "Tempo para exibição de mensagens",
+        "type": "int"
+      },
+      "revista_acessos": {
+        "description": "Revista obrigatória após acesso",
+        "type": "int"
+      },
+      "ambiente_id": {
+        "description": "ID do ambiente",
+        "type": "int"
+      },
+      "controlador_id": {
+        "description": "ID do controlador",
+        "type": "int"
+      },
+      "controlar_refeitorio": {
+        "description": "Controla refeitório",
+        "type": "bit"
+      },
+      "integracao_config": {
+        "description": "Configuração de integração",
+        "type": "tinyint"
+      },
+      "criacao_usu_id": {
+        "description": "Usuário que criou o registro",
+        "type": "int"
+      },
+      "criacao_data": {
+        "description": "Data de criação",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "Usuário que alterou o registro",
+        "type": "int"
+      },
+      "alteracao_data": {
+        "description": "Data de alteração",
+        "type": "datetime"
+      },
+      "DVR_n_camera": {
+        "description": "Número da câmera DVR",
+        "type": "int"
+      },
+      "ignorar_cobranca_ref": {
+        "description": "Ignora cobrança no refeitório",
+        "type": "tinyint"
+      },
+      "processo_id_liberado": {
+        "description": "Processo de acesso liberado",
+        "type": "int"
+      },
+      "processo_id_negado": {
+        "description": "Processo de acesso negado",
+        "type": "int"
+      },
+      "processo_id_conectado": {
+        "description": "Processo quando conectado",
+        "type": "int"
+      },
+      "processo_id_desconectado": {
+        "description": "Processo quando desconectado",
+        "type": "int"
+      },
+      "acesso_empresa": {
+        "description": "Controle de acesso empresarial",
+        "type": "bit"
+      },
+      "camera_id": {
+        "description": "ID da câmera associada",
+        "type": "int"
+      },
+      "comunicando": {
+        "description": "Data/hora da última comunicação",
+        "type": "smalldatetime"
+      },
+      "consulta_saldo": {
+        "description": "Consulta saldo antes do acesso",
+        "type": "bit"
+      },
+      "controlar_visitas": {
+        "description": "Controla visitas",
+        "type": "bit"
+      },
+      "catraca_saida_id": {
+        "description": "ID da catraca de saída",
+        "type": "int"
+      },
+      "comunicar_servidor": {
+        "description": "Comunica com o servidor",
+        "type": "bit"
+      },
+      "acesso_grupo_pessoas": {
+        "description": "Grupo de acesso de pessoas",
+        "type": "tinyint"
+      },
+      "acesso_grupo_segundos": {
+        "description": "Segundos de tolerância de acesso",
+        "type": "smallint"
+      },
+      "tabela_especifica_refeicao": {
+        "description": "Tabela específica de refeições",
+        "type": "int"
+      },
+      "config_ext": {
+        "description": "Configuração estendida",
+        "type": "ntext"
+      },
+      "consistir_somente_visitantes": {
+        "description": "Consistência apenas para visitantes",
+        "type": "bit"
+      },
+      "exigir_primeiro_acesso": {
+        "description": "Exige primeiro acesso registrado",
+        "type": "bit"
+      },
+      "usar_fechamento_acesso": {
+        "description": "Define tipo de fechamento de acesso",
+        "type": "varchar"
+      },
+      "desativado": {
+        "description": "Equipamento desativado",
+        "type": "bit"
+      },
+      "exceto_visitante": {
+        "description": "Exceto visitantes",
+        "type": "bit"
+      },
+      "desativar_visitante_independen": {
+        "description": "Desativa visitantes independentemente",
+        "type": "bit"
+      },
+      "elevador_terminal_id": {
+        "description": "ID do terminal de elevador",
+        "type": "int"
+      },
+      "ignorar_lado_estado_livre": {
+        "description": "Ignora estado livre de lado",
+        "type": "bit"
+      },
+      "lado_automatico_biometria": {
+        "description": "Lado automático via biometria",
+        "type": "bit"
+      },
+      "ajuste_hora": {
+        "description": "Ajuste de hora (minutos)",
+        "type": "int"
+      },
+      "id_global": {
+        "description": "Identificador global (UUID)",
+        "type": "uniqueidentifier"
+      },
+      "permitir_liberar_aplicativo": {
+        "description": "Permite liberar via app",
+        "type": "tinyint"
+      },
+      "descricao_aplicativo": {
+        "description": "Descrição do aplicativo",
+        "type": "varchar"
+      },
+      "icone_aplicativo": {
+        "description": "Ícone do aplicativo",
+        "type": "tinyint"
+      },
+      "padrao_liberar_aplicativo": {
+        "description": "Liberação padrão pelo app",
+        "type": "tinyint"
+      },
+      "desativar_envio_automatico": {
+        "description": "Desativa envio automático de dados",
+        "type": "bit"
+      },
+      "equipamento_relacao_id": {
+        "description": "ID do equipamento relacionado",
+        "type": "int"
+      },
+      "chave_comunicacao": {
+        "description": "Chave de comunicação",
+        "type": "varchar"
+      },
+      "somente_leitora": {
+        "description": "Somente leitura",
+        "type": "bit"
+      }
+    }
+  },
+  "equipamentos_consistencia": {
+    "description": "Tabela que relaciona equipamentos às consistências que devem ser aplicadas",
+    "columns": {
+      "equipamento_id": {
+        "description": "Identificador do equipamento",
+        "type": "int"
+      },
+      "consistencia_id": {
+        "description": "Identificador da consistência associada",
+        "type": "int"
+      }
+    }
+  },
+  "equipamentos_funcoes": {
+    "description": "Tabela de funções disponíveis para os equipamentos",
+    "columns": {
+      "id": {
+        "description": "Identificador único da função",
+        "type": "int"
+      },
+      "codigo": {
+        "description": "Código da função",
+        "type": "varchar"
+      },
+      "descricao": {
+        "description": "Descrição da função",
+        "type": "varchar"
+      }
+    }
+  },
+  "equipamentos_modelos": {
+    "description": "Tabela com os modelos de equipamentos e suas configurações associadas",
+    "columns": {
+      "id": {
+        "description": "Identificador único do modelo de equipamento",
+        "type": "int"
+      },
+      "marca": {
+        "description": "Marca do equipamento",
+        "type": "varchar"
+      },
+      "modelo": {
+        "description": "Modelo do equipamento",
+        "type": "varchar"
+      },
+      "prg_configuracao": {
+        "description": "Programa de configuração",
+        "type": "varchar"
+      },
+      "prg_man_digitais": {
+        "description": "Programa de gerenciamento de digitais",
+        "type": "varchar"
+      },
+      "prg_env_dados": {
+        "description": "Programa de envio de dados",
+        "type": "varchar"
+      },
+      "prg_rec_dados": {
+        "description": "Programa de recebimento de dados",
+        "type": "varchar"
+      },
+      "prg_nome_janela_rec_dados": {
+        "description": "Nome da janela do programa de recebimento de dados",
+        "type": "varchar"
+      },
+      "buscar_diretorio_sistema": {
+        "description": "Indica se o diretório do sistema deve ser buscado",
+        "type": "bit"
+      },
+      "rec_nome_arquivo": {
+        "description": "Nome do arquivo de recebimento",
+        "type": "varchar"
+      },
+      "rec_cracha_ini": {
+        "description": "Posição inicial do número do crachá no arquivo",
+        "type": "int"
+      },
+      "rec_cracha_tam": {
+        "description": "Tamanho do número do crachá no arquivo",
+        "type": "int"
+      },
+      "rec_data_ini": {
+        "description": "Posição inicial da data no arquivo",
+        "type": "int"
+      },
+      "rec_data_tam": {
+        "description": "Tamanho da data no arquivo",
+        "type": "int"
+      },
+      "rec_hora_ini": {
+        "description": "Posição inicial da hora no arquivo",
+        "type": "int"
+      },
+      "rec_hora_tam": {
+        "description": "Tamanho da hora no arquivo",
+        "type": "int"
+      },
+      "rec_equip_ini": {
+        "description": "Posição inicial do código do equipamento no arquivo",
+        "type": "int"
+      },
+      "rec_equip_tam": {
+        "description": "Tamanho do código do equipamento no arquivo",
+        "type": "int"
+      },
+      "rec_sentido_ini": {
+        "description": "Posição inicial do sentido de passagem",
+        "type": "int"
+      },
+      "rec_sentido_tam": {
+        "description": "Tamanho do sentido de passagem",
+        "type": "int"
+      },
+      "rec_sentido_palavra_sai": {
+        "description": "Palavra que identifica o sentido de saída",
+        "type": "varchar"
+      },
+      "rec_funcao_ini": {
+        "description": "Posição inicial da função do crachá",
+        "type": "int"
+      },
+      "rec_funcao_tam": {
+        "description": "Tamanho da função do crachá",
+        "type": "int"
+      },
+      "formato_data": {
+        "description": "Formato de data utilizado no arquivo",
+        "type": "varchar"
+      },
+      "usa_digitais": {
+        "description": "Indica se o modelo usa digitais",
+        "type": "bit"
+      },
+      "comunicar_via_api_rest": {
+        "description": "Indica se o modelo se comunica via API REST",
+        "type": "bit"
+      }
+    }
+  },
+  "equips_especiais": {
+    "description": "Tabela de equipamentos especiais com configurações específicas",
+    "columns": {
+      "id": {
+        "description": "Identificador único do equipamento especial",
+        "type": "int"
+      },
+      "codigo": {
+        "description": "Código do equipamento especial",
+        "type": "varchar"
+      },
+      "descricao": {
+        "description": "Descrição do equipamento especial",
+        "type": "varchar"
+      },
+      "tipo": {
+        "description": "Tipo do equipamento",
+        "type": "tinyint"
+      },
+      "velocidade": {
+        "description": "Velocidade de comunicação do equipamento",
+        "type": "int"
+      },
+      "porta_com": {
+        "description": "Porta de comunicação serial (COM)",
+        "type": "smallint"
+      },
+      "tipo_com": {
+        "description": "Tipo de comunicação (ex: serial, TCP/IP)",
+        "type": "smallint"
+      },
+      "ip": {
+        "description": "Endereço IP do equipamento",
+        "type": "varchar"
+      },
+      "config": {
+        "description": "Configuração adicional em formato textual",
+        "type": "varchar"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou o registro",
+        "type": "int"
+      },
+      "criacao_data": {
+        "description": "Data da criação do registro",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que realizou a última alteração",
+        "type": "int"
+      },
+      "alteracao_data": {
+        "description": "Data da última alteração do registro",
+        "type": "datetime"
+      },
+      "porta": {
+        "description": "Número da porta de rede usada pelo equipamento",
+        "type": "int"
+      }
+    }
+  },
+  "estado_civil": {
+    "description": "Tabela com os estados civis cadastrados",
+    "columns": {
+      "id": {
+        "description": "Identificador único do estado civil",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do estado civil (ex: solteiro, casado)",
+        "type": "varchar"
+      }
+    }
+  },
+  "estado_historico": {
+    "description": "Tabela que armazena o histórico de estados de uma pessoa",
+    "columns": {
+      "id": {
+        "description": "Identificador único do registro de histórico de estado",
+        "type": "int"
+      },
+      "pessoa_id": {
+        "description": "Identificador da pessoa relacionada ao estado",
+        "type": "int"
+      },
+      "estado": {
+        "description": "Estado da pessoa no momento do registro",
+        "type": "int"
+      },
+      "data_inicio": {
+        "description": "Data de início do estado registrado",
+        "type": "smalldatetime"
+      },
+      "hora_inicio": {
+        "description": "Hora de início do estado registrado",
+        "type": "varchar"
+      },
+      "data_fim": {
+        "description": "Data de término do estado registrado",
+        "type": "smalldatetime"
+      },
+      "hora_fim": {
+        "description": "Hora de término do estado registrado",
+        "type": "varchar"
+      }
+    }
+  },
+  "estruturas": {
+    "description": "Tabela que contém informações sobre as estruturas organizacionais ou físicas",
+    "columns": {
+      "id": {
+        "description": "Identificador único da estrutura",
+        "type": "int"
+      },
+      "codigo": {
+        "description": "Código único da estrutura",
+        "type": "varchar"
+      },
+      "descricao": {
+        "description": "Descrição da estrutura",
+        "type": "varchar"
+      },
+      "cod_estrutura": {
+        "description": "Código identificador de uma estrutura superior ou relacionada",
+        "type": "varchar"
+      },
+      "pessoa_responsavel_id": {
+        "description": "Identificador da pessoa responsável pela estrutura",
+        "type": "int"
+      },
+      "data_desativado": {
+        "description": "Data em que a estrutura foi desativada",
+        "type": "smalldatetime"
+      },
+      "nivel": {
+        "description": "Nível da estrutura dentro da hierarquia organizacional",
+        "type": "tinyint"
+      }
+    }
+  },
+  "etiquetas_itens": {
+    "description": "Tabela que define os itens de etiquetas e suas configurações de posicionamento",
+    "columns": {
+      "id": {
+        "description": "Identificador único do item de etiqueta",
+        "type": "int"
+      },
+      "tipo_campo": {
+        "description": "Tipo de campo do item (ex: texto, número, etc.)",
+        "type": "tinyint"
+      },
+      "topo": {
+        "description": "Posição do item no eixo vertical (topo) da etiqueta",
+        "type": "float"
+      },
+      "esquerda": {
+        "description": "Posição do item no eixo horizontal (esquerda) da etiqueta",
+        "type": "float"
+      },
+      "largura": {
+        "description": "Largura do item na etiqueta",
+        "type": "float"
+      },
+      "altura": {
+        "description": "Altura do item na etiqueta",
+        "type": "float"
+      },
+      "config": {
+        "description": "Configurações adicionais do item de etiqueta, em formato textual",
+        "type": "varchar"
+      }
+    }
+  },
+  "etiquetas_itens_principal": {
+    "description": "Tabela que define os itens principais das etiquetas, incluindo imagens e posicionamento",
+    "columns": {
+      "id": {
+        "description": "Identificador único do item da etiqueta principal",
+        "type": "int"
+      },
+      "etiqueta_principal_id": {
+        "description": "Identificador da etiqueta principal à qual o item pertence",
+        "type": "int"
+      },
+      "tipo_campo": {
+        "description": "Tipo de campo do item (ex: texto, imagem, etc.)",
+        "type": "tinyint"
+      },
+      "topo": {
+        "description": "Posição do item no eixo vertical (topo) da etiqueta",
+        "type": "real"
+      },
+      "esquerda": {
+        "description": "Posição do item no eixo horizontal (esquerda) da etiqueta",
+        "type": "real"
+      },
+      "largura": {
+        "description": "Largura do item na etiqueta",
+        "type": "real"
+      },
+      "altura": {
+        "description": "Altura do item na etiqueta",
+        "type": "real"
+      },
+      "config": {
+        "description": "Configurações adicionais do item de etiqueta, em formato textual",
+        "type": "varchar"
+      },
+      "imagem": {
+        "description": "Imagem associada ao item da etiqueta (se aplicável)",
+        "type": "image"
+      }
+    }
+  },
+  "etiquetas_principal": {
+    "description": "Tabela que define as etiquetas principais e suas configurações de layout",
+    "columns": {
+      "id": {
+        "description": "Identificador único da etiqueta principal",
+        "type": "int"
+      },
+      "nome": {
+        "description": "Nome ou título da etiqueta principal",
+        "type": "varchar"
+      },
+      "tipo_folha": {
+        "description": "Tipo de folha para impressão da etiqueta (ex: A4, Carta)",
+        "type": "tinyint"
+      },
+      "folha_altura": {
+        "description": "Altura da folha de impressão",
+        "type": "real"
+      },
+      "folha_largura": {
+        "description": "Largura da folha de impressão",
+        "type": "real"
+      },
+      "margem_superior": {
+        "description": "Margem superior da folha de impressão",
+        "type": "real"
+      },
+      "margem_esquerda": {
+        "description": "Margem esquerda da folha de impressão",
+        "type": "real"
+      },
+      "etiqueta_altura": {
+        "description": "Altura das etiquetas",
+        "type": "real"
+      },
+      "etiqueta_largura": {
+        "description": "Largura das etiquetas",
+        "type": "real"
+      },
+      "etiquetas_horizontais": {
+        "description": "Número de etiquetas dispostas horizontalmente na folha",
+        "type": "tinyint"
+      },
+      "etiquetas_verticais": {
+        "description": "Número de etiquetas dispostas verticalmente na folha",
+        "type": "tinyint"
+      },
+      "paisagem": {
+        "description": "Indica se a folha de impressão está no formato paisagem",
+        "type": "bit"
+      }
+    }
+  },
+  "eventos_acessos": {
+    "description": "Tabela que registra os eventos de acessos realizados",
+    "columns": {
+      "id": {
+        "description": "Identificador único do evento de acesso",
+        "type": "int"
+      },
+      "data": {
+        "description": "Data do evento de acesso",
+        "type": "smalldatetime"
+      },
+      "hora": {
+        "description": "Hora do evento de acesso",
+        "type": "int"
+      },
+      "pessoa_id": {
+        "description": "Identificador da pessoa que tentou o acesso",
+        "type": "int"
+      },
+      "equipamento_id": {
+        "description": "Identificador do equipamento utilizado para o acesso",
+        "type": "int"
+      },
+      "tipo_acesso": {
+        "description": "Tipo de acesso (ex: entrada, saída)",
+        "type": "tinyint"
+      },
+      "descricao": {
+        "description": "Descrição do evento de acesso",
+        "type": "varchar"
+      },
+      "negado": {
+        "description": "Indica se o acesso foi negado",
+        "type": "bit"
+      },
+      "confirmado": {
+        "description": "Indica se o acesso foi confirmado",
+        "type": "bit"
+      },
+      "valor_refeicao": {
+        "description": "Valor da refeição associado ao acesso (se aplicável)",
+        "type": "smallmoney"
+      },
+      "funcao_equipamento_id": {
+        "description": "Identificador da função do equipamento utilizada",
+        "type": "int"
+      },
+      "periferico": {
+        "description": "Identificador do periférico relacionado ao evento de acesso",
+        "type": "tinyint"
+      },
+      "id_global": {
+        "description": "Identificador global único para o evento",
+        "type": "uniqueidentifier"
+      }
+    }
+  },
+  "eventos_acessos_complementos": {
+    "description": "Tabela que armazena informações complementares aos eventos de acesso",
+    "columns": {
+      "acesso_id": {
+        "description": "Identificador do evento de acesso",
+        "type": "int"
+      },
+      "quem_visitar_id": {
+        "description": "Identificador da pessoa visitada (se aplicável)",
+        "type": "int"
+      },
+      "local_id": {
+        "description": "Identificador do local associado ao evento de acesso",
+        "type": "int"
+      },
+      "numero_utilizado": {
+        "description": "Número utilizado durante o evento de acesso (ex: número de crachá)",
+        "type": "varchar"
+      }
+    }
+  },
+  "eventos_envios": {
+    "description": "Tabela que registra os eventos de envio realizados",
+    "columns": {
+      "id": {
+        "description": "Identificador único do evento de envio",
+        "type": "int"
+      },
+      "pessoa_id": {
+        "description": "Identificador da pessoa relacionada ao envio",
+        "type": "int"
+      },
+      "equipamento_id": {
+        "description": "Identificador do equipamento utilizado para o envio",
+        "type": "int"
+      },
+      "numero": {
+        "description": "Número do evento de envio",
+        "type": "varchar"
+      },
+      "situacao": {
+        "description": "Situação do envio (ex: enviado, pendente)",
+        "type": "tinyint"
+      },
+      "numero_provisorio": {
+        "description": "Número provisório associado ao envio",
+        "type": "varchar"
+      },
+      "numero_provisorio_antigo": {
+        "description": "Número provisório antigo associado ao envio",
+        "type": "varchar"
+      },
+      "evento": {
+        "description": "Tipo de evento relacionado ao envio",
+        "type": "tinyint"
+      }
+    }
+  },
+  "eventos_imagens": {
+    "description": "Tabela que armazena as imagens associadas aos eventos",
+    "columns": {
+      "id": {
+        "description": "Identificador único da imagem do evento",
+        "type": "int"
+      },
+      "inicio_data": {
+        "description": "Data de início do evento com imagem",
+        "type": "smalldatetime"
+      },
+      "inicio_hora": {
+        "description": "Hora de início do evento com imagem",
+        "type": "int"
+      },
+      "fim_data": {
+        "description": "Data de término do evento com imagem",
+        "type": "smalldatetime"
+      },
+      "fim_hora": {
+        "description": "Hora de término do evento com imagem",
+        "type": "int"
+      },
+      "camera_id": {
+        "description": "Identificador da câmera utilizada no evento",
+        "type": "int"
+      },
+      "imagem": {
+        "description": "Imagem associada ao evento",
+        "type": "image"
+      },
+      "pessoa_id": {
+        "description": "Identificador da pessoa associada ao evento",
+        "type": "int"
+      }
+    }
+  },
+  "eventos_registros": {
+    "description": "Tabela que armazena os registros dos eventos realizados",
+    "columns": {
+      "id": {
+        "description": "Identificador único do registro de evento",
+        "type": "int"
+      },
+      "data": {
+        "description": "Data do registro do evento",
+        "type": "datetime"
+      },
+      "hora": {
+        "description": "Hora do registro do evento",
+        "type": "int"
+      },
+      "processo_id": {
+        "description": "Identificador do processo associado ao evento",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição detalhada do evento",
+        "type": "varchar"
+      },
+      "tipo": {
+        "description": "Tipo do evento registrado (ex: acesso, falha, etc.)",
+        "type": "tinyint"
+      },
+      "pessoa_id": {
+        "description": "Identificador da pessoa relacionada ao evento",
+        "type": "int"
+      },
+      "n_identificador": {
+        "description": "Número identificador associado ao evento (ex: número de crachá)",
+        "type": "varchar"
+      },
+      "equipamento_id": {
+        "description": "Identificador do equipamento associado ao evento",
+        "type": "int"
+      }
+    }
+  },
+  "exportacao_pessoas_layout": {
+    "description": "Tabela que define o layout de exportação de dados de pessoas",
+    "columns": {
+      "id": {
+        "description": "Identificador único do layout de exportação",
+        "type": "int"
+      },
+      "ordem": {
+        "description": "Ordem dos campos no layout de exportação",
+        "type": "int"
+      },
+      "campo": {
+        "description": "Identificador do campo que será exportado",
+        "type": "int"
+      },
+      "valor": {
+        "description": "Valor do campo a ser exportado",
+        "type": "nvarchar"
+      }
+    }
+  },
+  "feriados": {
+    "description": "Tabela que armazena os feriados",
+    "columns": {
+      "id": {
+        "description": "Identificador único do feriado",
+        "type": "int"
+      },
+      "data": {
+        "description": "Data do feriado",
+        "type": "smalldatetime"
+      },
+      "descricao": {
+        "description": "Descrição do feriado",
+        "type": "varchar"
+      }
+    }
+  },
+  "feriados_empresas": {
+    "description": "Tabela que relaciona feriados com empresas",
+    "columns": {
+      "feriado_id": {
+        "description": "Identificador do feriado",
+        "type": "int"
+      },
+      "empresa_id": {
+        "description": "Identificador da empresa",
+        "type": "int"
+      }
+    }
+  },
+  "filtro1": {
+    "description": "Tabela de filtro 1",
+    "columns": {
+      "id": {
+        "description": "Identificador único do filtro",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do filtro",
+        "type": "varchar"
+      },
+      "processo_id_liberado": {
+        "description": "Identificador do processo liberado",
+        "type": "int"
+      },
+      "processo_id_negado": {
+        "description": "Identificador do processo negado",
+        "type": "int"
+      }
+    }
+  },
+  "filtro2": {
+    "description": "Tabela de filtro 2",
+    "columns": {
+      "id": {
+        "description": "Identificador único do filtro",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do filtro",
+        "type": "varchar"
+      },
+      "processo_id_liberado": {
+        "description": "Identificador do processo liberado",
+        "type": "int"
+      },
+      "processo_id_negado": {
+        "description": "Identificador do processo negado",
+        "type": "int"
+      }
+    }
+  },
+  "filtro3": {
+    "description": "Tabela de filtro 3",
+    "columns": {
+      "id": {
+        "description": "Identificador único do filtro",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do filtro",
+        "type": "varchar"
+      },
+      "processo_id_liberado": {
+        "description": "Identificador do processo liberado",
+        "type": "int"
+      },
+      "processo_id_negado": {
+        "description": "Identificador do processo negado",
+        "type": "int"
+      },
+      "id_global": {
+        "description": "Identificador global do filtro",
+        "type": "uniqueidentifier"
+      }
+    }
+  },
+  "filtro4": {
+    "description": "Tabela de filtro 4",
+    "columns": {
+      "id": {
+        "description": "Identificador único do filtro",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do filtro",
+        "type": "varchar"
+      },
+      "processo_id_liberado": {
+        "description": "Identificador do processo liberado",
+        "type": "int"
+      },
+      "processo_id_negado": {
+        "description": "Identificador do processo negado",
+        "type": "int"
+      }
+    }
+  },
+  "filtro5": {
+    "description": "Tabela de filtro 5",
+    "columns": {
+      "id": {
+        "description": "Identificador único do filtro",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do filtro",
+        "type": "varchar"
+      },
+      "processo_id_liberado": {
+        "description": "Identificador do processo liberado",
+        "type": "int"
+      },
+      "processo_id_negado": {
+        "description": "Identificador do processo negado",
+        "type": "int"
+      }
+    }
+  },
+  "fornecedores": {
+    "description": "Tabela que armazena os dados dos fornecedores",
+    "columns": {
+      "id": {
+        "description": "Identificador único do fornecedor",
+        "type": "int"
+      },
+      "razaoSocial": {
+        "description": "Razão social do fornecedor",
+        "type": "varchar"
+      },
+      "nomeFantasia": {
+        "description": "Nome fantasia do fornecedor",
+        "type": "varchar"
+      },
+      "documento": {
+        "description": "Documento do fornecedor (CNPJ/CPF)",
+        "type": "varchar"
+      },
+      "tipoDocumento": {
+        "description": "Tipo de documento (CNPJ ou CPF)",
+        "type": "tinyint"
+      },
+      "endereco": {
+        "description": "Endereço do fornecedor",
+        "type": "varchar"
+      },
+      "bairro": {
+        "description": "Bairro do fornecedor",
+        "type": "varchar"
+      },
+      "cidade": {
+        "description": "Cidade do fornecedor",
+        "type": "varchar"
+      },
+      "pais": {
+        "description": "País do fornecedor",
+        "type": "varchar"
+      },
+      "responsavel": {
+        "description": "Responsável pelo fornecedor",
+        "type": "varchar"
+      },
+      "cep": {
+        "description": "CEP do fornecedor",
+        "type": "varchar"
+      },
+      "uf": {
+        "description": "Unidade federativa do fornecedor",
+        "type": "varchar"
+      },
+      "telefone": {
+        "description": "Telefone do fornecedor",
+        "type": "varchar"
+      }
+    }
+  },
+  "fotos_cadastro": {
+    "description": "Tabela que armazena as informações de fotos de cadastro",
+    "columns": {
+      "id": {
+        "description": "Identificador único da foto",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição da foto",
+        "type": "varchar"
+      },
+      "ordem": {
+        "description": "Ordem de exibição da foto",
+        "type": "int"
+      },
+      "tipo_captura": {
+        "description": "Tipo de captura da foto",
+        "type": "tinyint"
+      },
+      "camera_id": {
+        "description": "Identificador da câmera",
+        "type": "int"
+      },
+      "mostrar_visu": {
+        "description": "Indica se a foto deve ser exibida visualmente",
+        "type": "bit"
+      }
+    }
+  },
+  "grau_parentesco": {
+    "description": "Tabela que armazena os graus de parentesco",
+    "columns": {
+      "id": {
+        "description": "Identificador único do grau de parentesco",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do grau de parentesco",
+        "type": "varchar"
+      }
+    }
+  },
+  "grupos": {
+    "description": "Tabela que armazena informações sobre os grupos",
+    "columns": {
+      "id": {
+        "description": "Identificador único do grupo",
+        "type": "int"
+      },
+      "nome": {
+        "description": "Nome do grupo",
+        "type": "varchar"
+      },
+      "administrador": {
+        "description": "Indica se o grupo é administrador",
+        "type": "bit"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou o grupo",
+        "type": "int"
+      },
+      "criacao_data": {
+        "description": "Data de criação do grupo",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou o grupo",
+        "type": "int"
+      },
+      "alteracao_data": {
+        "description": "Data da última alteração do grupo",
+        "type": "datetime"
+      },
+      "bloquear_estado_pessoas": {
+        "description": "Indica se o grupo bloqueia o estado das pessoas",
+        "type": "bit"
+      },
+      "bloquear_principal": {
+        "description": "Indica se o grupo bloqueia a principal",
+        "type": "bit"
+      },
+      "visualizar_pessoas_bloqueadas": {
+        "description": "Indica se o grupo pode visualizar pessoas bloqueadas",
+        "type": "bit"
+      },
+      "bloquear_validade_pessoas": {
+        "description": "Indica se o grupo bloqueia a validade das pessoas",
+        "type": "bit"
+      }
+    }
+  },
+  "grupos_restricoes_classif": {
+    "description": "Tabela que armazena as restrições de classificação para grupos",
+    "columns": {
+      "classificacao_id": {
+        "description": "Identificador da classificação",
+        "type": "int"
+      },
+      "grupo_id": {
+        "description": "Identificador do grupo",
+        "type": "int"
+      }
+    }
+  },
+  "grupos_restricoes_empresa": {
+    "description": "Tabela que armazena as restrições de empresa para grupos",
+    "columns": {
+      "empresa_id": {
+        "description": "Identificador da empresa",
+        "type": "int"
+      },
+      "grupo_id": {
+        "description": "Identificador do grupo",
+        "type": "int"
+      }
+    }
+  },
+  "grupos_restricoes_equips": {
+    "description": "Tabela que armazena as restrições de equipamentos para grupos",
+    "columns": {
+      "equipamento_id": {
+        "description": "Identificador do equipamento",
+        "type": "int"
+      },
+      "grupo_id": {
+        "description": "Identificador do grupo",
+        "type": "int"
+      }
+    }
+  },
+  "grupos_restricoes_hor": {
+    "description": "Tabela que armazena as restrições de horário para grupos",
+    "columns": {
+      "horario_id": {
+        "description": "Identificador do horário",
+        "type": "int"
+      },
+      "grupo_id": {
+        "description": "Identificador do grupo",
+        "type": "int"
+      }
+    }
+  },
+  "grupos_restricoes_niveis": {
+    "description": "Tabela que armazena as restrições de níveis para grupos",
+    "columns": {
+      "nivel_id": {
+        "description": "Identificador do nível",
+        "type": "int"
+      },
+      "grupo_id": {
+        "description": "Identificador do grupo",
+        "type": "int"
+      }
+    }
+  },
+  "horarios": {
+    "description": "Tabela que armazena os horários de trabalho ou atividades",
+    "columns": {
+      "id": {
+        "description": "Identificador único do horário",
+        "type": "int"
+      },
+      "nome": {
+        "description": "Nome do horário",
+        "type": "varchar"
+      },
+      "escala_tamanho": {
+        "description": "Tamanho da escala do horário",
+        "type": "int"
+      },
+      "escala_data": {
+        "description": "Data da escala",
+        "type": "smalldatetime"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou o horário",
+        "type": "int"
+      },
+      "criacao_data": {
+        "description": "Data de criação do horário",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou o horário",
+        "type": "int"
+      },
+      "alteracao_data": {
+        "description": "Data da última alteração do horário",
+        "type": "datetime"
+      }
+    }
+  },
+  "grupos_restricoes_hor": {
+    "description": "Tabela que armazena as restrições de horários para grupos",
+    "columns": {
+      "horario_id": {
+        "description": "Identificador do horário relacionado ao grupo",
+        "type": "int"
+      },
+      "grupo_id": {
+        "description": "Identificador do grupo relacionado à restrição",
+        "type": "int"
+      }
+    }
+  },
+  "grupos_restricoes_niveis": {
+    "description": "Tabela que armazena as restrições de níveis para grupos",
+    "columns": {
+      "nivel_id": {
+        "description": "Identificador do nível relacionado ao grupo",
+        "type": "int"
+      },
+      "grupo_id": {
+        "description": "Identificador do grupo relacionado à restrição de nível",
+        "type": "int"
+      }
+    }
+  },
+  "horarios": {
+    "description": "Tabela que armazena os horários de trabalho ou atividades",
+    "columns": {
+      "id": {
+        "description": "Identificador único do horário",
+        "type": "int"
+      },
+      "nome": {
+        "description": "Nome do horário",
+        "type": "varchar"
+      },
+      "escala_tamanho": {
+        "description": "Tamanho da escala do horário",
+        "type": "int"
+      },
+      "escala_data": {
+        "description": "Data da escala",
+        "type": "smalldatetime"
+      }
+    }
+  },
+  "horarios_itens": {
+    "description": "Tabela que armazena os itens específicos de cada horário",
+    "columns": {
+      "id": {
+        "description": "Identificador único do item de horário",
+        "type": "int"
+      },
+      "horario_id": {
+        "description": "Identificador do horário relacionado ao item",
+        "type": "int"
+      },
+      "inicio": {
+        "description": "Hora de início do item de horário",
+        "type": "varchar"
+      },
+      "fim": {
+        "description": "Hora de término do item de horário",
+        "type": "varchar"
+      }
+    }
+  },
+  "horarios_itens_equips": {
+    "description": "Tabela que armazena a relação entre os itens de horário e os equipamentos",
+    "columns": {
+      "horario_item_id": {
+        "description": "Identificador do item de horário relacionado ao equipamento",
+        "type": "int"
+      },
+      "equipamento_id": {
+        "description": "Identificador do equipamento associado ao item de horário",
+        "type": "int"
+      }
+    }
+  },
+  "horarios_itens_equips_t_min": {
+    "description": "Tabela que armazena a relação entre os itens de horário e equipamentos com limite de tempo",
+    "columns": {
+      "horario_item_id": {
+        "description": "Identificador do item de horário com limite de tempo",
+        "type": "int"
+      },
+      "equipamento_id": {
+        "description": "Identificador do equipamento associado ao item de horário com limite de tempo",
+        "type": "int"
+      }
+    }
+  },
+  "importar_reservas": {
+    "description": "Tabela que armazena as configurações de importação de reservas",
+    "columns": {
+      "id": {
+        "description": "Identificador único da configuração de importação de reservas",
+        "type": "int"
+      },
+      "ativar": {
+        "description": "Flag para ativar a importação de reservas",
+        "type": "bit"
+      },
+      "sistema": {
+        "description": "Identificador do sistema de integração",
+        "type": "int"
+      },
+      "banco_tipo": {
+        "description": "Tipo de banco de dados para a importação",
+        "type": "int"
+      },
+      "banco_servidor": {
+        "description": "Nome do servidor do banco de dados",
+        "type": "varchar"
+      }
+    }
+  },
+  "integracao_biometrias": {
+    "description": "Tabela que armazena informações de integração de biometrias",
+    "columns": {
+      "id": {
+        "description": "Identificador único da biometria",
+        "type": "int"
+      },
+      "n_folha": {
+        "description": "Número da folha do colaborador",
+        "type": "varchar"
+      },
+      "matricula_digital": {
+        "description": "Identificador digital da matrícula",
+        "type": "varchar"
+      },
+      "template": {
+        "description": "Template da biometria",
+        "type": "varbinary"
+      }
+    }
+  },
+  "integracao_bloqueios_extras": {
+    "description": "Tabela que armazena informações de bloqueios extras para pessoas",
+    "columns": {
+      "id": {
+        "description": "Identificador único do bloqueio extra",
+        "type": "int"
+      },
+      "pessoa_n_folha": {
+        "description": "Número da folha do colaborador",
+        "type": "varchar"
+      },
+      "tipo": {
+        "description": "Tipo de bloqueio",
+        "type": "tinyint"
+      },
+      "data_inicio": {
+        "description": "Data de início do bloqueio",
+        "type": "smalldatetime"
+      },
+      "data_fim": {
+        "description": "Data de término do bloqueio",
+        "type": "smalldatetime"
+      },
+      "hora_inicio": {
+        "description": "Hora de início do bloqueio",
+        "type": "varchar"
+      },
+      "hora_fim": {
+        "description": "Hora de término do bloqueio",
+        "type": "varchar"
+      }
+    }
+  },
+  "integracao_config": {
+    "description": "Tabela que armazena as configurações gerais da integração",
+    "columns": {
+      "id": {
+        "description": "Identificador único da configuração",
+        "type": "int"
+      },
+      "sistema": {
+        "description": "Identificador do sistema de integração",
+        "type": "int"
+      },
+      "banco_tipo": {
+        "description": "Tipo de banco de dados para integração",
+        "type": "int"
+      },
+      "banco_servidor": {
+        "description": "Nome do servidor do banco de dados",
+        "type": "varchar"
+      },
+      "banco_nome": {
+        "description": "Nome do banco de dados",
+        "type": "varchar"
+      }
+    },
+    "integracao_externa": {
+      "description": "Tabela que armazena dados de integração externa de colaboradores",
+      "columns": {
+        "n_folha": {
+          "description": "Número da folha do colaborador",
+          "type": "varchar"
+        },
+        "n_identificador": {
+          "description": "Identificador único do colaborador",
+          "type": "varchar"
+        },
+        "rg": {
+          "description": "RG do colaborador",
+          "type": "varchar"
+        },
+        "cpf": {
+          "description": "CPF do colaborador",
+          "type": "varchar"
+        },
+        "nome": {
+          "description": "Nome completo do colaborador",
+          "type": "varchar"
+        }
+      }
+    },
+    "integracao_horarios": {
+      "description": "Tabela que armazena horários de acesso de integração",
+      "columns": {
+        "nome": {
+          "description": "Nome do horário de acesso",
+          "type": "varchar"
+        },
+        "inicio": {
+          "description": "Hora de início do horário de acesso",
+          "type": "varchar"
+        },
+        "fim": {
+          "description": "Hora de término do horário de acesso",
+          "type": "varchar"
+        },
+        "seg": {
+          "description": "Flag para indicar se o horário é válido na segunda-feira",
+          "type": "bit"
+        },
+        "ter": {
+          "description": "Flag para indicar se o horário é válido na terça-feira",
+          "type": "bit"
+        }
+      }
+    },
+    "integracao_mensagens": {
+      "description": "Tabela que armazena mensagens de integração de colaboradores",
+      "columns": {
+        "id": {
+          "description": "Identificador único da mensagem",
+          "type": "int"
+        },
+        "pessoas_n_folha": {
+          "description": "Número da folha do colaborador",
+          "type": "varchar"
+        },
+        "data": {
+          "description": "Data da mensagem",
+          "type": "smalldatetime"
+        },
+        "mensagem_linha1": {
+          "description": "Primeira linha da mensagem",
+          "type": "varchar"
+        },
+        "mensagem_linha2": {
+          "description": "Segunda linha da mensagem",
+          "type": "varchar"
+        }
+      }
+    },
+    "layout_acesso_pessoal": {
+      "description": "Tabela que armazena o layout de acesso pessoal",
+      "columns": {
+        "ordem": {
+          "description": "Ordem do campo no layout",
+          "type": "int"
+        },
+        "campo": {
+          "description": "Identificador do campo no layout",
+          "type": "tinyint"
+        },
+        "valor": {
+          "description": "Valor associado ao campo",
+          "type": "varchar"
+        }
+      }
+    },
+    "Layout_Importacao_Pessoa": {
+      "description": "Tabela que armazena as configurações de importação de pessoas",
+      "columns": {
+        "id": {
+          "description": "Identificador único da configuração de importação",
+          "type": "int"
+        },
+        "Posicao": {
+          "description": "Posição do campo na importação",
+          "type": "int"
+        },
+        "Tamanho": {
+          "description": "Tamanho do campo na importação",
+          "type": "int"
+        },
+        "Campo": {
+          "description": "Campo da importação",
+          "type": "int"
+        }
+      }
+    },
+    "liberacoes_extras": {
+      "description": "Tabela que armazena informações de liberações extras para pessoas",
+      "columns": {
+        "id": {
+          "description": "Identificador único da liberação extra",
+          "type": "int"
+        },
+        "pessoa_id": {
+          "description": "Identificador da pessoa para a liberação extra",
+          "type": "int"
+        },
+        "data_inicio": {
+          "description": "Data de início da liberação extra",
+          "type": "smalldatetime"
+        },
+        "data_fim": {
+          "description": "Data de término da liberação extra",
+          "type": "smalldatetime"
+        }
+      }
+    },
+    "liberacoes_extras_grupo": {
+      "description": "Tabela que armazena os grupos de liberações extras",
+      "columns": {
+        "id": {
+          "description": "Identificador único do grupo de liberação extra",
+          "type": "int"
+        },
+        "descricao": {
+          "description": "Descrição do grupo de liberação extra",
+          "type": "varchar"
+        }
+      }
+    }
+  },
+  "liberacoes_manuais": {
+    "description": "Tabela que armazena as liberações manuais realizadas para pessoas e equipamentos",
+    "columns": {
+      "id": {
+        "description": "Identificador único da liberação manual",
+        "type": "int"
+      },
+      "data": {
+        "description": "Data da liberação manual",
+        "type": "datetime"
+      },
+      "hora": {
+        "description": "Hora da liberação manual",
+        "type": "int"
+      },
+      "equipamento_id": {
+        "description": "Identificador do equipamento liberado",
+        "type": "int"
+      },
+      "tipo_liberacao": {
+        "description": "Tipo de liberação (ex: autorizada, cancelada)",
+        "type": "tinyint"
+      },
+      "usuario_id": {
+        "description": "ID do usuário que fez a liberação manual",
+        "type": "int"
+      },
+      "pessoa_id": {
+        "description": "ID da pessoa que recebeu a liberação",
+        "type": "int"
+      },
+      "sentido": {
+        "description": "Sentido da liberação (ex: entrada, saída)",
+        "type": "smallint"
+      }
+    }
+  },
+  "locais": {
+    "description": "Tabela que armazena os locais de acesso",
+    "columns": {
+      "id": {
+        "description": "Identificador único do local",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do local",
+        "type": "varchar"
+      },
+      "permitir_reserva_app": {
+        "description": "Indica se é permitido realizar reserva do local pelo aplicativo",
+        "type": "bit"
+      },
+      "taxa_manutencao": {
+        "description": "Taxa de manutenção associada ao local",
+        "type": "smallmoney"
+      },
+      "antecedencia": {
+        "description": "Antecedência necessária para reservar o local",
+        "type": "int"
+      },
+      "id_global": {
+        "description": "Identificador global único do local",
+        "type": "uniqueidentifier"
+      }
+    }
+  },
+  "logs": {
+    "description": "Tabela que armazena as ações realizadas no sistema",
+    "columns": {
+      "id": {
+        "description": "Identificador único do log",
+        "type": "int"
+      },
+      "usuario_id": {
+        "description": "ID do usuário que executou a ação",
+        "type": "int"
+      },
+      "acao_id": {
+        "description": "ID da ação realizada",
+        "type": "int"
+      },
+      "obs": {
+        "description": "Observações sobre a ação",
+        "type": "varchar"
+      },
+      "data_hora": {
+        "description": "Data e hora em que a ação foi realizada",
+        "type": "datetime"
+      }
+    }
+  },
+  "logs_acoes": {
+    "description": "Tabela que armazena as ações realizadas no sistema, detalhadas",
+    "columns": {
+      "id": {
+        "description": "Identificador único da ação",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição da ação",
+        "type": "varchar"
+      }
+    }
+  },
+  "mensagens": {
+    "description": "Tabela que armazena as mensagens enviadas aos usuários",
+    "columns": {
+      "id": {
+        "description": "Identificador único da mensagem",
+        "type": "int"
+      },
+      "pessoa_id": {
+        "description": "ID da pessoa para quem a mensagem foi enviada",
+        "type": "int"
+      },
+      "data": {
+        "description": "Data de envio da mensagem",
+        "type": "smalldatetime"
+      },
+      "mensagem": {
+        "description": "Texto da mensagem",
+        "type": "varchar"
+      },
+      "mensagem_popup": {
+        "description": "Texto da mensagem que será exibida como popup",
+        "type": "varchar"
+      },
+      "equipamentos": {
+        "description": "Lista de equipamentos associados à mensagem",
+        "type": "varchar"
+      },
+      "integracao_id": {
+        "description": "ID da integração associada à mensagem",
+        "type": "int"
+      }
+    }
+  },
+  "movimentacoes_notas_fiscais": {
+    "description": "Tabela que armazena as movimentações de notas fiscais de fornecedores",
+    "columns": {
+      "id": {
+        "description": "Identificador único da movimentação",
+        "type": "int"
+      },
+      "fornecedor": {
+        "description": "Nome do fornecedor",
+        "type": "varchar"
+      },
+      "transporte": {
+        "description": "Transportadora responsável pela movimentação",
+        "type": "varchar"
+      },
+      "nota_fiscal": {
+        "description": "Número da nota fiscal",
+        "type": "varchar"
+      },
+      "placa": {
+        "description": "Placa do veículo transportador",
+        "type": "varchar"
+      },
+      "motorista": {
+        "description": "Nome do motorista do transporte",
+        "type": "varchar"
+      },
+      "obs": {
+        "description": "Observações sobre a movimentação",
+        "type": "varchar"
+      },
+      "ent_data": {
+        "description": "Data de entrada da nota fiscal",
+        "type": "smalldatetime"
+      },
+      "ent_hora": {
+        "description": "Hora de entrada da nota fiscal",
+        "type": "varchar"
+      },
+      "sai_data": {
+        "description": "Data de saída da nota fiscal",
+        "type": "smalldatetime"
+      },
+      "sai_hora": {
+        "description": "Hora de saída da nota fiscal",
+        "type": "varchar"
+      },
+      "criacao_usu_id": {
+        "description": "ID do usuário que criou a movimentação",
+        "type": "int"
+      },
+      "criacao_data": {
+        "description": "Data de criação da movimentação",
+        "type": "datetime"
+      },
+      "alteracao_usu_id": {
+        "description": "ID do usuário que alterou a movimentação",
+        "type": "int"
+      },
+      "alteracao_data": {
+        "description": "Data da última alteração da movimentação",
+        "type": "datetime"
+      },
+      "fornecedorId": {
+        "description": "ID do fornecedor relacionado à movimentação",
+        "type": "int"
+      }
+    },
+    "movimentacoes_objetos": {
+      "description": "Tabela que armazena as movimentações de objetos de pessoas",
+      "columns": {
+        "id": {
+          "description": "Identificador único da movimentação",
+          "type": "int"
+        },
+        "pessoa_id": {
+          "description": "ID da pessoa que movimentou o objeto",
+          "type": "int"
+        },
+        "descricao": {
+          "description": "Descrição do objeto movimentado",
+          "type": "varchar"
+        },
+        "ent_data": {
+          "description": "Data de entrada do objeto",
+          "type": "smalldatetime"
+        },
+        "ent_hora": {
+          "description": "Hora de entrada do objeto",
+          "type": "varchar"
+        },
+        "sai_data": {
+          "description": "Data de saída do objeto",
+          "type": "smalldatetime"
+        },
+        "sai_hora": {
+          "description": "Hora de saída do objeto",
+          "type": "varchar"
+        },
+        "criacao_usu_id": {
+          "description": "ID do usuário que criou a movimentação do objeto",
+          "type": "int"
+        },
+        "criacao_data": {
+          "description": "Data de criação da movimentação do objeto",
+          "type": "datetime"
+        },
+        "alteracao_usu_id": {
+          "description": "ID do usuário que alterou a movimentação do objeto",
+          "type": "int"
+        },
+        "alteracao_data": {
+          "description": "Data da última alteração da movimentação do objeto",
+          "type": "datetime"
+        }
+      }
+    },
+    "niveis": {
+      "description": "Tabela que armazena os níveis de segurança ou acesso",
+      "columns": {
+        "id": {
+          "description": "Identificador único do nível",
+          "type": "int"
+        },
+        "descricao": {
+          "description": "Descrição do nível",
+          "type": "varchar"
+        },
+        "usar_rota": {
+          "description": "Indica se o nível usa rota",
+          "type": "bit"
+        },
+        "listar_portaria": {
+          "description": "Indica se o nível pode ser listado na portaria",
+          "type": "bit"
+        },
+        "criacao_usu_id": {
+          "description": "ID do usuário que criou o nível",
+          "type": "int"
+        },
+        "criacao_data": {
+          "description": "Data de criação do nível",
+          "type": "datetime"
+        },
+        "alteracao_usu_id": {
+          "description": "ID do usuário que alterou o nível",
+          "type": "int"
+        },
+        "alteracao_data": {
+          "description": "Data da última alteração do nível",
+          "type": "datetime"
+        },
+        "tempo_maximo": {
+          "description": "Tempo máximo de acesso permitido no nível",
+          "type": "int"
+        },
+        "fechamento_rota": {
+          "description": "Indica se o nível deve realizar o fechamento de rota",
+          "type": "int"
+        },
+        "rota_sem_funcao": {
+          "description": "Indica se o nível tem rota sem função definida",
+          "type": "bit"
+        }
+      }
+    },
+    "niveis_itens": {
+      "description": "Tabela que armazena os itens ou equipamentos associados aos níveis de segurança ou acesso",
+      "columns": {
+        "id": {
+          "description": "Identificador único do item de nível",
+          "type": "int"
+        },
+        "nivel_id": {
+          "description": "ID do nível de segurança ao qual o item pertence",
+          "type": "int"
+        },
+        "equipamento_id": {
+          "description": "ID do equipamento associado ao nível",
+          "type": "int"
+        },
+        "horario_id": {
+          "description": "ID do horário associado ao item",
+          "type": "int"
+        },
+        "rota_ordem": {
+          "description": "Ordem da rota para o item do nível",
+          "type": "int"
+        }
+      }
+    },
+    "nivel_historico": {
+      "description": "Tabela que armazena o histórico dos níveis atribuídos às pessoas",
+      "columns": {
+        "id": {
+          "description": "Identificador único do histórico de nível",
+          "type": "int"
+        },
+        "pessoa_id": {
+          "description": "ID da pessoa que recebeu o nível",
+          "type": "int"
+        },
+        "nivel_id": {
+          "description": "ID do nível atribuído à pessoa",
+          "type": "int"
+        },
+        "data_inicio": {
+          "description": "Data de início da atribuição do nível",
+          "type": "smalldatetime"
+        },
+        "hora_inicio": {
+          "description": "Hora de início da atribuição do nível",
+          "type": "varchar"
+        },
+        "data_fim": {
+          "description": "Data de fim da atribuição do nível",
+          "type": "smalldatetime"
+        },
+        "hora_fim": {
+          "description": "Hora de fim da atribuição do nível",
+          "type": "varchar"
+        },
+        "alteracao_usu_id": {
+          "description": "ID do usuário que alterou o histórico de nível",
+          "type": "int"
+        }
+      }
+    },
+    "numeros_especiais": {
+      "description": "Tabela que armazena números especiais para controle",
+      "columns": {
+        "numero": {
+          "description": "Número especial utilizado para controle",
+          "type": "varchar"
+        },
+        "obs": {
+          "description": "Observações sobre o número especial",
+          "type": "varchar"
+        },
+        "n_reduzido": {
+          "description": "Número reduzido para controle alternativo",
+          "type": "varchar"
+        },
+        "criacao_usu_id": {
+          "description": "ID do usuário que criou o número especial",
+          "type": "int"
+        },
+        "criacao_data": {
+          "description": "Data de criação do número especial",
+          "type": "datetime"
+        },
+        "alteracao_usu_id": {
+          "description": "ID do usuário que alterou o número especial",
+          "type": "int"
+        },
+        "alteracao_data": {
+          "description": "Data da última alteração do número especial",
+          "type": "datetime"
+        }
+      }
+    },
+    "numeros_historico": {
+      "description": "Tabela que armazena o histórico de números associados às pessoas",
+      "columns": {
+        "id": {
+          "description": "Identificador único do histórico de número",
+          "type": "int"
+        },
+        "pessoa_id": {
+          "description": "ID da pessoa associada ao número",
+          "type": "int"
+        },
+        "numero": {
+          "description": "Número associado à pessoa",
+          "type": "varchar"
+        },
+        "tipo_numero": {
+          "description": "Tipo do número associado",
+          "type": "tinyint"
+        },
+        "data_inicio": {
+          "description": "Data de início da associação do número",
+          "type": "smalldatetime"
+        },
+        "data_fim": {
+          "description": "Data de fim da associação do número",
+          "type": "smalldatetime"
+        },
+        "Hora_inicio": {
+          "description": "Hora de início da associação do número",
+          "type": "varchar"
+        },
+        "hora_fim": {
+          "description": "Hora de fim da associação do número",
+          "type": "varchar"
+        }
+      }
+    },
+    "numeros_validos": {
+      "description": "Tabela que armazena números válidos para uso",
+      "columns": {
+        "numero": {
+          "description": "Número válido para uso",
+          "type": "varchar"
+        },
+        "data_fornecimento": {
+          "description": "Data de fornecimento do número",
+          "type": "smalldatetime"
+        },
+        "obs": {
+          "description": "Observações sobre o número fornecido",
+          "type": "varchar"
+        },
+        "data_entrega": {
+          "description": "Data de entrega do número",
+          "type": "smalldatetime"
+        },
+        "criacao_usu_id": {
+          "description": "ID do usuário que criou o número válido",
+          "type": "int"
+        },
+        "criacao_data": {
+          "description": "Data de criação do número válido",
+          "type": "datetime"
+        },
+        "alteracao_usu_id": {
+          "description": "ID do usuário que alterou o número válido",
+          "type": "int"
+        },
+        "alteracao_data": {
+          "description": "Data da última alteração do número válido",
+          "type": "datetime"
+        }
+      }
+    }
+  },
+  "paineis": {
+    "description": "Tabela que armazena os painéis de controle e suas configurações",
+    "columns": {
+      "id": {
+        "description": "Identificador único do painel",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição do painel",
+        "type": "varchar"
+      },
+      "ip": {
+        "description": "IP do painel",
+        "type": "varchar"
+      },
+      "configs": {
+        "description": "Configurações do painel",
+        "type": "varchar"
+      },
+      "rota": {
+        "description": "Rota associada ao painel",
+        "type": "varchar"
+      },
+      "template": {
+        "description": "Template do painel",
+        "type": "ntext"
+      }
+    }
+  },
+  "pen_app_tar_realizadas": {
+    "description": "Tabela que armazena as taras realizadas no aplicativo de gerenciamento",
+    "columns": {
+      "id": {
+        "description": "Identificador único da tarefa realizada",
+        "type": "int"
+      },
+      "data_hora": {
+        "description": "Data e hora da tarefa realizada",
+        "type": "datetime"
+      },
+      "descricao": {
+        "description": "Descrição da tarefa realizada",
+        "type": "varchar"
+      }
+    }
+  },
+  "pendencias_app": {
+    "description": "Tabela que armazena as pendências no aplicativo",
+    "columns": {
+      "tipo_pendencia": {
+        "description": "Tipo da pendência",
+        "type": "int"
+      },
+      "pendencia_id": {
+        "description": "Identificador único da pendência",
+        "type": "int"
+      },
+      "prioridade": {
+        "description": "Prioridade da pendência",
+        "type": "tinyint"
+      },
+      "parametros": {
+        "description": "Parâmetros adicionais da pendência",
+        "type": "varchar"
+      },
+      "pendencia_id_global": {
+        "description": "Identificador único global da pendência",
+        "type": "uniqueidentifier"
+      }
+    }
+  },
+  "perguntas_adicionais": {
+    "description": "Tabela que armazena perguntas adicionais para formulários ou cadastros",
+    "columns": {
+      "id": {
+        "description": "Identificador único da pergunta",
+        "type": "int"
+      },
+      "descricao": {
+        "description": "Descrição da pergunta",
+        "type": "varchar"
+      },
+      "grupo": {
+        "description": "Grupo ao qual a pergunta pertence",
+        "type": "varchar"
+      },
+      "ordem": {
+        "description": "Ordem da pergunta no grupo",
+        "type": "smallint"
+      },
+      "tamanho": {
+        "description": "Tamanho do campo de resposta",
+        "type": "smallint"
+      },
+      "nao_imprimir": {
+        "description": "Indica se a pergunta deve ser impressa ou não",
+        "type": "bit"
+      }
+    }
+  },
+  "pessoas": {
+    "description": "Tabela que armazena informações sobre as pessoas cadastradas no sistema",
+    "columns": {
+      {
+        "nome": "id",
+        "tipo": "int",
+        "descricao": "Identificador único da pessoa."
+      },
+      {
+        "nome": "n_identificador",
+        "tipo": "varchar",
+        "descricao": "Número de identificador da pessoa."
+      },
+      {
+        "nome": "nome",
+        "tipo": "varchar",
+        "descricao": "Nome completo da pessoa."
+      },
+      {
+        "nome": "rg",
+        "tipo": "varchar",
+        "descricao": "Registro geral (RG) da pessoa."
+      },
+      {
+        "nome": "empresa_id",
+        "tipo": "int",
+        "descricao": "Identificador da empresa da pessoa."
+      },
+      {
+        "nome": "horario_id",
+        "tipo": "int",
+        "descricao": "Identificador do horário de trabalho da pessoa."
+      },
+      {
+        "nome": "estado",
+        "tipo": "tinyint",
+        "descricao": "Estado atual da pessoa (ativo, inativo)."
+      },
+      {
+        "nome": "classificacao_id",
+        "tipo": "int",
+        "descricao": "Classificação da pessoa, conforme algum critério."
+      },
+      {
+        "nome": "validade_data_ini",
+        "tipo": "smalldatetime",
+        "descricao": "Data de início da validade do cadastro da pessoa."
+      },
+      {
+        "nome": "validade_hora_ini",
+        "tipo": "varchar",
+        "descricao": "Hora de início da validade do cadastro da pessoa."
+      },
+      {
+        "nome": "validade_data_fim",
+        "tipo": "smalldatetime",
+        "descricao": "Data de término da validade do cadastro da pessoa."
+      },
+      {
+        "nome": "validade_hora_fim",
+        "tipo": "varchar",
+        "descricao": "Hora de término da validade do cadastro da pessoa."
+      },
+      {
+        "nome": "obs",
+        "tipo": "varchar",
+        "descricao": "Observações adicionais sobre a pessoa."
+      },
+      {
+        "nome": "nivel_id",
+        "tipo": "int",
+        "descricao": "Identificador do nível da pessoa (ex.: nível hierárquico)."
+      },
+      {
+        "nome": "estrutura_id",
+        "tipo": "int",
+        "descricao": "Identificador da estrutura organizacional da pessoa."
+      },
+      {
+        "nome": "mensalidade_valor",
+        "tipo": "smallmoney",
+        "descricao": "Valor da mensalidade relacionada à pessoa."
+      },
+      {
+        "nome": "mensalidade_vencimento",
+        "tipo": "tinyint",
+        "descricao": "Dia de vencimento da mensalidade."
+      },
+      {
+        "nome": "mensalidade_tolerancia",
+        "tipo": "tinyint",
+        "descricao": "Número de dias de tolerância para pagamento da mensalidade."
+      },
+      {
+        "nome": "mensalidade_bloquear_pagto",
+        "tipo": "bit",
+        "descricao": "Indica se o pagamento da mensalidade será bloqueado."
+      },
+      {
+        "nome": "quem_visitar_id",
+        "tipo": "int",
+        "descricao": "Identificador da pessoa que irá realizar a visita."
+      },
+      {
+        "nome": "sem_digital",
+        "tipo": "bit",
+        "descricao": "Indica se a pessoa não possui digital cadastrada."
+      },
+      {
+        "nome": "endereco",
+        "tipo": "varchar",
+        "descricao": "Endereço residencial da pessoa."
+      },
+      {
+        "nome": "bairro",
+        "tipo": "varchar",
+        "descricao": "Bairro da residência da pessoa."
+      },
+      {
+        "nome": "cidade",
+        "tipo": "varchar",
+        "descricao": "Cidade da residência da pessoa."
+      },
+      {
+        "nome": "cep",
+        "tipo": "varchar",
+        "descricao": "Código postal (CEP) da residência da pessoa."
+      },
+      {
+        "nome": "uf",
+        "tipo": "varchar",
+        "descricao": "Unidade federativa (estado) da residência da pessoa."
+      },
+      {
+        "nome": "pais",
+        "tipo": "varchar",
+        "descricao": "País de residência da pessoa."
+      },
+      {
+        "nome": "telefone",
+        "tipo": "varchar",
+        "descricao": "Número de telefone da pessoa."
+      },
+      {
+        "nome": "celular",
+        "tipo": "varchar",
+        "descricao": "Número de celular da pessoa."
+      },
+      {
+        "nome": "cpf",
+        "tipo": "varchar",
+        "descricao": "Cadastro de pessoa física (CPF) da pessoa."
+      },
+      {
+        "nome": "nascimento",
+        "tipo": "smalldatetime",
+        "descricao": "Data de nascimento da pessoa."
+      },
+      {
+        "nome": "email",
+        "tipo": "varchar",
+        "descricao": "Endereço de e-mail da pessoa."
+      },
+      {
+        "nome": "senha",
+        "tipo": "varchar",
+        "descricao": "Senha de acesso da pessoa."
+      },
+      {
+        "nome": "nome_pai",
+        "tipo": "varchar",
+        "descricao": "Nome do pai da pessoa."
+      },
+      {
+        "nome": "nome_mae",
+        "tipo": "varchar",
+        "descricao": "Nome da mãe da pessoa."
+      },
+      {
+        "nome": "cargo",
+        "tipo": "varchar",
+        "descricao": "Cargo ou função ocupada pela pessoa."
+      },
+      {
+        "nome": "empresanome",
+        "tipo": "varchar",
+        "descricao": "Nome da empresa da pessoa."
+      },
+      {
+        "nome": "empresafone",
+        "tipo": "varchar",
+        "descricao": "Número de telefone da empresa da pessoa."
+      },
+      {
+        "nome": "ramal",
+        "tipo": "varchar",
+        "descricao": "Número de ramal da pessoa na empresa."
+      },
+      {
+        "nome": "n_folha",
+        "tipo": "varchar",
+        "descricao": "Número da folha de pagamento da pessoa."
+      },
+      {
+        "nome": "rg_exped",
+        "tipo": "smalldatetime",
+        "descricao": "Data de expedição do RG."
+      },
+      {
+        "nome": "rg_ssp",
+        "tipo": "varchar",
+        "descricao": "Órgão expedidor do RG."
+      },
+      {
+        "nome": "naturalidade",
+        "tipo": "varchar",
+        "descricao": "Naturalidade (cidade e estado) da pessoa."
+      },
+      {
+        "nome": "estado_civil_id",
+        "tipo": "int",
+        "descricao": "Identificador do estado civil da pessoa."
+      },
+      {
+        "nome": "sexo_masculino",
+        "tipo": "bit",
+        "descricao": "Indica se a pessoa é do sexo masculino."
+      },
+      {
+        "nome": "n_provisorio",
+        "tipo": "varchar",
+        "descricao": "Número do documento provisório da pessoa."
+      },
+      {
+        "nome": "provisorio_inicio",
+        "tipo": "smalldatetime",
+        "descricao": "Data de início da validade do documento provisório."
+      },
+      {
+        "nome": "provisorio_fim",
+        "tipo": "smalldatetime",
+        "descricao": "Data de término da validade do documento provisório."
+      },
+      {
+        "nome": "consumo_limite_credito",
+        "tipo": "real",
+        "descricao": "Limite de crédito disponível para consumo."
+      },
+      {
+        "nome": "web_senha",
+        "tipo": "varchar",
+        "descricao": "Senha de acesso à plataforma web."
+      },
+      {
+        "nome": "web_bloqueado",
+        "tipo": "bit",
+        "descricao": "Indica se o acesso à plataforma web está bloqueado."
+      },
+      {
+        "nome": "web_n_modulo",
+        "tipo": "varchar",
+        "descricao": "Módulo da plataforma web ao qual a pessoa tem acesso."
+      },
+      {
+        "nome": "web_visu_acessos",
+        "tipo": "bit",
+        "descricao": "Indica se a pessoa pode visualizar acessos na plataforma web."
+      },
+      {
+        "nome": "condominios_ap",
+        "tipo": "varchar",
+        "descricao": "Apartamentos do condomínio atribuídos à pessoa."
+      },
+      {
+        "nome": "condominios_bloco",
+        "tipo": "varchar",
+        "descricao": "Blocos do condomínio atribuídos à pessoa."
+      },
+      {
+        "nome": "master",
+        "tipo": "bit",
+        "descricao": "Indica se a pessoa tem acesso de master (administrador)."
+      },
+      {
+        "nome": "ultimo_acesso_entrada",
+        "tipo": "bit",
+        "descricao": "Indica se foi feito um último acesso de entrada."
+      },
+      {
+        "nome": "liberacao_imediata",
+        "tipo": "bit",
+        "descricao": "Indica se a liberação de acesso foi imediata."
+      },
+      {
+        "nome": "refeicao_controle",
+        "tipo": "tinyint",
+        "descricao": "Controle de refeição da pessoa."
+      },
+      {
+        "nome": "refeicao_valor_unico",
+        "tipo": "smallmoney",
+        "descricao": "Valor único para refeição da pessoa."
+      },
+      {
+        "nome": "refeicao_conta_corrente",
+        "tipo": "bit",
+        "descricao": "Indica se a refeição está associada à conta corrente."
+      },
+      {
+        "nome": "filtro1_id",
+        "tipo": "int",
+        "descricao": "Filtro 1 aplicado à pessoa."
+      },
+      {
+        "nome": "filtro2_id",
+        "tipo": "int",
+        "descricao": "Filtro 2 aplicado à pessoa."
+      },
+      {
+        "nome": "filtro3_id",
+        "tipo": "int",
+        "descricao": "Filtro 3 aplicado à pessoa."
+      },
+      {
+        "nome": "filtro4_id",
+        "tipo": "int",
+        "descricao": "Filtro 4 aplicado à pessoa."
+      },
+      {
+        "nome": "integracao_config",
+        "tipo": "tinyint",
+        "descricao": "Configuração de integração da pessoa."
+      },
+      {
+        "nome": "criacao_usu_id",
+        "tipo": "int",
+        "descricao": "Identificador do usuário que criou o registro."
+      },
+      {
+        "nome": "criacao_data",
+        "tipo": "datetime",
+        "descricao": "Data e hora da criação do registro."
+      },
+      {
+        "nome": "alteracao_usu_id",
+        "tipo": "int",
+        "descricao": "Identificador do usuário que fez a última alteração."
+      },
+      {
+        "nome": "alteracao_data",
+        "tipo": "datetime",
+        "descricao": "Data e hora da última alteração."
+      },
+      {
+        "nome": "reserva_status",
+        "tipo": "bit",
+        "descricao": "Indica se a pessoa tem reserva de algum serviço."
+      },
+      {
+        "nome": "reserva_ignorar",
+        "tipo": "bit",
+        "descricao": "Indica se a reserva será ignorada."
+      },
+      {
+        "nome": "id_externo",
+        "tipo": "int",
+        "descricao": "Identificador externo vinculado à pessoa."
+      },
+      {
+        "nome": "h7x_configs",
+        "tipo": "varchar",
+        "descricao": "Configurações relacionadas ao H7X para a pessoa."
+      },
+      {
+        "nome": "processo_id_liberado",
+        "tipo": "int",
+        "descricao": "Identificador de processo liberado."
+      },
+      {
+        "nome": "processo_id_negado",
+        "tipo": "int",
+        "descricao": "Identificador de processo negado."
+      },
+      {
+        "nome": "filtro5_id",
+        "tipo": "int",
+        "descricao": "Filtro 5 aplicado à pessoa."
+      },
+      {
+        "nome": "grupo_refeicao_id",
+        "tipo": "int",
+        "descricao": "Identificador do grupo de refeição da pessoa."
+      },
+      {
+        "nome": "visitas_limite",
+        "tipo": "int",
+        "descricao": "Limite de visitas permitidas à pessoa."
+      },
+      {
+        "nome": "visitas_atual",
+        "tipo": "int",
+        "descricao": "Número atual de visitas realizadas."
+      },
+      {
+        "nome": "senha_consumo",
+        "tipo": "varchar",
+        "descricao": "Senha para consumo de serviços."
+      },
+      {
+        "nome": "n_utilizar_teclado",
+        "tipo": "bit",
+        "descricao": "Indica se a pessoa não utilizará o teclado."
+      },
+      {
+        "nome": "n_pis",
+        "tipo": "varchar",
+        "descricao": "Número de PIS da pessoa."
+      },
+      {
+        "nome": "ambiente_id",
+        "tipo": "int",
+        "descricao": "Identificador do ambiente ao qual a pessoa pertence."
+      },
+      {
+        "nome": "elevador_andares_extras",
+        "tipo": "varchar",
+        "descricao": "Informações sobre andares extras no elevador."
+      },
+      {
+        "nome": "alterar_senha",
+        "tipo": "bit",
+        "descricao": "Indica se a pessoa pode alterar sua senha."
+      },
+      {
+        "nome": "id_global",
+        "tipo": "uniqueidentifier",
+        "descricao": "Identificador global da pessoa."
+      },
+      {
+        "nome": "senha_app",
+        "tipo": "varchar",
+        "descricao": "Senha de acesso ao aplicativo."
+      },
+      {
+        "nome": "permissao_liberar_app",
+        "tipo": "tinyint",
+        "descricao": "Permissão para liberar o aplicativo."
+      },
+      {
+        "nome": "permitir_cadastro_correspond",
+        "tipo": "bit",
+        "descricao": "Permite o cadastro de correspondências para a pessoa."
+      }
+    }
+  },
+  {
+    "pessoas_apartamentos": {
+      "description": "Associação entre pessoas e apartamentos",
+      "columns": {
+        "pessoa_id": {
+          "description": "Identificador da pessoa",
+          "type": "integer"
+        },
+        "apartamento_id": {
+          "description": "Identificador do apartamento",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_boxes": {
+      "description": "Associação entre pessoas e boxes de garagem",
+      "columns": {
+        "pessoa_id": {
+          "description": "Identificador da pessoa",
+          "type": "integer"
+        },
+        "box_id": {
+          "description": "Identificador do box",
+          "type": "integer"
+        },
+        "ordem": {
+          "description": "Ordem de prioridade ou exibição",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_caixas_correios": {
+      "description": "Associação entre pessoas e caixas de correio",
+      "columns": {
+        "pessoa_id": {
+          "description": "Identificador da pessoa",
+          "type": "integer"
+        },
+        "caixa_correio_id": {
+          "description": "Identificador da caixa de correio",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_chaves": {
+      "description": "Associação entre pessoas e chaves controladas",
+      "columns": {
+        "pessoa_id": {
+          "description": "Identificador da pessoa",
+          "type": "integer"
+        },
+        "chave_id": {
+          "description": "Identificador da chave",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_dependentes": {
+      "description": "Associação entre pessoas e seus dependentes",
+      "columns": {
+        "pessoa_id": {
+          "description": "Identificador da pessoa responsável",
+          "type": "integer"
+        },
+        "dependente_id": {
+          "description": "Identificador do dependente",
+          "type": "integer"
+        },
+        "grau_parentesco_id": {
+          "description": "Identificador do grau de parentesco",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_depositos": {
+      "description": "Associação entre pessoas e depósitos vinculados",
+      "columns": {
+        "pessoa_id": {
+          "description": "Identificador da pessoa",
+          "type": "integer"
+        },
+        "deposito_id": {
+          "description": "Identificador do depósito",
+          "type": "integer"
+        }
+      }
+    }
+  },
+  {
+    "pessoas_digitais": {
+      "description": "Tabela de digitais biométricas das pessoas",
+      "columns": {
+        "id": {
+          "description": "Identificador único da digital",
+          "type": "integer"
+        },
+        "pessoa_id": {
+          "description": "ID da pessoa associada à digital",
+          "type": "integer"
+        },
+        "matricula_digital": {
+          "description": "Matrícula vinculada à digital",
+          "type": "varchar"
+        },
+        "template_codigo": {
+          "description": "Código do template biométrico",
+          "type": "varchar"
+        },
+        "template": {
+          "description": "Template da digital em formato binário",
+          "type": "varbinary"
+        },
+        "template_qualidade": {
+          "description": "Qualidade do template",
+          "type": "integer"
+        },
+        "dedo": {
+          "description": "Número do dedo da digital",
+          "type": "tinyint"
+        },
+        "master": {
+          "description": "Indica se é digital master",
+          "type": "bit"
+        },
+        "panico": {
+          "description": "Indica se é digital de pânico",
+          "type": "bit"
+        },
+        "criacao_usu_id": {
+          "description": "ID do usuário que criou",
+          "type": "integer"
+        },
+        "criacao_data": {
+          "description": "Data de criação",
+          "type": "datetime"
+        },
+        "alteracao_usu_id": {
+          "description": "ID do usuário que alterou",
+          "type": "integer"
+        },
+        "alteracao_data": {
+          "description": "Data de alteração",
+          "type": "datetime"
+        },
+        "tipo_biometria": {
+          "description": "Tipo de biometria",
+          "type": "smallint"
+        }
+      }
+    },
+    "pessoas_digitais_envios": {
+      "description": "Tabela de envio de digitais para equipamentos",
+      "columns": {
+        "digital_id": {
+          "description": "ID da digital enviada",
+          "type": "integer"
+        },
+        "equipamento_id": {
+          "description": "ID do equipamento de destino",
+          "type": "integer"
+        },
+        "data_envio": {
+          "description": "Data do envio",
+          "type": "smalldatetime"
+        }
+      }
+    },
+    "pessoas_documentos": {
+      "description": "Documentos vinculados às pessoas",
+      "columns": {
+        "pessoa_id": {
+          "description": "ID da pessoa",
+          "type": "integer"
+        },
+        "tipo_documento_id": {
+          "description": "Tipo do documento",
+          "type": "integer"
+        },
+        "numero": {
+          "description": "Número do documento",
+          "type": "varchar"
+        }
+      }
+    },
+    "pessoas_hor_funcoes": {
+      "description": "Associação entre pessoas, funções e horários",
+      "columns": {
+        "pessoa_id": {
+          "description": "ID da pessoa",
+          "type": "integer"
+        },
+        "funcao_id": {
+          "description": "ID da função",
+          "type": "integer"
+        },
+        "horario_id": {
+          "description": "ID do horário",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_niveis": {
+      "description": "Níveis de acesso associados às pessoas",
+      "columns": {
+        "pessoa_id": {
+          "description": "ID da pessoa",
+          "type": "integer"
+        },
+        "nivel_id": {
+          "description": "ID do nível de acesso",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_padroes": {
+      "description": "Configurações padrão para pessoas por classificação",
+      "columns": {
+        "classificacao_id": {
+          "description": "ID da classificação",
+          "type": "integer"
+        },
+        "empresa_id": {
+          "description": "ID da empresa",
+          "type": "integer"
+        },
+        "estrutura_id": {
+          "description": "ID da estrutura",
+          "type": "integer"
+        },
+        "estado": {
+          "description": "Estado (ativo/inativo)",
+          "type": "tinyint"
+        },
+        "horario_id": {
+          "description": "ID do horário padrão",
+          "type": "integer"
+        },
+        "nivel_id": {
+          "description": "ID do nível padrão",
+          "type": "integer"
+        },
+        "validade_data_ini": {
+          "description": "Data de início da validade",
+          "type": "smalldatetime"
+        },
+        "validade_hora_ini": {
+          "description": "Hora de início da validade",
+          "type": "varchar"
+        },
+        "validade_data_fim": {
+          "description": "Data de fim da validade",
+          "type": "smalldatetime"
+        },
+        "validade_hora_fim": {
+          "description": "Hora de fim da validade",
+          "type": "varchar"
+        },
+        "obs": {
+          "description": "Observações",
+          "type": "varchar"
+        },
+        "sem_digital": {
+          "description": "Indica se não possui digital",
+          "type": "bit"
+        },
+        "master": {
+          "description": "Indica se é master",
+          "type": "bit"
+        },
+        "visitas_limite": {
+          "description": "Limite de visitas permitidas",
+          "type": "integer"
+        },
+        "visitas_atual": {
+          "description": "Número atual de visitas",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_respostas": {
+      "description": "Respostas das pessoas a perguntas adicionais",
+      "columns": {
+        "pessoa_id": {
+          "description": "ID da pessoa",
+          "type": "integer"
+        },
+        "pergunta_id": {
+          "description": "ID da pergunta",
+          "type": "integer"
+        },
+        "resposta": {
+          "description": "Texto da resposta",
+          "type": "varchar"
+        }
+      }
+    },
+    "pessoas_varios_numeros": {
+      "description": "Vários números associados à mesma pessoa",
+      "columns": {
+        "pessoa_id": {
+          "description": "ID da pessoa",
+          "type": "integer"
+        },
+        "numero": {
+          "description": "Número alternativo",
+          "type": "varchar"
+        },
+        "nivel_id": {
+          "description": "ID do nível associado",
+          "type": "integer"
+        },
+        "processo_id_liberado": {
+          "description": "ID do processo liberado",
+          "type": "integer"
+        },
+        "processo_id_negado": {
+          "description": "ID do processo negado",
+          "type": "integer"
+        }
+      }
+    },
+    "pessoas_veiculos": {
+      "description": "Relação entre pessoas e veículos",
+      "columns": {
+        "pessoa_id": {
+          "description": "ID da pessoa",
+          "type": "integer"
+        },
+        "veiculo_id": {
+          "description": "ID do veículo",
+          "type": "integer"
+        }
+      }
+    },
+    "plantas_baixas": {
+      "description": "Plantas baixas do sistema",
+      "columns": {
+        "id": {
+          "description": "ID da planta",
+          "type": "integer"
+        },
+        "nome": {
+          "description": "Nome da planta",
+          "type": "varchar"
+        },
+        "cor_fundo": {
+          "description": "Cor de fundo da planta",
+          "type": "integer"
+        },
+        "tamanho_imagem": {
+          "description": "Tamanho da imagem da planta",
+          "type": "tinyint"
+        },
+        "imagem_planta": {
+          "description": "Imagem da planta em formato binário",
+          "type": "image"
+        }
+      }
+    },
+    "plantas_baixas_itens": {
+      "description": "Itens posicionados na planta baixa",
+      "columns": {
+        "id": {
+          "description": "ID do item",
+          "type": "integer"
+        },
+        "planta_baixa_id": {
+          "description": "ID da planta baixa",
+          "type": "integer"
+        },
+        "pos_esquerda": {
+          "description": "Posição esquerda (em pixels)",
+          "type": "integer"
+        },
+        "pos_topo": {
+          "description": "Posição topo (em pixels)",
+          "type": "integer"
+        },
+        "tipo": {
+          "description": "Tipo do item",
+          "type": "integer"
+        },
+        "config": {
+          "description": "Configurações do item",
+          "type": "varchar"
+        }
+      }
+    },
+    "portaria_campos": {
+      "description": "Campos exibidos na portaria",
+      "columns": {
+        "descricao": {
+          "description": "Descrição do campo",
+          "type": "varchar"
+        },
+        "ordem": {
+          "description": "Ordem de exibição",
+          "type": "integer"
+        }
+      }
+    },
+    "processos": {
+      "description": "Processos de liberação ou bloqueio",
+      "columns": {
+        "id": {
+          "description": "ID do processo",
+          "type": "integer"
+        },
+        "descricao": {
+          "description": "Descrição do processo",
+          "type": "varchar"
+        },
+        "criacao_usu_id": {
+          "description": "ID do usuário que criou",
+          "type": "integer"
+        },
+        "criacao_data": {
+          "description": "Data de criação",
+          "type": "datetime"
+        },
+        "alteracao_usu_id": {
+          "description": "ID do usuário que alterou",
+          "type": "integer"
+        },
+        "alteracao_data": {
+          "description": "Data de alteração",
+          "type": "datetime"
+        }
+      }
+    },
+    "processos_itens": {
+      "description": "Itens pertencentes a um processo",
+      "columns": {
+        "id": {
+          "description": "ID do item",
+          "type": "integer"
+        },
+        "processo_id": {
+          "description": "ID do processo",
+          "type": "integer"
+        },
+        "numero": {
+          "description": "Número do item no processo",
+          "type": "integer"
+        },
+        "tipo": {
+          "description": "Tipo do item",
+          "type": "integer"
+        },
+        "config": {
+          "description": "Configuração do item",
+          "type": "varchar"
+        },
+        "proximo": {
+          "description": "Próximo item (fluxo principal)",
+          "type": "integer"
+        },
+        "proximo_alt": {
+          "description": "Item alternativo (fluxo alternativo)",
+          "type": "integer"
+        },
+        "esquerda": {
+          "description": "Posição à esquerda (px)",
+          "type": "integer"
+        },
+        "topo": {
+          "description": "Posição no topo (px)",
+          "type": "integer"
+        }
+      }
+    },
+    "refeicoes_layout": {
+      "description": "Layout da tela de refeições",
+      "columns": {
+        "id": {
+          "description": "ID do layout",
+          "type": "integer"
+        },
+        "ordem": {
+          "description": "Ordem de exibição",
+          "type": "integer"
+        },
+        "campo": {
+          "description": "Campo associado",
+          "type": "integer"
+        },
+        "valor": {
+          "description": "Valor do campo",
+          "type": "nvarchar"
+        }
+      }
+    },
+    "registro_sistema": {
+      "description": "Registro de licença do sistema",
+      "columns": {
+        "codigo_produto": {
+          "description": "Código do produto licenciado",
+          "type": "integer"
+        },
+        "chave": {
+          "description": "Chave de registro",
+          "type": "varchar"
+        },
+        "empresa_id": {
+          "description": "ID da empresa licenciada",
+          "type": "integer"
+        }
+      }
+    },
+    "registro_sistema_config": {
+      "description": "Configurações da licença do sistema",
+      "columns": {
+        "quantidade_pessoas": {
+          "description": "Quantidade de pessoas permitidas",
+          "type": "tinyint"
+        },
+        "n_equipamentos": {
+          "description": "Número de equipamentos permitidos",
+          "type": "integer"
+        },
+        "n_eventos": {
+          "description": "Número de eventos permitidos",
+          "type": "integer"
+        },
+        "acessos": {
+          "description": "Descrição dos acessos",
+          "type": "varchar"
+        },
+        "tipo_web": {
+          "description": "Indica se é licença web",
+          "type": "bit"
+        },
+        "mini_acesso": {
+          "description": "Indica se possui miniacesso",
+          "type": "bit"
+        },
+        "data_base_controle_recursos": {
+          "description": "Data base para controle de recursos",
+          "type": "varchar"
+        },
+        "usa_acessonet_app": {
+          "description": "Indica se utiliza o app AcessoNet",
+          "type": "bit"
+        }
+      }
+    },
+    "rel_personalizados": {
+      "description": "Relatórios personalizados do sistema",
+      "columns": {
+        "id": {
+          "description": "ID do relatório",
+          "type": "integer"
+        },
+        "nome": {
+          "description": "Nome do relatório",
+          "type": "varchar"
+        },
+        "sql": {
+          "description": "Consulta SQL associada",
+          "type": "varchar"
+        },
+        "arquivo_mrt": {
+          "description": "Arquivo de layout MRT em binário",
+          "type": "varbinary"
+        },
+        "exibir_recepcao": {
+          "description": "Indica se deve exibir na recepção",
+          "type": "bit"
+        }
+      }
+    }
+  },
+  {
+    "rel_personalizados_parametros": {
+      "description": "Parâmetros utilizados nos relatórios personalizados",
+      "columns": {
+        "rel_personalizado_id": {
+          "description": "ID do relatório personalizado",
+          "type": "integer"
+        },
+        "nome": {
+          "description": "Nome do parâmetro",
+          "type": "varchar"
+        },
+        "tipo": {
+          "description": "Tipo do parâmetro",
+          "type": "tinyint"
+        }
+      }
+    },
+    "reservas_faixas": {
+      "description": "Faixas de horários reserváveis e respectivas liberações",
+      "columns": {
+        "id": {
+          "description": "Identificador da faixa",
+          "type": "integer"
+        },
+        "reserva_inicio": {
+          "description": "Horário de início da reserva",
+          "type": "varchar"
+        },
+        "reserva_fim": {
+          "description": "Horário de fim da reserva",
+          "type": "varchar"
+        },
+        "liberacao_inicio": {
+          "description": "Horário de início da liberação",
+          "type": "varchar"
+        },
+        "liberacao_fim": {
+          "description": "Horário de fim da liberação",
+          "type": "varchar"
+        },
+        "proximo_util": {
+          "description": "Indica se considera o próximo dia útil",
+          "type": "bit"
+        },
+        "equipamentos_reserva": {
+          "description": "Equipamentos envolvidos na reserva",
+          "type": "varchar"
+        },
+        "equipamentos_liberacao": {
+          "description": "Equipamentos envolvidos na liberação",
+          "type": "varchar"
+        }
+      }
+    },
+    "reservas_locais": {
+      "description": "Reservas realizadas para locais específicos",
+      "columns": {
+        "id": {
+          "description": "Identificador único da reserva",
+          "type": "uniqueidentifier"
+        },
+        "data": {
+          "description": "Data da reserva",
+          "type": "smalldatetime"
+        },
+        "hora": {
+          "description": "Hora da reserva",
+          "type": "integer"
+        },
+        "pessoa_id": {
+          "description": "Identificador da pessoa",
+          "type": "uniqueidentifier"
+        },
+        "local_id": {
+          "description": "Identificador do local",
+          "type": "uniqueidentifier"
+        },
+        "data_hora_fim": {
+          "description": "Data e hora do fim da reserva",
+          "type": "datetime"
+        }
+      }
+    },
+    "restricoes_cadastros": {
+      "description": "Restrições de ações para usuários em telas específicas",
+      "columns": {
+        "usuario_id": {
+          "description": "Identificador do usuário",
+          "type": "integer"
+        },
+        "tela": {
+          "description": "Identificador da tela",
+          "type": "integer"
+        },
+        "acao": {
+          "description": "Ação restrita",
+          "type": "integer"
+        }
+      }
+    },
+    "servicos_logs": {
+      "description": "Registro de execução de serviços do sistema",
+      "columns": {
+        "ID": {
+          "description": "Identificador do log",
+          "type": "integer"
+        },
+        "tipo": {
+          "description": "Tipo de serviço",
+          "type": "tinyint"
+        },
+        "inicio": {
+          "description": "Início da execução",
+          "type": "datetime"
+        },
+        "fim": {
+          "description": "Fim da execução",
+          "type": "datetime"
+        },
+        "obs": {
+          "description": "Observações do processo",
+          "type": "varchar"
+        }
+      }
+    },
+    "sirenes": {
+      "description": "Configuração de sirenes e batidas sonoras",
+      "columns": {
+        "batida": {
+          "description": "Horário da batida",
+          "type": "varchar"
+        },
+        "duracao": {
+          "description": "Duração da sirene",
+          "type": "tinyint"
+        },
+        "seg": {
+          "description": "Toca na segunda-feira",
+          "type": "bit"
+        },
+        "ter": {
+          "description": "Toca na terça-feira",
+          "type": "bit"
+        },
+        "qua": {
+          "description": "Toca na quarta-feira",
+          "type": "bit"
+        },
+        "qui": {
+          "description": "Toca na quinta-feira",
+          "type": "bit"
+        },
+        "sex": {
+          "description": "Toca na sexta-feira",
+          "type": "bit"
+        },
+        "sab": {
+          "description": "Toca no sábado",
+          "type": "bit"
+        },
+        "dom": {
+          "description": "Toca no domingo",
+          "type": "bit"
+        },
+        "fer": {
+          "description": "Toca em feriados",
+          "type": "bit"
+        },
+        "criacao_usu_id": {
+          "description": "Usuário que criou",
+          "type": "integer"
+        },
+        "criacao_data": {
+          "description": "Data de criação",
+          "type": "datetime"
+        },
+        "alteracao_usu_id": {
+          "description": "Usuário que alterou",
+          "type": "integer"
+        },
+        "alteracao_data": {
+          "description": "Data de alteração",
+          "type": "datetime"
+        }
+      }
+    },
+    "solicitacoes_app": {
+      "description": "Solicitações realizadas pelo aplicativo",
+      "columns": {
+        "id": {
+          "description": "Identificador da solicitação",
+          "type": "uniqueidentifier"
+        },
+        "data_hora": {
+          "description": "Data e hora da solicitação",
+          "type": "smalldatetime"
+        },
+        "solicitante_id": {
+          "description": "Pessoa solicitante",
+          "type": "uniqueidentifier"
+        },
+        "tarefa": {
+          "description": "Tipo da tarefa solicitada",
+          "type": "tinyint"
+        },
+        "dados_solicitacao_id": {
+          "description": "ID dos dados da solicitação",
+          "type": "uniqueidentifier"
+        },
+        "dados_solicitacao": {
+          "description": "Conteúdo da solicitação",
+          "type": "ntext"
+        },
+        "estado": {
+          "description": "Estado atual da solicitação",
+          "type": "tinyint"
+        },
+        "motivo": {
+          "description": "Motivo do estado da solicitação",
+          "type": "varchar"
+        }
+      }
+    },
+    "telas_pessoas": {
+      "description": "Configurações visuais e de filtros para tela de pessoas",
+      "columns": {
+        "classificacao_id": {
+          "description": "Identificador da classificação",
+          "type": "integer"
+        },
+        "cor_fundo_tela": {
+          "description": "Cor de fundo da tela",
+          "type": "integer"
+        },
+        "bloqueia_filtro1": {
+          "description": "Bloqueia o filtro 1",
+          "type": "bit"
+        },
+        "bloqueia_filtro2": {
+          "description": "Bloqueia o filtro 2",
+          "type": "bit"
+        },
+        "bloqueia_filtro3": {
+          "description": "Bloqueia o filtro 3",
+          "type": "bit"
+        },
+        "bloqueia_filtro4": {
+          "description": "Bloqueia o filtro 4",
+          "type": "bit"
+        },
+        "bloqueia_filtro5": {
+          "description": "Bloqueia o filtro 5",
+          "type": "bit"
+        }
+      }
+    },
+    "tempo_entre_acessos": {
+      "description": "Tempo mínimo entre acessos em equipamentos relacionados",
+      "columns": {
+        "equipamento_id": {
+          "description": "Equipamento principal",
+          "type": "integer"
+        },
+        "equip_relacionado_id": {
+          "description": "Equipamento relacionado",
+          "type": "integer"
+        },
+        "tempo": {
+          "description": "Tempo mínimo entre acessos (em segundos)",
+          "type": "integer"
+        }
+      }
+    }
+  }

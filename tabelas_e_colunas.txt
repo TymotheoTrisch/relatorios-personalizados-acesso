@@ -1,1699 +1,1699 @@
 Tabela: agenda_comunicacao
 Colunas:
-  - id
-  - tarefa
-  - data
-  - hora
-  - enviar_data
-  - enviar_pessoas
-  - enviar_horarios
-  - enviar_acionamentos
-  - receber_registros
-  - ultima_execucao
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - enviar_digitais
-  - digitais_tipo_acao
-  - digitais_liberados
-  - receber_digitais
-  - somente_digitais_novas
-  - lido
-  - resultado_execucao
-  - descricao
-  - repeticao_minutos
+  - id (int)
+  - tarefa (tinyint)
+  - data (smalldatetime)
+  - hora (varchar)
+  - enviar_data (bit)
+  - enviar_pessoas (bit)
+  - enviar_horarios (bit)
+  - enviar_acionamentos (bit)
+  - receber_registros (bit)
+  - ultima_execucao (datetime)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - enviar_digitais (bit)
+  - digitais_tipo_acao (tinyint)
+  - digitais_liberados (bit)
+  - receber_digitais (bit)
+  - somente_digitais_novas (bit)
+  - lido (bit)
+  - resultado_execucao (varchar)
+  - descricao (varchar)
+  - repeticao_minutos (smallint)
 
 Tabela: agenda_comunicacao_equips
 Colunas:
-  - agenda_id
-  - equipamento_id
+  - agenda_id (int)
+  - equipamento_id (int)
 
 Tabela: agenda_tarefas
 Colunas:
-  - id
-  - tipo_tarefa
-  - tipo_momento
-  - data
-  - hora
-  - obs
-  - ultima_execucao
-  - backup_remoto
-  - lido
-  - resultado_execucao
-  - repeticao_minutos
+  - id (int)
+  - tipo_tarefa (tinyint)
+  - tipo_momento (tinyint)
+  - data (smalldatetime)
+  - hora (varchar)
+  - obs (varchar)
+  - ultima_execucao (smalldatetime)
+  - backup_remoto (bit)
+  - lido (bit)
+  - resultado_execucao (varchar)
+  - repeticao_minutos (smallint)
 
 Tabela: agenda_visitas
 Colunas:
-  - id
-  - agendamento_data
-  - agendamento_hora
-  - visitante_documento
-  - visitante_nome
-  - visitante_empresa
-  - quem_visitar_id
-  - nivel_acesso_id
-  - validade_data_fim
-  - validade_hora_fim
-  - obs
-  - criacao_data
-  - alteracao_data
-  - criacao_pessoa_id
-  - visitante_tipo_documento
-  - visitante_celular
-  - visitante_email
-  - id_global
-  - foto_visitante
-  - visitante_tipo_id
+  - id (int)
+  - agendamento_data (smalldatetime)
+  - agendamento_hora (varchar)
+  - visitante_documento (varchar)
+  - visitante_nome (varchar)
+  - visitante_empresa (varchar)
+  - quem_visitar_id (int)
+  - nivel_acesso_id (int)
+  - validade_data_fim (smalldatetime)
+  - validade_hora_fim (varchar)
+  - obs (varchar)
+  - criacao_data (datetime)
+  - alteracao_data (datetime)
+  - criacao_pessoa_id (int)
+  - visitante_tipo_documento (int)
+  - visitante_celular (varchar)
+  - visitante_email (varchar)
+  - id_global (uniqueidentifier)
+  - foto_visitante (image)
+  - visitante_tipo_id (uniqueidentifier)
 
 Tabela: ambientes
 Colunas:
-  - id
-  - descricao
-  - lotacao_maxima
-  - quantidade_atual
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - amb_controle_est
-  - bloq_acesso_veiculos
-  - amb_controla_box
-  - nao_controlar_outras_empresas
+  - id (int)
+  - descricao (varchar)
+  - lotacao_maxima (int)
+  - quantidade_atual (int)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - amb_controle_est (bit)
+  - bloq_acesso_veiculos (bit)
+  - amb_controla_box (bit)
+  - nao_controlar_outras_empresas (bit)
 
 Tabela: ambientes_empresas
 Colunas:
-  - ambiente_id
-  - empresa_id
-  - lotacao_maxima
-  - quantidade_atual
+  - ambiente_id (int)
+  - empresa_id (int)
+  - lotacao_maxima (int)
+  - quantidade_atual (int)
 
 Tabela: ambientes_vagas_lista
 Colunas:
-  - id
-  - ambiente_id
-  - pessoa_id
-  - classificacao_id
-  - estrutura_id
-  - filtro1_id
-  - filtro2_id
+  - id (int)
+  - ambiente_id (int)
+  - pessoa_id (int)
+  - classificacao_id (int)
+  - estrutura_id (int)
+  - filtro1_id (int)
+  - filtro2_id (int)
 
 Tabela: apartamentos
 Colunas:
-  - id
-  - descricao
-  - bloco_id
-  - id_global
+  - id (int)
+  - descricao (varchar)
+  - bloco_id (int)
+  - id_global (uniqueidentifier)
 
 Tabela: arquivo_fotos
 Colunas:
-  - chave
-  - dados
+  - chave (varchar)
+  - dados (image)
 
 Tabela: blocos
 Colunas:
-  - id
-  - descricao
-  - id_global
+  - id (int)
+  - descricao (varchar)
+  - id_global (uniqueidentifier)
 
 Tabela: bloqueios_extras
 Colunas:
-  - id
-  - pessoa_id
-  - tipo
-  - data_inicio
-  - data_fim
-  - hora_inicio
-  - hora_fim
-  - obs
-  - msg_display
-  - equipamentos
-  - grupo_bloqueio_id
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_data
-  - alteracao_usu_id
-  - integracao_id
-  - sentido
+  - id (int)
+  - pessoa_id (int)
+  - tipo (tinyint)
+  - data_inicio (smalldatetime)
+  - data_fim (smalldatetime)
+  - hora_inicio (varchar)
+  - hora_fim (varchar)
+  - obs (varchar)
+  - msg_display (varchar)
+  - equipamentos (varchar)
+  - grupo_bloqueio_id (int)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_data (datetime)
+  - alteracao_usu_id (int)
+  - integracao_id (int)
+  - sentido (tinyint)
 
 Tabela: bloqueios_extras_grupo
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: boxes
 Colunas:
-  - id
-  - descricao
-  - ocupado
-  - ocupacao_pessoa_id
+  - id (int)
+  - descricao (varchar)
+  - ocupado (bit)
+  - ocupacao_pessoa_id (int)
 
 Tabela: caixas_correios
 Colunas:
-  - id
-  - descricao
-  - n_identificador
-  - situacao
+  - id (int)
+  - descricao (varchar)
+  - n_identificador (varchar)
+  - situacao (tinyint)
 
 Tabela: cameras
 Colunas:
-  - id
-  - descricao
-  - marca_modelo
-  - ip
-  - configs
-  - numero
-  - porta
+  - id (int)
+  - descricao (varchar)
+  - marca_modelo (tinyint)
+  - ip (varchar)
+  - configs (varchar)
+  - numero (int)
+  - porta (int)
 
 Tabela: chaves
 Colunas:
-  - id
-  - n_identificador
-  - nome
-  - local
+  - id (int)
+  - n_identificador (varchar)
+  - nome (varchar)
+  - local (varchar)
 
 Tabela: chaves_registros
 Colunas:
-  - id
-  - pessoa_id
-  - chave_id
-  - tipo_acesso
-  - data
-  - hora
+  - id (int)
+  - pessoa_id (int)
+  - chave_id (int)
+  - tipo_acesso (tinyint)
+  - data (smalldatetime)
+  - hora (int)
 
 Tabela: classificacao_historico
 Colunas:
-  - id
-  - pessoa_id
-  - classificacao_id
-  - data_inicio
-  - hora_inicio
-  - data_fim
-  - hora_fim
+  - id (int)
+  - pessoa_id (int)
+  - classificacao_id (int)
+  - data_inicio (smalldatetime)
+  - hora_inicio (varchar)
+  - data_fim (smalldatetime)
+  - hora_fim (varchar)
 
 Tabela: classificacoes
 Colunas:
-  - id
-  - descricao
-  - usar_urna
-  - estacionamento_vagas_maxima
-  - estacionamento_vagas_ocupadas
-  - apartamento_obrigatorio
-  - box_obrigatorio
-  - deposito_obrigatorio
-  - elevador_perfil
+  - id (int)
+  - descricao (varchar)
+  - usar_urna (bit)
+  - estacionamento_vagas_maxima (int)
+  - estacionamento_vagas_ocupadas (int)
+  - apartamento_obrigatorio (bit)
+  - box_obrigatorio (bit)
+  - deposito_obrigatorio (bit)
+  - elevador_perfil (varchar)
 
 Tabela: comunicados
 Colunas:
-  - id
-  - titulo
-  - visivel
-  - visivel_ate
-  - texto
+  - id (uniqueidentifier)
+  - titulo (varchar)
+  - visivel (tinyint)
+  - visivel_ate (smalldatetime)
+  - texto (ntext)
 
 Tabela: config_etiqueta
 Colunas:
-  - id
-  - tipo_folha
-  - margem_superior
-  - margem_esquerda
-  - etiqueta_altura
-  - etiqueta_largura
-  - etiquetas_horizontais
-  - etiquetas_verticais
-  - posicao
-  - impressao_auto
-  - paisagem
-  - tipo_visualizacao
+  - id (int)
+  - tipo_folha (tinyint)
+  - margem_superior (real)
+  - margem_esquerda (real)
+  - etiqueta_altura (real)
+  - etiqueta_largura (real)
+  - etiquetas_horizontais (tinyint)
+  - etiquetas_verticais (tinyint)
+  - posicao (tinyint)
+  - impressao_auto (bit)
+  - paisagem (bit)
+  - tipo_visualizacao (tinyint)
 
 Tabela: configs
 Colunas:
-  - nome
-  - valor
+  - nome (varchar)
+  - valor (varchar)
 
 Tabela: consumo_conta_corrente
 Colunas:
-  - id
-  - data
-  - hora
-  - quantidade
-  - valor
-  - obs
-  - pessoa_id
-  - produto_id
-  - tipo_origem
-  - a_vista
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - id (int)
+  - data (smalldatetime)
+  - hora (varchar)
+  - quantidade (real)
+  - valor (money)
+  - obs (varchar)
+  - pessoa_id (int)
+  - produto_id (int)
+  - tipo_origem (tinyint)
+  - a_vista (bit)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: consumo_produtos
 Colunas:
-  - id
-  - codigo
-  - descricao
-  - tipo_produto_id
-  - valor
-  - qt_disponivel
-  - qt_minimo
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - id (int)
+  - codigo (varchar)
+  - descricao (varchar)
+  - tipo_produto_id (int)
+  - valor (smallmoney)
+  - qt_disponivel (real)
+  - qt_minimo (real)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: consumo_tipos_produtos
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: correspondencias
 Colunas:
-  - id
-  - data_entrega
-  - hora_entrega
-  - descricao
-  - apartamento_id
-  - destinatario_id
-  - pessoa_retirada_id
-  - data_retirada
-  - hora_retirada
-  - status
-  - senha
+  - id (uniqueidentifier)
+  - data_entrega (datetime)
+  - hora_entrega (int)
+  - descricao (varchar)
+  - apartamento_id (int)
+  - destinatario_id (int)
+  - pessoa_retirada_id (int)
+  - data_retirada (datetime)
+  - hora_retirada (int)
+  - status (tinyint)
+  - senha (varchar)
 
 Tabela: criptografia_numeros
 Colunas:
-  - de
-  - para
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - de (varchar)
+  - para (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: depositos
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: elevadores_andares
 Colunas:
-  - andar
-  - zona_id
-  - template
+  - andar (varchar)
+  - zona_id (int)
+  - template (varchar)
 
 Tabela: elevadores_configs
 Colunas:
-  - id
-  - ativar
-  - sistema
-  - modo
-  - servidor
-  - porta_tcp
-  - porta_tcp_bd
-  - andar_base
+  - id (int)
+  - ativar (bit)
+  - sistema (tinyint)
+  - modo (tinyint)
+  - servidor (varchar)
+  - porta_tcp (int)
+  - porta_tcp_bd (int)
+  - andar_base (varchar)
 
 Tabela: elevadores_tarefas
 Colunas:
-  - id
-  - data_hora
-  - tarefa
-  - parametros
-  - feita
-  - resposta
+  - id (int)
+  - data_hora (smalldatetime)
+  - tarefa (tinyint)
+  - parametros (varchar)
+  - feita (bit)
+  - resposta (varchar)
 
 Tabela: empresas
 Colunas:
-  - id
-  - nome
-  - inscricao
-  - cnpj
-  - endereco
-  - bairro
-  - cidade
-  - cep
-  - uf
-  - telefone
-  - fax
-  - obs
-  - responsavel
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - pais
-  - responsavel_cargo
-  - responsavel_email
-  - elevador_andares
-  - tipo_documento
+  - id (int)
+  - nome (varchar)
+  - inscricao (varchar)
+  - cnpj (varchar)
+  - endereco (varchar)
+  - bairro (varchar)
+  - cidade (varchar)
+  - cep (varchar)
+  - uf (varchar)
+  - telefone (varchar)
+  - fax (varchar)
+  - obs (varchar)
+  - responsavel (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - pais (varchar)
+  - responsavel_cargo (varchar)
+  - responsavel_email (varchar)
+  - elevador_andares (varchar)
+  - tipo_documento (int)
 
 Tabela: equipamentos
 Colunas:
-  - id
-  - codigo
-  - descricao
-  - tipo
-  - estacao
-  - on_line
-  - velocidade
-  - porta_com
-  - tipo_com
-  - ip
-  - tempo_acionamento
-  - catraca
-  - ignorar_registro
-  - lado_automatico
-  - controlar_giro
-  - solicita_senha
-  - config
-  - controlar_urna
-  - desativar_visitantes
-  - usar_descripto
-  - controlar_estacionamento
-  - controlar_claviculario
-  - versao_epron
-  - tempo_msg
-  - revista_acessos
-  - ambiente_id
-  - controlador_id
-  - controlar_refeitorio
-  - integracao_config
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - DVR_n_camera
-  - ignorar_cobranca_ref
-  - processo_id_liberado
-  - processo_id_negado
-  - processo_id_conectado
-  - processo_id_desconectado
-  - acesso_empresa
-  - camera_id
-  - comunicando
-  - consulta_saldo
-  - controlar_visitas
-  - catraca_saida_id
-  - comunicar_servidor
-  - acesso_grupo_pessoas
-  - acesso_grupo_segundos
-  - tabela_especifica_refeicao
-  - config_ext
-  - consistir_somente_visitantes
-  - exigir_primeiro_acesso
-  - usar_fechamento_acesso
-  - desativado
-  - exceto_visitante
-  - desativar_visitante_independen
-  - elevador_terminal_id
-  - ignorar_lado_estado_livre
-  - lado_automatico_biometria
-  - ajuste_hora
-  - id_global
-  - permitir_liberar_aplicativo
-  - descricao_aplicativo
-  - icone_aplicativo
-  - padrao_liberar_aplicativo
-  - desativar_envio_automatico
-  - equipamento_relacao_id
-  - chave_comunicacao
-  - somente_leitora
+  - id (int)
+  - codigo (varchar)
+  - descricao (varchar)
+  - tipo (tinyint)
+  - estacao (varchar)
+  - on_line (bit)
+  - velocidade (int)
+  - porta_com (smallint)
+  - tipo_com (smallint)
+  - ip (varchar)
+  - tempo_acionamento (int)
+  - catraca (bit)
+  - ignorar_registro (tinyint)
+  - lado_automatico (bit)
+  - controlar_giro (bit)
+  - solicita_senha (bit)
+  - config (varchar)
+  - controlar_urna (bit)
+  - desativar_visitantes (bit)
+  - usar_descripto (bit)
+  - controlar_estacionamento (bit)
+  - controlar_claviculario (bit)
+  - versao_epron (int)
+  - tempo_msg (int)
+  - revista_acessos (int)
+  - ambiente_id (int)
+  - controlador_id (int)
+  - controlar_refeitorio (bit)
+  - integracao_config (tinyint)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - DVR_n_camera (int)
+  - ignorar_cobranca_ref (tinyint)
+  - processo_id_liberado (int)
+  - processo_id_negado (int)
+  - processo_id_conectado (int)
+  - processo_id_desconectado (int)
+  - acesso_empresa (bit)
+  - camera_id (int)
+  - comunicando (smalldatetime)
+  - consulta_saldo (bit)
+  - controlar_visitas (bit)
+  - catraca_saida_id (int)
+  - comunicar_servidor (bit)
+  - acesso_grupo_pessoas (tinyint)
+  - acesso_grupo_segundos (smallint)
+  - tabela_especifica_refeicao (int)
+  - config_ext (ntext)
+  - consistir_somente_visitantes (bit)
+  - exigir_primeiro_acesso (bit)
+  - usar_fechamento_acesso (varchar)
+  - desativado (bit)
+  - exceto_visitante (bit)
+  - desativar_visitante_independen (bit)
+  - elevador_terminal_id (int)
+  - ignorar_lado_estado_livre (bit)
+  - lado_automatico_biometria (bit)
+  - ajuste_hora (int)
+  - id_global (uniqueidentifier)
+  - permitir_liberar_aplicativo (tinyint)
+  - descricao_aplicativo (varchar)
+  - icone_aplicativo (tinyint)
+  - padrao_liberar_aplicativo (tinyint)
+  - desativar_envio_automatico (bit)
+  - equipamento_relacao_id (int)
+  - chave_comunicacao (varchar)
+  - somente_leitora (bit)
 
 Tabela: equipamentos_consistencia
 Colunas:
-  - equipamento_id
-  - consistencia_id
+  - equipamento_id (int)
+  - consistencia_id (int)
 
 Tabela: equipamentos_funcoes
 Colunas:
-  - id
-  - codigo
-  - descricao
+  - id (int)
+  - codigo (varchar)
+  - descricao (varchar)
 
 Tabela: equipamentos_modelos
 Colunas:
-  - id
-  - marca
-  - modelo
-  - prg_configuracao
-  - prg_man_digitais
-  - prg_env_dados
-  - prg_rec_dados
-  - prg_nome_janela_rec_dados
-  - buscar_diretorio_sistema
-  - rec_nome_arquivo
-  - rec_cracha_ini
-  - rec_cracha_tam
-  - rec_data_ini
-  - rec_data_tam
-  - rec_hora_ini
-  - rec_hora_tam
-  - rec_equip_ini
-  - rec_equip_tam
-  - rec_sentido_ini
-  - rec_sentido_tam
-  - rec_sentido_palavra_sai
-  - rec_funcao_ini
-  - rec_funcao_tam
-  - formato_data
-  - usa_digitais
-  - comunicar_via_api_rest
+  - id (int)
+  - marca (varchar)
+  - modelo (varchar)
+  - prg_configuracao (varchar)
+  - prg_man_digitais (varchar)
+  - prg_env_dados (varchar)
+  - prg_rec_dados (varchar)
+  - prg_nome_janela_rec_dados (varchar)
+  - buscar_diretorio_sistema (bit)
+  - rec_nome_arquivo (varchar)
+  - rec_cracha_ini (int)
+  - rec_cracha_tam (int)
+  - rec_data_ini (int)
+  - rec_data_tam (int)
+  - rec_hora_ini (int)
+  - rec_hora_tam (int)
+  - rec_equip_ini (int)
+  - rec_equip_tam (int)
+  - rec_sentido_ini (int)
+  - rec_sentido_tam (int)
+  - rec_sentido_palavra_sai (varchar)
+  - rec_funcao_ini (int)
+  - rec_funcao_tam (int)
+  - formato_data (varchar)
+  - usa_digitais (bit)
+  - comunicar_via_api_rest (bit)
 
 Tabela: equips_especiais
 Colunas:
-  - id
-  - codigo
-  - descricao
-  - tipo
-  - velocidade
-  - porta_com
-  - tipo_com
-  - ip
-  - config
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - porta
+  - id (int)
+  - codigo (varchar)
+  - descricao (varchar)
+  - tipo (tinyint)
+  - velocidade (int)
+  - porta_com (smallint)
+  - tipo_com (smallint)
+  - ip (varchar)
+  - config (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - porta (int)
 
 Tabela: estado_civil
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: estado_historico
 Colunas:
-  - id
-  - pessoa_id
-  - estado
-  - data_inicio
-  - hora_inicio
-  - data_fim
-  - hora_fim
+  - id (int)
+  - pessoa_id (int)
+  - estado (int)
+  - data_inicio (smalldatetime)
+  - hora_inicio (varchar)
+  - data_fim (smalldatetime)
+  - hora_fim (varchar)
 
 Tabela: estruturas
 Colunas:
-  - id
-  - codigo
-  - descricao
-  - cod_estrutura
-  - pessoa_responsavel_id
-  - data_desativado
-  - nivel
+  - id (int)
+  - codigo (varchar)
+  - descricao (varchar)
+  - cod_estrutura (varchar)
+  - pessoa_responsavel_id (int)
+  - data_desativado (smalldatetime)
+  - nivel (tinyint)
 
 Tabela: etiquetas_itens
 Colunas:
-  - id
-  - tipo_campo
-  - topo
-  - esquerda
-  - largura
-  - altura
-  - config
+  - id (int)
+  - tipo_campo (tinyint)
+  - topo (float)
+  - esquerda (float)
+  - largura (float)
+  - altura (float)
+  - config (varchar)
 
 Tabela: etiquetas_itens_principal
 Colunas:
-  - id
-  - etiqueta_principal_id
-  - tipo_campo
-  - topo
-  - esquerda
-  - largura
-  - altura
-  - config
-  - imagem
+  - id (int)
+  - etiqueta_principal_id (int)
+  - tipo_campo (tinyint)
+  - topo (real)
+  - esquerda (real)
+  - largura (real)
+  - altura (real)
+  - config (varchar)
+  - imagem (image)
 
 Tabela: etiquetas_principal
 Colunas:
-  - id
-  - nome
-  - tipo_folha
-  - folha_altura
-  - folha_largura
-  - margem_superior
-  - margem_esquerda
-  - etiqueta_altura
-  - etiqueta_largura
-  - etiquetas_horizontais
-  - etiquetas_verticais
-  - paisagem
+  - id (int)
+  - nome (varchar)
+  - tipo_folha (tinyint)
+  - folha_altura (real)
+  - folha_largura (real)
+  - margem_superior (real)
+  - margem_esquerda (real)
+  - etiqueta_altura (real)
+  - etiqueta_largura (real)
+  - etiquetas_horizontais (tinyint)
+  - etiquetas_verticais (tinyint)
+  - paisagem (bit)
 
 Tabela: eventos_acessos
 Colunas:
-  - id
-  - data
-  - hora
-  - pessoa_id
-  - equipamento_id
-  - tipo_acesso
-  - descricao
-  - negado
-  - confirmado
-  - valor_refeicao
-  - funcao_equipamento_id
-  - periferico
-  - id_global
+  - id (int)
+  - data (smalldatetime)
+  - hora (int)
+  - pessoa_id (int)
+  - equipamento_id (int)
+  - tipo_acesso (tinyint)
+  - descricao (varchar)
+  - negado (bit)
+  - confirmado (bit)
+  - valor_refeicao (smallmoney)
+  - funcao_equipamento_id (int)
+  - periferico (tinyint)
+  - id_global (uniqueidentifier)
 
 Tabela: eventos_acessos_complementos
 Colunas:
-  - acesso_id
-  - quem_visitar_id
-  - local_id
-  - numero_utilizado
+  - acesso_id (int)
+  - quem_visitar_id (int)
+  - local_id (int)
+  - numero_utilizado (varchar)
 
 Tabela: eventos_envios
 Colunas:
-  - id
-  - pessoa_id
-  - equipamento_id
-  - numero
-  - situacao
-  - numero_provisorio
-  - numero_provisorio_antigo
-  - evento
+  - id (int)
+  - pessoa_id (int)
+  - equipamento_id (int)
+  - numero (varchar)
+  - situacao (tinyint)
+  - numero_provisorio (varchar)
+  - numero_provisorio_antigo (varchar)
+  - evento (tinyint)
 
 Tabela: eventos_imagens
 Colunas:
-  - id
-  - inicio_data
-  - inicio_hora
-  - fim_data
-  - fim_hora
-  - camera_id
-  - imagem
-  - pessoa_id
+  - id (int)
+  - inicio_data (smalldatetime)
+  - inicio_hora (int)
+  - fim_data (smalldatetime)
+  - fim_hora (int)
+  - camera_id (int)
+  - imagem (image)
+  - pessoa_id (int)
 
 Tabela: eventos_registros
 Colunas:
-  - id
-  - data
-  - hora
-  - processo_id
-  - descricao
-  - tipo
-  - pessoa_id
-  - n_identificador
-  - equipamento_id
+  - id (int)
+  - data (datetime)
+  - hora (int)
+  - processo_id (int)
+  - descricao (varchar)
+  - tipo (tinyint)
+  - pessoa_id (int)
+  - n_identificador (varchar)
+  - equipamento_id (int)
 
 Tabela: exportacao_pessoas_layout
 Colunas:
-  - id
-  - ordem
-  - campo
-  - valor
+  - id (int)
+  - ordem (int)
+  - campo (int)
+  - valor (nvarchar)
 
 Tabela: feriados
 Colunas:
-  - id
-  - data
-  - descricao
+  - id (int)
+  - data (smalldatetime)
+  - descricao (varchar)
 
 Tabela: feriados_empresas
 Colunas:
-  - feriado_id
-  - empresa_id
+  - feriado_id (int)
+  - empresa_id (int)
 
 Tabela: filtro1
 Colunas:
-  - id
-  - descricao
-  - processo_id_liberado
-  - processo_id_negado
+  - id (int)
+  - descricao (varchar)
+  - processo_id_liberado (int)
+  - processo_id_negado (int)
 
 Tabela: filtro2
 Colunas:
-  - id
-  - descricao
-  - processo_id_liberado
-  - processo_id_negado
+  - id (int)
+  - descricao (varchar)
+  - processo_id_liberado (int)
+  - processo_id_negado (int)
 
 Tabela: filtro3
 Colunas:
-  - id
-  - descricao
-  - processo_id_liberado
-  - processo_id_negado
-  - id_global
+  - id (int)
+  - descricao (varchar)
+  - processo_id_liberado (int)
+  - processo_id_negado (int)
+  - id_global (uniqueidentifier)
 
 Tabela: filtro4
 Colunas:
-  - id
-  - descricao
-  - processo_id_liberado
-  - processo_id_negado
+  - id (int)
+  - descricao (varchar)
+  - processo_id_liberado (int)
+  - processo_id_negado (int)
 
 Tabela: filtro5
 Colunas:
-  - id
-  - descricao
-  - processo_id_liberado
-  - processo_id_negado
+  - id (int)
+  - descricao (varchar)
+  - processo_id_liberado (int)
+  - processo_id_negado (int)
 
 Tabela: fornecedores
 Colunas:
-  - id
-  - razaoSocial
-  - nomeFantasia
-  - documento
-  - tipoDocumento
-  - endereco
-  - bairro
-  - cidade
-  - pais
-  - responsavel
-  - cep
-  - uf
-  - telefone
+  - id (int)
+  - razaoSocial (varchar)
+  - nomeFantasia (varchar)
+  - documento (varchar)
+  - tipoDocumento (tinyint)
+  - endereco (varchar)
+  - bairro (varchar)
+  - cidade (varchar)
+  - pais (varchar)
+  - responsavel (varchar)
+  - cep (varchar)
+  - uf (varchar)
+  - telefone (varchar)
 
 Tabela: fotos_cadastro
 Colunas:
-  - id
-  - descricao
-  - ordem
-  - tipo_captura
-  - camera_id
-  - mostrar_visu
+  - id (int)
+  - descricao (varchar)
+  - ordem (int)
+  - tipo_captura (tinyint)
+  - camera_id (int)
+  - mostrar_visu (bit)
 
 Tabela: grau_parentesco
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: grupos
 Colunas:
-  - id
-  - nome
-  - administrador
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - bloquear_estado_pessoas
-  - bloquear_principal
-  - visualizar_pessoas_bloqueadas
-  - bloquear_validade_pessoas
+  - id (int)
+  - nome (varchar)
+  - administrador (bit)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - bloquear_estado_pessoas (bit)
+  - bloquear_principal (bit)
+  - visualizar_pessoas_bloqueadas (bit)
+  - bloquear_validade_pessoas (bit)
 
 Tabela: grupos_restricoes_classif
 Colunas:
-  - classificacao_id
-  - grupo_id
+  - classificacao_id (int)
+  - grupo_id (int)
 
 Tabela: grupos_restricoes_empresa
 Colunas:
-  - empresa_id
-  - grupo_id
+  - empresa_id (int)
+  - grupo_id (int)
 
 Tabela: grupos_restricoes_equips
 Colunas:
-  - equipamento_id
-  - grupo_id
+  - equipamento_id (int)
+  - grupo_id (int)
 
 Tabela: grupos_restricoes_hor
 Colunas:
-  - horario_id
-  - grupo_id
+  - horario_id (int)
+  - grupo_id (int)
 
 Tabela: grupos_restricoes_niveis
 Colunas:
-  - nivel_id
-  - grupo_id
+  - nivel_id (int)
+  - grupo_id (int)
 
 Tabela: horarios
 Colunas:
-  - id
-  - nome
-  - escala_tamanho
-  - escala_data
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - id (int)
+  - nome (varchar)
+  - escala_tamanho (int)
+  - escala_data (smalldatetime)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: horarios_itens
 Colunas:
-  - id
-  - horario_id
-  - inicio
-  - fim
-  - seg
-  - ter
-  - qua
-  - qui
-  - sex
-  - sab
-  - dom
-  - fer
-  - tipo_limite
-  - limite_acessos
-  - dias_escala
-  - ciclo
-  - liberar
-  - t_minimo_sentido
-  - t_minimo_tempo
-  - t_minimo_fora_faixa
+  - id (int)
+  - horario_id (int)
+  - inicio (varchar)
+  - fim (varchar)
+  - seg (bit)
+  - ter (bit)
+  - qua (bit)
+  - qui (bit)
+  - sex (bit)
+  - sab (bit)
+  - dom (bit)
+  - fer (bit)
+  - tipo_limite (int)
+  - limite_acessos (smallint)
+  - dias_escala (smallint)
+  - ciclo (int)
+  - liberar (tinyint)
+  - t_minimo_sentido (tinyint)
+  - t_minimo_tempo (smallint)
+  - t_minimo_fora_faixa (bit)
 
 Tabela: horarios_itens_equips
 Colunas:
-  - horario_item_id
-  - equipamento_id
+  - horario_item_id (int)
+  - equipamento_id (int)
 
 Tabela: horarios_itens_equips_t_min
 Colunas:
-  - horario_item_id
-  - equipamento_id
+  - horario_item_id (int)
+  - equipamento_id (int)
 
 Tabela: importar_reservas
 Colunas:
-  - id
-  - ativar
-  - sistema
-  - banco_tipo
-  - banco_servidor
-  - banco_nome
-  - banco_usuario
-  - banco_senha
-  - atualizar_pessoas
-  - tipo_teste
-  - config
-  - campo_ligacao
-  - usa_faixas
-  - multa_sem_refeicao
-  - liberar_mesmo_sem_reserva
-  - valor_fixo_sem_reserva
+  - id (int)
+  - ativar (bit)
+  - sistema (int)
+  - banco_tipo (int)
+  - banco_servidor (varchar)
+  - banco_nome (varchar)
+  - banco_usuario (varchar)
+  - banco_senha (varchar)
+  - atualizar_pessoas (bit)
+  - tipo_teste (int)
+  - config (varchar)
+  - campo_ligacao (tinyint)
+  - usa_faixas (bit)
+  - multa_sem_refeicao (smallmoney)
+  - liberar_mesmo_sem_reserva (bit)
+  - valor_fixo_sem_reserva (smallmoney)
 
 Tabela: integracao_biometrias
 Colunas:
-  - id
-  - n_folha
-  - matricula_digital
-  - template
-  - template_qualidade
-  - dedo
-  - master
-  - panico
-  - tipo_biometria
-  - exclusao
-  - leitura_status
-  - leitura_data
-  - leitura_resposta
-  - tipo_biometria_externa
+  - id (int)
+  - n_folha (varchar)
+  - matricula_digital (varchar)
+  - template (varbinary)
+  - template_qualidade (int)
+  - dedo (tinyint)
+  - master (bit)
+  - panico (bit)
+  - tipo_biometria (smallint)
+  - exclusao (bit)
+  - leitura_status (bit)
+  - leitura_data (smalldatetime)
+  - leitura_resposta (varchar)
+  - tipo_biometria_externa (smallint)
 
 Tabela: integracao_bloqueios_extras
 Colunas:
-  - id
-  - pessoa_n_folha
-  - tipo
-  - data_inicio
-  - data_fim
-  - hora_inicio
-  - hora_fim
-  - motivo
-  - msg_display
-  - equipamentos
-  - excluir_bloqueio
-  - leitura_status
-  - leitura_data
-  - leitura_resposta
-  - sentido
+  - id (int)
+  - pessoa_n_folha (varchar)
+  - tipo (tinyint)
+  - data_inicio (smalldatetime)
+  - data_fim (smalldatetime)
+  - hora_inicio (varchar)
+  - hora_fim (varchar)
+  - motivo (varchar)
+  - msg_display (varchar)
+  - equipamentos (varchar)
+  - excluir_bloqueio (bit)
+  - leitura_status (bit)
+  - leitura_data (smalldatetime)
+  - leitura_resposta (varchar)
+  - sentido (tinyint)
 
 Tabela: integracao_config
 Colunas:
-  - id
-  - sistema
-  - banco_tipo
-  - banco_servidor
-  - banco_nome
-  - banco_usuario
-  - banco_senha
-  - pessoas_tipo_exp
-  - pessoas_classifs
-  - acessos_tipo_exp
-  - acessos_funcao_id
-  - ativar
-  - campo_ligacao
-  - acessos_tipo_enquadramento
-  - windows_autent
-  - campo_integracao_gateway
-  - email_gateway
-  - senha_gateway
-  - banco_id
-  - sentido_dados
-  - importar_afastamentos
-  - estado_pessoa
+  - id (int)
+  - sistema (int)
+  - banco_tipo (int)
+  - banco_servidor (varchar)
+  - banco_nome (varchar)
+  - banco_usuario (varchar)
+  - banco_senha (varchar)
+  - pessoas_tipo_exp (tinyint)
+  - pessoas_classifs (varchar)
+  - acessos_tipo_exp (tinyint)
+  - acessos_funcao_id (int)
+  - ativar (bit)
+  - campo_ligacao (tinyint)
+  - acessos_tipo_enquadramento (tinyint)
+  - windows_autent (bit)
+  - campo_integracao_gateway (tinyint)
+  - email_gateway (varchar)
+  - senha_gateway (varchar)
+  - banco_id (varchar)
+  - sentido_dados (tinyint)
+  - importar_afastamentos (bit)
+  - estado_pessoa (tinyint)
 
 Tabela: integracao_externa
 Colunas:
-  - n_folha
-  - n_identificador
-  - rg
-  - cpf
-  - nome
-  - empresa_cnpj
-  - horario_nome
-  - nivel_nome
-  - estado
-  - classificacao
-  - validade_data_ini
-  - validade_hora_ini
-  - validade_data_fim
-  - validade_hora_fim
-  - obs
-  - estrutura_codigo
-  - email
-  - rg_exped
-  - rg_ssp
-  - n_provisorio
-  - provisorio_inicio
-  - provisorio_fim
-  - filtro1
-  - filtro2
-  - filtro3
-  - filtro4
-  - foto
-  - excluir_pessoa
-  - leitura_status
-  - leitura_data
-  - leitura_resposta
-  - filtro5
-  - n_pis
-  - endereco
-  - bairro
-  - cidade
-  - uf
-  - cep
-  - telefone
-  - celular
-  - nome_pai
-  - nome_mae
-  - nascimento
-  - sexo_masculino
-  - naturalidade
-  - nacionalidade
-  - estado_civil
-  - master
-  - nao_digital
-  - refeicao_controle
-  - refeicao_valor_unico
-  - refeicao_tabela
-  - refeicao_conta_corrente
-  - data_inclusao
+  - n_folha (varchar)
+  - n_identificador (varchar)
+  - rg (varchar)
+  - cpf (varchar)
+  - nome (varchar)
+  - empresa_cnpj (varchar)
+  - horario_nome (varchar)
+  - nivel_nome (varchar)
+  - estado (tinyint)
+  - classificacao (varchar)
+  - validade_data_ini (smalldatetime)
+  - validade_hora_ini (varchar)
+  - validade_data_fim (smalldatetime)
+  - validade_hora_fim (varchar)
+  - obs (varchar)
+  - estrutura_codigo (varchar)
+  - email (varchar)
+  - rg_exped (smalldatetime)
+  - rg_ssp (varchar)
+  - n_provisorio (varchar)
+  - provisorio_inicio (smalldatetime)
+  - provisorio_fim (smalldatetime)
+  - filtro1 (varchar)
+  - filtro2 (varchar)
+  - filtro3 (varchar)
+  - filtro4 (varchar)
+  - foto (varchar)
+  - excluir_pessoa (bit)
+  - leitura_status (bit)
+  - leitura_data (smalldatetime)
+  - leitura_resposta (varchar)
+  - filtro5 (varchar)
+  - n_pis (varchar)
+  - endereco (varchar)
+  - bairro (varchar)
+  - cidade (varchar)
+  - uf (varchar)
+  - cep (varchar)
+  - telefone (varchar)
+  - celular (varchar)
+  - nome_pai (varchar)
+  - nome_mae (varchar)
+  - nascimento (smalldatetime)
+  - sexo_masculino (bit)
+  - naturalidade (varchar)
+  - nacionalidade (varchar)
+  - estado_civil (varchar)
+  - master (bit)
+  - nao_digital (bit)
+  - refeicao_controle (tinyint)
+  - refeicao_valor_unico (smallmoney)
+  - refeicao_tabela (varchar)
+  - refeicao_conta_corrente (bit)
+  - data_inclusao (smalldatetime)
 
 Tabela: integracao_horarios
 Colunas:
-  - nome
-  - inicio
-  - fim
-  - seg
-  - ter
-  - qua
-  - qui
-  - sex
-  - sab
-  - dom
-  - fer
-  - acessos
-  - tipo_acesso
-  - liberar_sentido
-  - excluir_horario
-  - leitura_status
-  - leitura_data
-  - leitura_resposta
+  - nome (varchar)
+  - inicio (varchar)
+  - fim (varchar)
+  - seg (bit)
+  - ter (bit)
+  - qua (bit)
+  - qui (bit)
+  - sex (bit)
+  - sab (bit)
+  - dom (bit)
+  - fer (bit)
+  - acessos (smallint)
+  - tipo_acesso (tinyint)
+  - liberar_sentido (tinyint)
+  - excluir_horario (bit)
+  - leitura_status (bit)
+  - leitura_data (smalldatetime)
+  - leitura_resposta (varchar)
 
 Tabela: integracao_mensagens
 Colunas:
-  - id
-  - pessoas_n_folha
-  - data
-  - mensagem_linha1
-  - mensagem_linha2
-  - mensagem_popup
-  - equipamentos
-  - excluir_mensagem
-  - leitura_status
-  - leitura_data
-  - leitura_resposta
+  - id (int)
+  - pessoas_n_folha (varchar)
+  - data (smalldatetime)
+  - mensagem_linha1 (varchar)
+  - mensagem_linha2 (varchar)
+  - mensagem_popup (varchar)
+  - equipamentos (varchar)
+  - excluir_mensagem (bit)
+  - leitura_status (bit)
+  - leitura_data (smalldatetime)
+  - leitura_resposta (varchar)
 
 Tabela: layout_acesso_pessoal
 Colunas:
-  - ordem
-  - campo
-  - valor
+  - ordem (int)
+  - campo (tinyint)
+  - valor (varchar)
 
 Tabela: Layout_Importacao_Pessoa
 Colunas:
-  - id
-  - Posicao
-  - Tamanho
-  - Campo
+  - id (int)
+  - Posicao (int)
+  - Tamanho (int)
+  - Campo (int)
 
 Tabela: liberacoes_extras
 Colunas:
-  - id
-  - pessoa_id
-  - data_inicio
-  - data_fim
-  - hora_inicio
-  - hora_fim
-  - obs
-  - equipamentos
-  - grupo_extra_id
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - autorizacao_usu_id
-  - sentido
-  - n_acessos
+  - id (int)
+  - pessoa_id (int)
+  - data_inicio (smalldatetime)
+  - data_fim (smalldatetime)
+  - hora_inicio (varchar)
+  - hora_fim (varchar)
+  - obs (varchar)
+  - equipamentos (varchar)
+  - grupo_extra_id (int)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - autorizacao_usu_id (int)
+  - sentido (tinyint)
+  - n_acessos (smallint)
 
 Tabela: liberacoes_extras_grupo
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: liberacoes_manuais
 Colunas:
-  - id
-  - data
-  - hora
-  - equipamento_id
-  - tipo_liberacao
-  - usuario_id
-  - pessoa_id
-  - sentido
+  - id (int)
+  - data (datetime)
+  - hora (int)
+  - equipamento_id (int)
+  - tipo_liberacao (tinyint)
+  - usuario_id (int)
+  - pessoa_id (int)
+  - sentido (smallint)
 
 Tabela: locais
 Colunas:
-  - id
-  - descricao
-  - permitir_reserva_app
-  - taxa_manutencao
-  - antecedencia
-  - id_global
+  - id (int)
+  - descricao (varchar)
+  - permitir_reserva_app (bit)
+  - taxa_manutencao (smallmoney)
+  - antecedencia (int)
+  - id_global (uniqueidentifier)
 
 Tabela: logs
 Colunas:
-  - id
-  - usuario_id
-  - acao_id
-  - obs
-  - data_hora
+  - id (int)
+  - usuario_id (int)
+  - acao_id (int)
+  - obs (varchar)
+  - data_hora (datetime)
 
 Tabela: logs_acoes
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: mensagens
 Colunas:
-  - id
-  - pessoa_id
-  - data
-  - mensagem
-  - mensagem_popup
-  - equipamentos
-  - integracao_id
+  - id (int)
+  - pessoa_id (int)
+  - data (smalldatetime)
+  - mensagem (varchar)
+  - mensagem_popup (varchar)
+  - equipamentos (varchar)
+  - integracao_id (int)
 
 Tabela: movimentacoes_notas_fiscais
 Colunas:
-  - id
-  - fornecedor
-  - transporte
-  - nota_fiscal
-  - placa
-  - motorista
-  - obs
-  - ent_data
-  - ent_hora
-  - sai_data
-  - sai_hora
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - fornecedorId
+  - id (int)
+  - fornecedor (varchar)
+  - transporte (varchar)
+  - nota_fiscal (varchar)
+  - placa (varchar)
+  - motorista (varchar)
+  - obs (varchar)
+  - ent_data (smalldatetime)
+  - ent_hora (varchar)
+  - sai_data (smalldatetime)
+  - sai_hora (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - fornecedorId (int)
 
 Tabela: movimentacoes_objetos
 Colunas:
-  - id
-  - pessoa_id
-  - descricao
-  - ent_data
-  - ent_hora
-  - sai_data
-  - sai_hora
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - id (int)
+  - pessoa_id (int)
+  - descricao (varchar)
+  - ent_data (smalldatetime)
+  - ent_hora (varchar)
+  - sai_data (smalldatetime)
+  - sai_hora (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: niveis
 Colunas:
-  - id
-  - descricao
-  - usar_rota
-  - listar_portaria
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - tempo_maximo
-  - fechamento_rota
-  - rota_sem_funcao
+  - id (int)
+  - descricao (varchar)
+  - usar_rota (bit)
+  - listar_portaria (bit)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - tempo_maximo (int)
+  - fechamento_rota (int)
+  - rota_sem_funcao (bit)
 
 Tabela: niveis_itens
 Colunas:
-  - id
-  - nivel_id
-  - equipamento_id
-  - horario_id
-  - rota_ordem
+  - id (int)
+  - nivel_id (int)
+  - equipamento_id (int)
+  - horario_id (int)
+  - rota_ordem (int)
 
 Tabela: nivel_historico
 Colunas:
-  - id
-  - pessoa_id
-  - nivel_id
-  - data_inicio
-  - hora_inicio
-  - data_fim
-  - hora_fim
-  - alteracao_usu_id
+  - id (int)
+  - pessoa_id (int)
+  - nivel_id (int)
+  - data_inicio (smalldatetime)
+  - hora_inicio (varchar)
+  - data_fim (smalldatetime)
+  - hora_fim (varchar)
+  - alteracao_usu_id (int)
 
 Tabela: numeros_especiais
 Colunas:
-  - numero
-  - obs
-  - n_reduzido
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - numero (varchar)
+  - obs (varchar)
+  - n_reduzido (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: numeros_historico
 Colunas:
-  - id
-  - pessoa_id
-  - numero
-  - tipo_numero
-  - data_inicio
-  - data_fim
-  - Hora_inicio
-  - hora_fim
+  - id (int)
+  - pessoa_id (int)
+  - numero (varchar)
+  - tipo_numero (tinyint)
+  - data_inicio (smalldatetime)
+  - data_fim (smalldatetime)
+  - Hora_inicio (varchar)
+  - hora_fim (varchar)
 
 Tabela: numeros_validos
 Colunas:
-  - numero
-  - data_fornecimento
-  - obs
-  - data_entrega
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - numero (varchar)
+  - data_fornecimento (smalldatetime)
+  - obs (varchar)
+  - data_entrega (smalldatetime)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: ocorrencias
 Colunas:
-  - id
-  - vigilante_id
-  - data
-  - hora
-  - local_id
-  - local_complemento
-  - tipo_ocorrencia_id
-  - descricao
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - id (int)
+  - vigilante_id (int)
+  - data (smalldatetime)
+  - hora (int)
+  - local_id (int)
+  - local_complemento (varchar)
+  - tipo_ocorrencia_id (int)
+  - descricao (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (smalldatetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (smalldatetime)
 
 Tabela: ocorrencias_pessoas
 Colunas:
-  - ocorrencias_id
-  - pessoa_id
+  - ocorrencias_id (int)
+  - pessoa_id (int)
 
 Tabela: ordem_servico
 Colunas:
-  - id
-  - pessoa_id
-  - inicio_data
-  - inicio_hora
-  - fim_data
-  - fim_hora
-  - n_ordem_servico
-  - obs
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - id (int)
+  - pessoa_id (int)
+  - inicio_data (smalldatetime)
+  - inicio_hora (varchar)
+  - fim_data (smalldatetime)
+  - fim_hora (varchar)
+  - n_ordem_servico (varchar)
+  - obs (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: paineis
 Colunas:
-  - id
-  - descricao
-  - ip
-  - configs
-  - rota
-  - template
+  - id (int)
+  - descricao (varchar)
+  - ip (varchar)
+  - configs (varchar)
+  - rota (varchar)
+  - template (ntext)
 
 Tabela: pen_app_tar_realizadas
 Colunas:
-  - id
-  - data_hora
-  - descricao
+  - id (int)
+  - data_hora (datetime)
+  - descricao (varchar)
 
 Tabela: pendencias_app
 Colunas:
-  - tipo_pendencia
-  - pendencia_id
-  - prioridade
-  - parametros
-  - pendencia_id_global
+  - tipo_pendencia (int)
+  - pendencia_id (int)
+  - prioridade (tinyint)
+  - parametros (varchar)
+  - pendencia_id_global (uniqueidentifier)
 
 Tabela: perguntas_adicionais
 Colunas:
-  - id
-  - descricao
-  - grupo
-  - ordem
-  - tamanho
-  - nao_imprimir
+  - id (int)
+  - descricao (varchar)
+  - grupo (varchar)
+  - ordem (smallint)
+  - tamanho (smallint)
+  - nao_imprimir (bit)
 
 Tabela: pessoas
 Colunas:
-  - id
-  - n_identificador
-  - nome
-  - rg
-  - empresa_id
-  - horario_id
-  - estado
-  - classificacao_id
-  - validade_data_ini
-  - validade_hora_ini
-  - validade_data_fim
-  - validade_hora_fim
-  - obs
-  - nivel_id
-  - estrutura_id
-  - mensalidade_valor
-  - mensalidade_vencimento
-  - mensalidade_tolerancia
-  - mensalidade_bloquear_pagto
-  - quem_visitar_id
-  - sem_digital
-  - endereco
-  - bairro
-  - cidade
-  - cep
-  - uf
-  - pais
-  - telefone
-  - celular
-  - cpf
-  - nascimento
-  - email
-  - senha
-  - nome_pai
-  - nome_mae
-  - cargo
-  - empresanome
-  - empresafone
-  - ramal
-  - n_folha
-  - rg_exped
-  - rg_ssp
-  - naturalidade
-  - estado_civil_id
-  - sexo_masculino
-  - n_provisorio
-  - provisorio_inicio
-  - provisorio_fim
-  - consumo_limite_credito
-  - web_senha
-  - web_bloqueado
-  - web_n_modulo
-  - web_visu_acessos
-  - condominios_ap
-  - condominios_bloco
-  - master
-  - ultimo_acesso_entrada
-  - liberacao_imediata
-  - refeicao_controle
-  - refeicao_valor_unico
-  - refeicao_conta_corrente
-  - filtro1_id
-  - filtro2_id
-  - filtro3_id
-  - filtro4_id
-  - integracao_config
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - reserva_status
-  - reserva_ignorar
-  - id_externo
-  - h7x_configs
-  - processo_id_liberado
-  - processo_id_negado
-  - filtro5_id
-  - grupo_refeicao_id
-  - visitas_limite
-  - visitas_atual
-  - senha_consumo
-  - n_utilizar_teclado
-  - n_pis
-  - ambiente_id
-  - elevador_andares_extras
-  - alterar_senha
-  - id_global
-  - senha_app
-  - permissao_liberar_app
-  - permitir_cadastro_correspond
+  - id (int)
+  - n_identificador (varchar)
+  - nome (varchar)
+  - rg (varchar)
+  - empresa_id (int)
+  - horario_id (int)
+  - estado (tinyint)
+  - classificacao_id (int)
+  - validade_data_ini (smalldatetime)
+  - validade_hora_ini (varchar)
+  - validade_data_fim (smalldatetime)
+  - validade_hora_fim (varchar)
+  - obs (varchar)
+  - nivel_id (int)
+  - estrutura_id (int)
+  - mensalidade_valor (smallmoney)
+  - mensalidade_vencimento (tinyint)
+  - mensalidade_tolerancia (tinyint)
+  - mensalidade_bloquear_pagto (bit)
+  - quem_visitar_id (int)
+  - sem_digital (bit)
+  - endereco (varchar)
+  - bairro (varchar)
+  - cidade (varchar)
+  - cep (varchar)
+  - uf (varchar)
+  - pais (varchar)
+  - telefone (varchar)
+  - celular (varchar)
+  - cpf (varchar)
+  - nascimento (smalldatetime)
+  - email (varchar)
+  - senha (varchar)
+  - nome_pai (varchar)
+  - nome_mae (varchar)
+  - cargo (varchar)
+  - empresanome (varchar)
+  - empresafone (varchar)
+  - ramal (varchar)
+  - n_folha (varchar)
+  - rg_exped (smalldatetime)
+  - rg_ssp (varchar)
+  - naturalidade (varchar)
+  - estado_civil_id (int)
+  - sexo_masculino (bit)
+  - n_provisorio (varchar)
+  - provisorio_inicio (smalldatetime)
+  - provisorio_fim (smalldatetime)
+  - consumo_limite_credito (real)
+  - web_senha (varchar)
+  - web_bloqueado (bit)
+  - web_n_modulo (varchar)
+  - web_visu_acessos (bit)
+  - condominios_ap (varchar)
+  - condominios_bloco (varchar)
+  - master (bit)
+  - ultimo_acesso_entrada (bit)
+  - liberacao_imediata (bit)
+  - refeicao_controle (tinyint)
+  - refeicao_valor_unico (smallmoney)
+  - refeicao_conta_corrente (bit)
+  - filtro1_id (int)
+  - filtro2_id (int)
+  - filtro3_id (int)
+  - filtro4_id (int)
+  - integracao_config (tinyint)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - reserva_status (bit)
+  - reserva_ignorar (bit)
+  - id_externo (int)
+  - h7x_configs (varchar)
+  - processo_id_liberado (int)
+  - processo_id_negado (int)
+  - filtro5_id (int)
+  - grupo_refeicao_id (int)
+  - visitas_limite (int)
+  - visitas_atual (int)
+  - senha_consumo (varchar)
+  - n_utilizar_teclado (bit)
+  - n_pis (varchar)
+  - ambiente_id (int)
+  - elevador_andares_extras (varchar)
+  - alterar_senha (bit)
+  - id_global (uniqueidentifier)
+  - senha_app (varchar)
+  - permissao_liberar_app (tinyint)
+  - permitir_cadastro_correspond (bit)
 
 Tabela: pessoas_apartamentos
 Colunas:
-  - pessoa_id
-  - apartamento_id
+  - pessoa_id (int)
+  - apartamento_id (int)
 
 Tabela: pessoas_boxes
 Colunas:
-  - pessoa_id
-  - box_id
-  - ordem
+  - pessoa_id (int)
+  - box_id (int)
+  - ordem (int)
 
 Tabela: pessoas_caixas_correios
 Colunas:
-  - pessoa_id
-  - caixa_correio_id
+  - pessoa_id (int)
+  - caixa_correio_id (int)
 
 Tabela: pessoas_chaves
 Colunas:
-  - pessoa_id
-  - chave_id
+  - pessoa_id (int)
+  - chave_id (int)
 
 Tabela: pessoas_dependentes
 Colunas:
-  - pessoa_id
-  - dependente_id
-  - grau_parentesco_id
+  - pessoa_id (int)
+  - dependente_id (int)
+  - grau_parentesco_id (int)
 
 Tabela: pessoas_depositos
 Colunas:
-  - pessoa_id
-  - deposito_id
+  - pessoa_id (int)
+  - deposito_id (int)
 
 Tabela: pessoas_digitais
 Colunas:
-  - id
-  - pessoa_id
-  - matricula_digital
-  - template_codigo
-  - template
-  - template_qualidade
-  - dedo
-  - master
-  - panico
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - tipo_biometria
+  - id (int)
+  - pessoa_id (int)
+  - matricula_digital (varchar)
+  - template_codigo (varchar)
+  - template (varbinary)
+  - template_qualidade (int)
+  - dedo (tinyint)
+  - master (bit)
+  - panico (bit)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - tipo_biometria (smallint)
 
 Tabela: pessoas_digitais_envios
 Colunas:
-  - digital_id
-  - equipamento_id
-  - data_envio
+  - digital_id (int)
+  - equipamento_id (int)
+  - data_envio (smalldatetime)
 
 Tabela: pessoas_documentos
 Colunas:
-  - pessoa_id
-  - tipo_documento_id
-  - numero
+  - pessoa_id (int)
+  - tipo_documento_id (int)
+  - numero (varchar)
 
 Tabela: pessoas_hor_funcoes
 Colunas:
-  - pessoa_id
-  - funcao_id
-  - horario_id
+  - pessoa_id (int)
+  - funcao_id (int)
+  - horario_id (int)
 
 Tabela: pessoas_niveis
 Colunas:
-  - pessoa_id
-  - nivel_id
+  - pessoa_id (int)
+  - nivel_id (int)
 
 Tabela: pessoas_padroes
 Colunas:
-  - classificacao_id
-  - empresa_id
-  - estrutura_id
-  - estado
-  - horario_id
-  - nivel_id
-  - validade_data_ini
-  - validade_hora_ini
-  - validade_data_fim
-  - validade_hora_fim
-  - obs
-  - sem_digital
-  - master
-  - visitas_limite
-  - visitas_atual
+  - classificacao_id (int)
+  - empresa_id (int)
+  - estrutura_id (int)
+  - estado (tinyint)
+  - horario_id (int)
+  - nivel_id (int)
+  - validade_data_ini (smalldatetime)
+  - validade_hora_ini (varchar)
+  - validade_data_fim (smalldatetime)
+  - validade_hora_fim (varchar)
+  - obs (varchar)
+  - sem_digital (bit)
+  - master (bit)
+  - visitas_limite (int)
+  - visitas_atual (int)
 
 Tabela: pessoas_respostas
 Colunas:
-  - pessoa_id
-  - pergunta_id
-  - resposta
+  - pessoa_id (int)
+  - pergunta_id (int)
+  - resposta (varchar)
 
 Tabela: pessoas_varios_numeros
 Colunas:
-  - pessoa_id
-  - numero
-  - nivel_id
-  - processo_id_liberado
-  - processo_id_negado
+  - pessoa_id (int)
+  - numero (varchar)
+  - nivel_id (int)
+  - processo_id_liberado (int)
+  - processo_id_negado (int)
 
 Tabela: pessoas_veiculos
 Colunas:
-  - pessoa_id
-  - veiculo_id
+  - pessoa_id (int)
+  - veiculo_id (int)
 
 Tabela: plantas_baixas
 Colunas:
-  - id
-  - nome
-  - cor_fundo
-  - tamanho_imagem
-  - imagem_planta
+  - id (int)
+  - nome (varchar)
+  - cor_fundo (int)
+  - tamanho_imagem (tinyint)
+  - imagem_planta (image)
 
 Tabela: plantas_baixas_itens
 Colunas:
-  - id
-  - planta_baixa_id
-  - pos_esquerda
-  - pos_topo
-  - tipo
-  - config
+  - id (int)
+  - planta_baixa_id (int)
+  - pos_esquerda (int)
+  - pos_topo (int)
+  - tipo (int)
+  - config (varchar)
 
 Tabela: portaria_campos
 Colunas:
-  - descricao
-  - ordem
+  - descricao (varchar)
+  - ordem (int)
 
 Tabela: processos
 Colunas:
-  - id
-  - descricao
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - id (int)
+  - descricao (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: processos_itens
 Colunas:
-  - id
-  - processo_id
-  - numero
-  - tipo
-  - config
-  - proximo
-  - proximo_alt
-  - esquerda
-  - topo
+  - id (int)
+  - processo_id (int)
+  - numero (int)
+  - tipo (int)
+  - config (varchar)
+  - proximo (int)
+  - proximo_alt (int)
+  - esquerda (int)
+  - topo (int)
 
 Tabela: refeicoes_layout
 Colunas:
-  - id
-  - ordem
-  - campo
-  - valor
+  - id (int)
+  - ordem (int)
+  - campo (int)
+  - valor (nvarchar)
 
 Tabela: registro_sistema
 Colunas:
-  - codigo_produto
-  - chave
-  - empresa_id
+  - codigo_produto (int)
+  - chave (varchar)
+  - empresa_id (int)
 
 Tabela: registro_sistema_config
 Colunas:
-  - quantidade_pessoas
-  - n_equipamentos
-  - n_eventos
-  - acessos
-  - tipo_web
-  - mini_acesso
-  - data_base_controle_recursos
-  - usa_acessonet_app
+  - quantidade_pessoas (tinyint)
+  - n_equipamentos (int)
+  - n_eventos (int)
+  - acessos (varchar)
+  - tipo_web (bit)
+  - mini_acesso (bit)
+  - data_base_controle_recursos (varchar)
+  - usa_acessonet_app (bit)
 
 Tabela: rel_personalizados
 Colunas:
-  - id
-  - nome
-  - sql
-  - arquivo_mrt
-  - exibir_recepcao
+  - id (int)
+  - nome (varchar)
+  - sql (varchar)
+  - arquivo_mrt (varbinary)
+  - exibir_recepcao (bit)
 
 Tabela: rel_personalizados_parametros
 Colunas:
-  - rel_personalizado_id
-  - nome
-  - tipo
+  - rel_personalizado_id (int)
+  - nome (varchar)
+  - tipo (tinyint)
 
 Tabela: reservas_faixas
 Colunas:
-  - id
-  - reserva_inicio
-  - reserva_fim
-  - liberacao_inicio
-  - liberacao_fim
-  - proximo_util
-  - equipamentos_reserva
-  - equipamentos_liberacao
+  - id (int)
+  - reserva_inicio (varchar)
+  - reserva_fim (varchar)
+  - liberacao_inicio (varchar)
+  - liberacao_fim (varchar)
+  - proximo_util (bit)
+  - equipamentos_reserva (varchar)
+  - equipamentos_liberacao (varchar)
 
 Tabela: reservas_locais
 Colunas:
-  - id
-  - data
-  - hora
-  - pessoa_id
-  - local_id
-  - data_hora_fim
+  - id (uniqueidentifier)
+  - data (smalldatetime)
+  - hora (int)
+  - pessoa_id (uniqueidentifier)
+  - local_id (uniqueidentifier)
+  - data_hora_fim (datetime)
 
 Tabela: restricoes_cadastros
 Colunas:
-  - usuario_id
-  - tela
-  - acao
+  - usuario_id (int)
+  - tela (int)
+  - acao (int)
 
 Tabela: servicos_logs
 Colunas:
-  - ID
-  - tipo
-  - inicio
-  - fim
-  - obs
+  - ID (int)
+  - tipo (tinyint)
+  - inicio (datetime)
+  - fim (datetime)
+  - obs (varchar)
 
 Tabela: sirenes
 Colunas:
-  - batida
-  - duracao
-  - seg
-  - ter
-  - qua
-  - qui
-  - sex
-  - sab
-  - dom
-  - fer
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - batida (varchar)
+  - duracao (tinyint)
+  - seg (bit)
+  - ter (bit)
+  - qua (bit)
+  - qui (bit)
+  - sex (bit)
+  - sab (bit)
+  - dom (bit)
+  - fer (bit)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: solicitacoes_app
 Colunas:
-  - id
-  - data_hora
-  - solicitante_id
-  - tarefa
-  - dados_solicitacao_id
-  - dados_solicitacao
-  - estado
-  - motivo
+  - id (uniqueidentifier)
+  - data_hora (smalldatetime)
+  - solicitante_id (uniqueidentifier)
+  - tarefa (tinyint)
+  - dados_solicitacao_id (uniqueidentifier)
+  - dados_solicitacao (ntext)
+  - estado (tinyint)
+  - motivo (varchar)
 
 Tabela: telas_pessoas
 Colunas:
-  - classificacao_id
-  - cor_fundo_tela
-  - bloqueia_filtro1
-  - bloqueia_filtro2
-  - bloqueia_filtro3
-  - bloqueia_filtro4
-  - bloqueia_filtro5
+  - classificacao_id (int)
+  - cor_fundo_tela (int)
+  - bloqueia_filtro1 (bit)
+  - bloqueia_filtro2 (bit)
+  - bloqueia_filtro3 (bit)
+  - bloqueia_filtro4 (bit)
+  - bloqueia_filtro5 (bit)
 
 Tabela: tempo_entre_acessos
 Colunas:
-  - equipamento_id
-  - equip_relacionado_id
-  - tempo
+  - equipamento_id (int)
+  - equip_relacionado_id (int)
+  - tempo (int)
 
 Tabela: tipos_documentos
 Colunas:
-  - id
-  - descricao
-  - permitir_zeros_esquerda
-  - permitir_alfa_numerico
-  - id_global
+  - id (int)
+  - descricao (varchar)
+  - permitir_zeros_esquerda (bit)
+  - permitir_alfa_numerico (bit)
+  - id_global (uniqueidentifier)
 
 Tabela: tipos_ocorrencias
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: tipos_refeicoes
 Colunas:
-  - id
-  - pessoa_id
-  - inicio
-  - fim
-  - seg
-  - ter
-  - qua
-  - qui
-  - sex
-  - sab
-  - dom
-  - fer
-  - descricao
-  - valor
-  - grupo_refeicao_id
-  - codigo
-  - sobrepor_faixas_existentes
-  - equipamento_funcao_id
+  - id (int)
+  - pessoa_id (int)
+  - inicio (int)
+  - fim (int)
+  - seg (bit)
+  - ter (bit)
+  - qua (bit)
+  - qui (bit)
+  - sex (bit)
+  - sab (bit)
+  - dom (bit)
+  - fer (bit)
+  - descricao (varchar)
+  - valor (smallmoney)
+  - grupo_refeicao_id (int)
+  - codigo (nvarchar)
+  - sobrepor_faixas_existentes (bit)
+  - equipamento_funcao_id (int)
 
 Tabela: tipos_refeicoes_faixas
 Colunas:
-  - id
-  - tipo_refeicao_id
-  - quantidade
-  - valor
+  - id (int)
+  - tipo_refeicao_id (int)
+  - quantidade (int)
+  - valor (smallmoney)
 
 Tabela: tipos_refeicoes_grupo
 Colunas:
-  - id
-  - descricao
+  - id (int)
+  - descricao (varchar)
 
 Tabela: usuarios
 Colunas:
-  - id
-  - nome
-  - administrador
-  - senha_entrada
-  - senha_alteracao
-  - senha_comunicacao
-  - senha_cadastro
-  - senha_exclusao
-  - dica_senha_entrada
-  - validade_senha_entrada
-  - mensalidade_alterar
-  - mensalidade_excluir
-  - bloqueado
-  - desativado
-  - ultimo_login
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
-  - bloquear_estado_pessoas
-  - bloquear_principal
-  - somente_liberacoes_extras
-  - grupo_id
-  - visualizar_pessoas_bloqueadas
-  - bloquear_validade_pessoas
-  - permitir_dados_sensiveis
-  - aceitou_dados_sensiveis
-  - data_aut_dados_sensiveis
-  - usu_aut_dados_sensiveis_id
-  - usa_act_dir_entrada
-  - usa_act_dir_alteracao
-  - usa_act_dir_comunicacao
-  - usa_act_dir_cadastramento
-  - usa_act_dir_exclusao
-  - data_termo_dados_sensiveis
+  - id (int)
+  - nome (varchar)
+  - administrador (bit)
+  - senha_entrada (varchar)
+  - senha_alteracao (varchar)
+  - senha_comunicacao (varchar)
+  - senha_cadastro (varchar)
+  - senha_exclusao (varchar)
+  - dica_senha_entrada (varchar)
+  - validade_senha_entrada (smalldatetime)
+  - mensalidade_alterar (bit)
+  - mensalidade_excluir (bit)
+  - bloqueado (bit)
+  - desativado (bit)
+  - ultimo_login (datetime)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
+  - bloquear_estado_pessoas (bit)
+  - bloquear_principal (bit)
+  - somente_liberacoes_extras (bit)
+  - grupo_id (int)
+  - visualizar_pessoas_bloqueadas (bit)
+  - bloquear_validade_pessoas (bit)
+  - permitir_dados_sensiveis (bit)
+  - aceitou_dados_sensiveis (bit)
+  - data_aut_dados_sensiveis (smalldatetime)
+  - usu_aut_dados_sensiveis_id (int)
+  - usa_act_dir_entrada (bit)
+  - usa_act_dir_alteracao (bit)
+  - usa_act_dir_comunicacao (bit)
+  - usa_act_dir_cadastramento (bit)
+  - usa_act_dir_exclusao (bit)
+  - data_termo_dados_sensiveis (smalldatetime)
 
 Tabela: usuarios_mensagens
 Colunas:
-  - id
-  - remetente_id
-  - destino_id
-  - data
-  - assunto
-  - texto
-  - lido
+  - id (int)
+  - remetente_id (int)
+  - destino_id (int)
+  - data (smalldatetime)
+  - assunto (varchar)
+  - texto (varchar)
+  - lido (bit)
 
 Tabela: usuarios_menus
 Colunas:
-  - id
-  - usuario_id
-  - nome_menu
+  - id (int)
+  - usuario_id (int)
+  - nome_menu (varchar)
 
 Tabela: usuarios_restricoes_classif
 Colunas:
-  - classificacao_id
-  - usuario_id
+  - classificacao_id (int)
+  - usuario_id (int)
 
 Tabela: usuarios_restricoes_empresa
 Colunas:
-  - empresa_id
-  - usuario_id
+  - empresa_id (int)
+  - usuario_id (int)
 
 Tabela: usuarios_restricoes_equips
 Colunas:
-  - equipamento_id
-  - usuario_id
+  - equipamento_id (int)
+  - usuario_id (int)
 
 Tabela: usuarios_restricoes_hor
 Colunas:
-  - horario_id
-  - usuario_id
+  - horario_id (int)
+  - usuario_id (int)
 
 Tabela: usuarios_restricoes_niveis
 Colunas:
-  - nivel_id
-  - usuario_id
+  - nivel_id (int)
+  - usuario_id (int)
 
 Tabela: veiculos
 Colunas:
-  - id
-  - placa
-  - marca
-  - modelo
-  - cor
-  - obs
-  - criacao_usu_id
-  - criacao_data
-  - alteracao_usu_id
-  - alteracao_data
+  - id (int)
+  - placa (varchar)
+  - marca (varchar)
+  - modelo (varchar)
+  - cor (varchar)
+  - obs (varchar)
+  - criacao_usu_id (int)
+  - criacao_data (datetime)
+  - alteracao_usu_id (int)
+  - alteracao_data (datetime)
 
 Tabela: vw_acessos
 Colunas:
-  - id
-  - data
-  - hora
-  - hora_segundos
-  - negado
-  - confirmado
-  - tipo_acessos
-  - descricao
-  - pessoa_n_identificador
-  - pessoa_nome
-  - pessoa_n_folha
-  - equipamento_codigo
-  - equipamento_descricao
+  - id (int)
+  - data (smalldatetime)
+  - hora (varchar)
+  - hora_segundos (int)
+  - negado (bit)
+  - confirmado (bit)
+  - tipo_acessos (varchar)
+  - descricao (varchar)
+  - pessoa_n_identificador (varchar)
+  - pessoa_nome (varchar)
+  - pessoa_n_folha (varchar)
+  - equipamento_codigo (varchar)
+  - equipamento_descricao (varchar)
 
 Tabela: vw_equipamentos
 Colunas:
-  - id
-  - codigo
-  - descricao
+  - id (int)
+  - codigo (varchar)
+  - descricao (varchar)

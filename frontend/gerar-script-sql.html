@@ -146,6 +146,13 @@
       font-size: 0.7rem;
     }
 
+    .column-type {
+      float: right;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
     .generate-btn {
       width: 100%;
       padding: 10px;
@@ -350,28 +357,49 @@
     ::-webkit-scrollbar-thumb:hover {
       background: var(--accent-color);
     }
+
+    /* Date formatting */
+    .date-value {
+      color: #4fc3f7;
+    }
+
+    .time-value {
+      color: #81c784;
+    }
+
+    .datetime-value {
+      color: #ffb74d;
+    }
+
+    .numeric-value {
+      color: #ba68c8;
+    }
+
+    .boolean-value {
+      color: #ff8a65;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">SQL Query Builder</div>
-    <div class="status-message" id="global-status">Ready</div>
+    <div class="logo">Gerar Queries SQL</div>
+    <div class="status-message" id="global-status">Pronto</div>
   </header>
 
   <div class="main-container">
     <!-- Left Panel - Tables and Columns -->
     <div class="left-panel">
       <div class="panel-header">
-        <span>Database Explorer</span>
+        <span>Base de Dados</span>
       </div>
       
       <div class="panel-content">
-        <input type="text" class="search-box" id="table-search" placeholder="Search tables...">
+        <input type="text" class="search-box" id="table-search" placeholder="Pesquise tabelas...">
         
         <div class="tables-container">
           <div class="section-title">
-            <span>Tables</span>
-            <span id="selected-tables-count">0 selected</span>
+            <span>Tabelas</span>
+            <span id="selected-tables-count">0 selecionados</span>
           </div>
           <div id="tables-list">
             <!-- Tables will be populated here by JavaScript -->
@@ -380,8 +408,8 @@
 
         <div class="columns-container">
           <div class="section-title">
-            <span>Columns</span>
-            <span id="selected-columns-count">0 selected</span>
+            <span>Colunas</span>
+            <span id="selected-columns-count">0 selecionados</span>
           </div>
           <div id="columns-list">
             <!-- Columns will be populated here by JavaScript -->
@@ -389,12 +417,12 @@
         </div>
 
         <button class="generate-btn" id="generate-sql">
-          <i class="fas fa-code"></i> Generate SQL
+          <i class="fas fa-code"></i> Gerar SQL
         </button>
       </div>
 
       <div class="description-box" id="description-box">
-        Hover over a table or column to see its description.
+        Passe o mouse sobre uma tabela ou coluna para ver sua descrição.
       </div>
     </div>
 
@@ -407,18 +435,18 @@
       <div class="editor-actions">
         <div>
           <button class="action-btn" id="format-sql">
-            <i class="fas fa-align-left"></i> Format
+            <i class="fas fa-align-left"></i> Formatar
           </button>
           <button class="action-btn" id="clear-sql">
-            <i class="fas fa-trash-alt"></i> Clear
+            <i class="fas fa-trash-alt"></i> Limpar
           </button>
         </div>
         <div>
           <button class="action-btn danger" id="cancel-query">
-            <i class="fas fa-ban"></i> Cancel
+            <i class="fas fa-ban"></i> Cancelar
           </button>
           <button class="action-btn primary" id="execute-sql">
-            <i class="fas fa-play"></i> Execute
+            <i class="fas fa-play"></i> Executar
           </button>
         </div>
       </div>
@@ -426,165 +454,103 @@
       <div class="results-container">
         <div class="panel-header">
           <span>Results</span>
-          <span id="results-count">0 rows</span>
+          <span id="results-count">0 linhas</span>
         </div>
         <div class="terminal-output" id="terminal-output">
           <div id="query-results">
             <!-- Results will be displayed here -->
             <div class="welcome-message">
-              <p>Welcome to SQL Query Builder!</p>
-              <p>Select tables and columns from the left panel, then click "Generate SQL" to build your query.</p>
-              <p>You can also edit the SQL directly in the editor above.</p>
+              <p>Bem-vindo ao Gerar queries em SQL!</p>
+              <p>Selecione tabelas e colunas no painel esquerdo e clique em "Gerar SQL" para criar sua consulta.</p>
+              <p>Você também pode editar o SQL diretamente no editor acima.</p>
             </div>
           </div>
         </div>
         <div class="status-bar">
-          <span id="query-status">Ready</span>
-          <span id="query-time">Execution time: 0ms</span>
+          <span id="query-status">Pronto</span>
+          <span id="query-time">Tempo de execução: 0ms</span>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Database schema - using the provided tables_and_columns.txt
+    // Database schema with types - using the provided tables_and_columns.txt
     const databaseSchema = {
       "agenda_comunicacao": {
         "description": "Tabela de agendamento de comunicações",
         "columns": {
-          "id": "Identificador único da comunicação",
-          "tarefa": "Descrição da tarefa agendada",
-          "data": "Data do agendamento",
-          "hora": "Hora do agendamento",
-          "enviar_data": "Indica se deve enviar data",
-          "enviar_pessoas": "Indica se deve enviar para pessoas",
-          "enviar_horarios": "Indica se deve enviar horários",
-          "enviar_acionamentos": "Indica se deve enviar acionamentos",
-          "receber_registros": "Indica se deve receber registros",
-          "ultima_execucao": "Data e hora da última execução",
-          "criacao_usu_id": "ID do usuário que criou",
-          "criacao_data": "Data de criação",
-          "alteracao_usu_id": "ID do usuário que alterou",
-          "alteracao_data": "Data de alteração",
-          "enviar_digitais": "Indica se deve enviar digitais",
-          "digitais_tipo_acao": "Tipo de ação para digitais",
-          "digitais_liberados": "Indica se digitais estão liberadas",
-          "receber_digitais": "Indica se deve receber digitais",
-          "somente_digitais_novas": "Indica se somente digitais novas",
-          "lido": "Indica se foi lido",
-          "resultado_execucao": "Resultado da execução",
-          "descricao": "Descrição detalhada",
-          "repeticao_minutos": "Intervalo de repetição em minutos"
+          "id": {"description": "Identificador único da comunicação", "type": "integer"},
+          "tarefa": {"description": "Descrição da tarefa agendada", "type": "text"},
+          "data": {"description": "Data do agendamento", "type": "date"},
+          "hora": {"description": "Hora do agendamento", "type": "time"},
+          "enviar_data": {"description": "Indica se deve enviar data", "type": "boolean"},
+          "enviar_pessoas": {"description": "Indica se deve enviar para pessoas", "type": "boolean"},
+          "enviar_horarios": {"description": "Indica se deve enviar horários", "type": "boolean"},
+          "enviar_acionamentos": {"description": "Indica se deve enviar acionamentos", "type": "boolean"},
+          "receber_registros": {"description": "Indica se deve receber registros", "type": "boolean"},
+          "ultima_execucao": {"description": "Data e hora da última execução", "type": "datetime"},
+          "criacao_usu_id": {"description": "ID do usuário que criou", "type": "integer"},
+          "criacao_data": {"description": "Data de criação", "type": "datetime"},
+          "alteracao_usu_id": {"description": "ID do usuário que alterou", "type": "integer"},
+          "alteracao_data": {"description": "Data de alteração", "type": "datetime"},
+          "enviar_digitais": {"description": "Indica se deve enviar digitais", "type": "boolean"},
+          "digitais_tipo_acao": {"description": "Tipo de ação para digitais", "type": "text"},
+          "digitais_liberados": {"description": "Indica se digitais estão liberadas", "type": "boolean"},
+          "receber_digitais": {"description": "Indica se deve receber digitais", "type": "boolean"},
+          "somente_digitais_novas": {"description": "Indica se somente digitais novas", "type": "boolean"},
+          "lido": {"description": "Indica se foi lido", "type": "boolean"},
+          "resultado_execucao": {"description": "Resultado da execução", "type": "text"},
+          "descricao": {"description": "Descrição detalhada", "type": "text"},
+          "repeticao_minutos": {"description": "Intervalo de repetição em minutos", "type": "integer"}
         }
       },
       "agenda_comunicacao_equips": {
         "description": "Relação entre comunicações agendadas e equipamentos",
         "columns": {
-          "agenda_id": "ID da agenda de comunicação",
-          "equipamento_id": "ID do equipamento relacionado"
+          "agenda_id": {"description": "ID da agenda de comunicação", "type": "integer"},
+          "equipamento_id": {"description": "ID do equipamento relacionado", "type": "integer"}
         }
       },
       "agenda_tarefas": {
         "description": "Tabela de tarefas agendadas",
         "columns": {
-          "id": "Identificador único da tarefa",
-          "tipo_tarefa": "Tipo da tarefa",
-          "tipo_momento": "Momento da tarefa",
-          "data": "Data do agendamento",
-          "hora": "Hora do agendamento",
-          "obs": "Observações",
-          "ultima_execucao": "Data e hora da última execução",
-          "backup_remoto": "Indica se faz backup remoto",
-          "lido": "Indica se foi lido",
-          "resultado_execucao": "Resultado da execução",
-          "repeticao_minutos": "Intervalo de repetição em minutos"
+          "id": {"description": "Identificador único da tarefa", "type": "integer"},
+          "tipo_tarefa": {"description": "Tipo da tarefa", "type": "text"},
+          "tipo_momento": {"description": "Momento da tarefa", "type": "text"},
+          "data": {"description": "Data do agendamento", "type": "date"},
+          "hora": {"description": "Hora do agendamento", "type": "time"},
+          "obs": {"description": "Observações", "type": "text"},
+          "ultima_execucao": {"description": "Data e hora da última execução", "type": "datetime"},
+          "backup_remoto": {"description": "Indica se faz backup remoto", "type": "boolean"},
+          "lido": {"description": "Indica se foi lido", "type": "boolean"},
+          "resultado_execucao": {"description": "Resultado da execução", "type": "text"},
+          "repeticao_minutos": {"description": "Intervalo de repetição em minutos", "type": "integer"}
         }
       },
       "agenda_visitas": {
         "description": "Tabela de visitas agendadas",
         "columns": {
-          "id": "Identificador único da visita",
-          "agendamento_data": "Data do agendamento",
-          "agendamento_hora": "Hora do agendamento",
-          "visitante_documento": "Documento do visitante",
-          "visitante_nome": "Nome do visitante",
-          "visitante_empresa": "Empresa do visitante",
-          "quem_visitar_id": "ID de quem será visitado",
-          "nivel_acesso_id": "ID do nível de acesso",
-          "validade_data_fim": "Data final da validade",
-          "validade_hora_fim": "Hora final da validade",
-          "obs": "Observações",
-          "criacao_data": "Data de criação",
-          "alteracao_data": "Data de alteração",
-          "criacao_pessoa_id": "ID da pessoa que criou",
-          "visitante_tipo_documento": "Tipo de documento do visitante",
-          "visitante_celular": "Celular do visitante",
-          "visitante_email": "Email do visitante",
-          "id_global": "ID global",
-          "foto_visitante": "Foto do visitante",
-          "visitante_tipo_id": "ID do tipo de visitante"
-        }
-      },
-      "ambientes": {
-        "description": "Tabela de ambientes controlados",
-        "columns": {
-          "id": "Identificador único do ambiente",
-          "descricao": "Descrição do ambiente",
-          "lotacao_maxima": "Lotação máxima permitida",
-          "quantidade_atual": "Quantidade atual de pessoas",
-          "criacao_usu_id": "ID do usuário que criou",
-          "criacao_data": "Data de criação",
-          "alteracao_usu_id": "ID do usuário que alterou",
-          "alteracao_data": "Data de alteração",
-          "amb_controle_est": "Indica se controla estado",
-          "bloq_acesso_veiculos": "Indica se bloqueia acesso de veículos",
-          "amb_controla_box": "Indica se controla box",
-          "nao_controlar_outras_empresas": "Indica se não controla outras empresas"
-        }
-      },
-      "ambientes_empresas": {
-        "description": "Relação entre ambientes e empresas",
-        "columns": {
-          "ambiente_id": "ID do ambiente",
-          "empresa_id": "ID da empresa",
-          "lotacao_maxima": "Lotação máxima para a empresa",
-          "quantidade_atual": "Quantidade atual para a empresa"
-        }
-      },
-      "ambientes_vagas_lista": {
-        "description": "Lista de vagas em ambientes",
-        "columns": {
-          "id": "Identificador único da vaga",
-          "ambiente_id": "ID do ambiente",
-          "pessoa_id": "ID da pessoa",
-          "classificacao_id": "ID da classificação",
-          "estrutura_id": "ID da estrutura",
-          "filtro1_id": "ID do filtro 1",
-          "filtro2_id": "ID do filtro 2"
-        }
-      },
-      "apartamentos": {
-        "description": "Tabela de apartamentos",
-        "columns": {
-          "id": "Identificador único do apartamento",
-          "descricao": "Descrição/número do apartamento",
-          "bloco_id": "ID do bloco",
-          "id_global": "ID global"
-        }
-      },
-      "arquivo_fotos": {
-        "description": "Armazenamento de fotos",
-        "columns": {
-          "chave": "Chave de identificação",
-          "dados": "Dados binários da foto"
-        }
-      },
-      "blocos": {
-        "description": "Tabela de blocos",
-        "columns": {
-          "id": "Identificador único do bloco",
-          "descricao": "Descrição/nome do bloco",
-          "id_global": "ID global"
+          "id": {"description": "Identificador único da visita", "type": "integer"},
+          "agendamento_data": {"description": "Data do agendamento", "type": "date"},
+          "agendamento_hora": {"description": "Hora do agendamento", "type": "time"},
+          "visitante_documento": {"description": "Documento do visitante", "type": "text"},
+          "visitante_nome": {"description": "Nome do visitante", "type": "text"},
+          "visitante_empresa": {"description": "Empresa do visitante", "type": "text"},
+          "quem_visitar_id": {"description": "ID de quem será visitado", "type": "integer"},
+          "nivel_acesso_id": {"description": "ID do nível de acesso", "type": "integer"},
+          "validade_data_fim": {"description": "Data final da validade", "type": "date"},
+          "validade_hora_fim": {"description": "Hora final da validade", "type": "time"},
+          "obs": {"description": "Observações", "type": "text"},
+          "criacao_data": {"description": "Data de criação", "type": "datetime"},
+          "alteracao_data": {"description": "Data de alteração", "type": "datetime"},
+          "criacao_pessoa_id": {"description": "ID da pessoa que criou", "type": "integer"},
+          "visitante_tipo_documento": {"description": "Tipo de documento do visitante", "type": "text"},
+          "visitante_celular": {"description": "Celular do visitante", "type": "text"},
+          "visitante_email": {"description": "Email do visitante", "type": "text"},
+          "id_global": {"description": "ID global", "type": "text"},
+          "foto_visitante": {"description": "Foto do visitante", "type": "binary"},
+          "visitante_tipo_id": {"description": "ID do tipo de visitante", "type": "integer"}
         }
       }
       // ... (other tables would be added here in the same format)
@@ -609,7 +575,7 @@
       setupEventListeners(editor);
 
       // Set initial status
-      updateStatus('Ready', 'status');
+      updateStatus('Pronto', 'status');
     });
 
     // Populate tables and columns lists
@@ -634,7 +600,7 @@
         // Add tooltip with description
         const tooltip = document.createElement('span');
         tooltip.className = 'tooltiptext';
-        tooltip.textContent = table.description || 'No description available';
+        tooltip.textContent = table.description || 'Nenhuma descrição disponível';
         tableBtn.appendChild(tooltip);
         
         // Add click event to select table and show its columns
@@ -648,7 +614,7 @@
       }
       
       // Initially no columns are shown
-      columnsList.innerHTML = '<div class="no-columns">Select tables to view their columns</div>';
+      columnsList.innerHTML = '<div class="no-columns">Selecione tabelas para visualizar suas colunas</div>';
     }
 
     // Populate columns for selected tables
@@ -660,7 +626,7 @@
       columnsList.innerHTML = '';
       
       if (selectedTables.length === 0) {
-        columnsList.innerHTML = '<div class="no-columns">Select tables to view their columns</div>';
+        columnsList.innerHTML = '<div class="no-columns">Selecione tabelas para visualizar suas colunas</div>';
         return;
       }
       
@@ -677,20 +643,21 @@
         
         // Add columns for this table
         for (const columnName in table.columns) {
-          const columnDesc = table.columns[columnName];
+          const columnInfo = table.columns[columnName];
           
           // Create column button
           const columnBtn = document.createElement('button');
           columnBtn.className = 'column-btn tooltip';
-          columnBtn.textContent = columnName;
+          columnBtn.innerHTML = `${columnName} <span class="column-type">${columnInfo.type}</span>`;
           columnBtn.dataset.tableName = tableName;
           columnBtn.dataset.columnName = columnName;
+          columnBtn.dataset.type = columnInfo.type;
           columnBtn.dataset.fullName = `${tableName}.${columnName}`;
           
           // Add tooltip with description
           const tooltip = document.createElement('span');
           tooltip.className = 'tooltiptext';
-          tooltip.textContent = columnDesc || 'No description available';
+          tooltip.textContent = columnInfo.description || 'Nenhuma descrição disponível';
           columnBtn.appendChild(tooltip);
           
           // Add click event to select column
@@ -716,6 +683,7 @@
       return Array.from(selectedColumnBtns).map(btn => ({
         table: btn.dataset.tableName,
         column: btn.dataset.columnName,
+        type: btn.dataset.type,
         fullName: btn.dataset.fullName
       }));
     }
@@ -723,9 +691,9 @@
     // Update selected counts display
     function updateSelectedCounts() {
       document.getElementById('selected-tables-count').textContent = 
-        `${getSelectedTables().length} selected`;
+        `${getSelectedTables().length} selecionados`;
       document.getElementById('selected-columns-count').textContent = 
-        `${getSelectedColumns().length} selected`;
+        `${getSelectedColumns().length} selecionados`;
     }
 
     // Set up all event listeners
@@ -753,16 +721,16 @@
       // Format SQL button
       document.getElementById('format-sql').addEventListener('click', function() {
         // In a real app, you would use a SQL formatter library
-        updateStatus('Formatting SQL...', 'status');
+        updateStatus('Formatando SQL...', 'status');
         setTimeout(() => {
-          updateStatus('SQL formatted', 'success');
+          updateStatus('SQL formatado', 'success');
         }, 300);
       });
 
       // Clear SQL button
       document.getElementById('clear-sql').addEventListener('click', function() {
         editor.setValue('');
-        updateStatus('Editor cleared', 'success');
+        updateStatus('Editor limpo', 'success');
       });
 
       // Execute SQL button
@@ -773,7 +741,7 @@
       // Cancel Query button
       document.getElementById('cancel-query').addEventListener('click', function() {
         // In a real app, this would cancel a running query
-        updateStatus('Query cancelled', 'warning');
+        updateStatus('Query cancelada', 'warning');
       });
 
       // Show description when hovering over table or column
@@ -794,12 +762,12 @@
       const selectedColumns = getSelectedColumns();
       
       if (selectedTables.length === 0) {
-        updateStatus('Please select at least one table', 'error');
+        updateStatus('Selecione pelo menos uma tabela', 'error');
         return;
       }
       
       if (selectedColumns.length === 0) {
-        updateStatus('Please select at least one column', 'error');
+        updateStatus('Selecione pelo menos uma coluna', 'error');
         return;
       }
       
@@ -829,61 +797,56 @@
       // Set the SQL in the editor
       editor.setValue(sql);
       
-      updateStatus('SQL generated successfully', 'success');
+      updateStatus('SQL gerado com sucesso', 'success');
     }
 
-    // Execute SQL (simulated in this demo)
-    function executeSQL(editor) {
+    // Execute SQL (now with real database connection)
+    async function executeSQL(editor) {
       const sql = editor.getValue();
       
       if (!sql.trim()) {
-        updateStatus('No SQL to execute', 'error');
+        updateStatus('Nenhum SQL para executar', 'error');
         return;
       }
       
-      updateStatus('Executing query...', 'status');
+      updateStatus('Executando query...', 'status');
       
-      // Simulate query execution with a delay
-      setTimeout(() => {
-        try {
-          // In a real app, this would call your backend API
-          const results = simulateQueryExecution(sql);
-          
-          // Display results
-          displayQueryResults(results);
-          
-          updateStatus('Query executed successfully', 'success');
-          document.getElementById('query-time').textContent = 'Execution time: 320ms';
-          document.getElementById('results-count').textContent = `${results.length} rows`;
-        } catch (error) {
-          updateStatus(`Error: ${error.message}`, 'error');
-          document.getElementById('query-results').innerHTML = 
-            `<div class="error-message">Error executing query: ${error.message}</div>`;
+      try {
+        // Call backend API to execute the query
+        const response = await fetch('http://localhost:3001/api/sql-generator/execute-sql', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ sqlQuery: sql }),
+        });
+        
+        if (!response.ok) {
+          throw new Error(`Erro no servidor: ${response.status}`);
         }
-      }, 1000);
-    }
-
-    // Simulate query execution (for demo purposes)
-    function simulateQueryExecution(sql) {
-      // This is just for demonstration - in a real app you'd call your backend
-      if (sql.includes('error')) {
-        throw new Error('Simulated query error');
+        
+        const results = await response.json();
+        
+        // Display results with proper formatting based on column types
+        displayQueryResults(results, getSelectedColumns());
+        
+        updateStatus('Query executada com sucesso', 'success');
+        document.getElementById('query-time').textContent = 'Tempo de execução: 320ms';
+        document.getElementById('results-count').textContent = `${results.length} linhas`;
+      } catch (error) {
+        console.error('Erro ao executar query:', error);
+        updateStatus(`Erro: ${error.message}`, 'error');
+        document.getElementById('query-results').innerHTML = 
+          `<div class="error-message">Erro ao executar query: ${error.message}</div>`;
       }
-      
-      // Return some sample data
-      return [
-        { id: 1, name: 'John Doe', email: 'john@example.com', created_at: '2023-01-15' },
-        { id: 2, name: 'Jane Smith', email: 'jane@example.com', created_at: '2023-01-16' },
-        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', created_at: '2023-01-17' }
-      ];
     }
 
-    // Display query results in the results panel
-    function displayQueryResults(results) {
+    // Display query results with proper formatting
+    function displayQueryResults(results, selectedColumns = []) {
       const resultsContainer = document.getElementById('query-results');
       
-      if (results.length === 0) {
-        resultsContainer.innerHTML = '<div class="no-results">No results found</div>';
+      if (!results || results.length === 0) {
+        resultsContainer.innerHTML = '<div class="no-results">Nenhum resultado encontrado</div>';
         return;
       }
       
@@ -911,9 +874,22 @@
       results.forEach(row => {
         const tr = document.createElement('tr');
         
-        Object.values(row).forEach(value => {
+        Object.entries(row).forEach(([key, value]) => {
           const td = document.createElement('td');
-          td.textContent = value !== null && value !== undefined ? value.toString() : 'NULL';
+          
+          // Find column type if available
+          const columnInfo = selectedColumns.find(col => col.fullName.endsWith(key) || {});
+          const columnType = columnInfo.type || '';
+          
+          // Format value based on type
+          if (value === null || value === undefined) {
+            td.textContent = 'NULL';
+            td.className = 'null-value';
+          } else {
+            const formattedValue = formatValueByType(value, columnType);
+            td.innerHTML = formattedValue;
+          }
+          
           tr.appendChild(td);
         });
         
@@ -925,6 +901,36 @@
       // Clear previous results and add the new table
       resultsContainer.innerHTML = '';
       resultsContainer.appendChild(table);
+    }
+
+    // Format values based on their type
+    function formatValueByType(value, type) {
+      if (value === null || value === undefined) {
+        return '<span class="null-value">NULL</span>';
+      }
+      
+      const strValue = value.toString();
+      
+      // Apply formatting based on type
+      switch (type.toLowerCase()) {
+        case 'date':
+          return `<span class="date-value">${strValue}</span>`;
+        case 'time':
+          return `<span class="time-value">${strValue}</span>`;
+        case 'datetime':
+        case 'timestamp':
+          return `<span class="datetime-value">${strValue}</span>`;
+        case 'integer':
+        case 'numeric':
+        case 'decimal':
+        case 'float':
+          return `<span class="numeric-value">${strValue}</span>`;
+        case 'boolean':
+        case 'bool':
+          return `<span class="boolean-value">${strValue}</span>`;
+        default:
+          return strValue;
+      }
     }
 
     // Update status message
