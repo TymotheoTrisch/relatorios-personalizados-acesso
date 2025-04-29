@@ -4,7 +4,7 @@ const config = {
   user: 'sa',
   password: '_43690',
   server: 'localhost\\SQL2022',
-  database: 'AcessoTesteAlison',
+  database: 'SecullumAcessoNet',
   options: {
     encrypt: false,
     trustServerCertificate: true,

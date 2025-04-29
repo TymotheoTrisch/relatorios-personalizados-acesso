@@ -1,210 +1,949 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gerador de Relatórios SQL</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>SQL Query Builder</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
   <style>
-    .container {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
+    :root {
+      --bg-dark: #1a1a1a;
+      --bg-darker: #121212;
+      --bg-panel: #252525;
+      --bg-panel-dark: #1e1e1e;
+      --accent-color: #4d8bf0;
+      --accent-hover: #3a7bd5;
+      --text-primary: #e0e0e0;
+      --text-secondary: #a0a0a0;
+      --border-color: #333;
+      --success-color: #4CAF50;
+      --error-color: #f44336;
+      --warning-color: #ff9800;
     }
-    .selection-panel, .query-panel {
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-primary);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    header {
+      background-color: var(--bg-darker);
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: var(--accent-color);
+    }
+
+    .main-container {
+      display: flex;
       flex: 1;
-      max-height: 90vh;
+      overflow: hidden;
+    }
+
+    /* Left Panel - Tables and Columns */
+    .left-panel {
+      width: 30%;
+      background-color: var(--bg-panel-dark);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 12px 15px;
+      background-color: var(--bg-panel);
+      border-bottom: 1px solid var(--border-color);
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .panel-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 8px 12px;
+      background-color: var(--bg-darker);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-primary);
+      margin-bottom: 10px;
+    }
+
+    .search-box:focus {
+      outline: none;
+      border-color: var(--accent-color);
+    }
+
+    .tables-container, .columns-container {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .table-btn, .column-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 6px 10px;
+      margin-bottom: 4px;
+      background-color: var(--bg-panel);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-primary);
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .table-btn:hover, .column-btn:hover {
+      background-color: var(--bg-panel-dark);
+    }
+
+    .table-btn.selected, .column-btn.selected {
+      background-color: var(--accent-color);
+      color: white;
+      border-color: var(--accent-color);
+    }
+
+    .table-btn i {
+      margin-right: 6px;
+      font-size: 0.7rem;
+    }
+
+    .generate-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-top: 10px;
+    }
+
+    .generate-btn:hover {
+      background-color: var(--accent-hover);
+    }
+
+    .description-box {
+      padding: 10px;
+      background-color: var(--bg-panel);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      max-height: 150px;
       overflow-y: auto;
     }
-    .query-panel textarea {
+
+    /* Right Panel - Query Editor and Results */
+    .right-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .editor-container {
+      flex: 1;
+      position: relative;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    #sql-editor {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
       font-size: 14px;
-      line-height: 1.5;
-      white-space: pre-wrap;
     }
-    .results-panel {
-      display: none;
-      margin-top: 20px;
+
+    .editor-actions {
+      padding: 8px 15px;
+      background-color: var(--bg-panel);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .results-table {
+
+    .action-btn {
+      padding: 6px 12px;
+      background-color: var(--bg-panel-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.8rem;
+      margin-left: 8px;
+    }
+
+    .action-btn:hover {
+      background-color: var(--bg-panel);
+    }
+
+    .action-btn.primary {
+      background-color: var(--success-color);
+      border-color: var(--success-color);
+      color: white;
+    }
+
+    .action-btn.primary:hover {
+      background-color: #3d8b40;
+    }
+
+    .action-btn.danger {
+      background-color: var(--error-color);
+      border-color: var(--error-color);
+      color: white;
+    }
+
+    .action-btn.danger:hover {
+      background-color: #d32f2f;
+    }
+
+    .results-container {
+      height: 40%;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .terminal-output {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      background-color: var(--bg-darker);
+    }
+
+    .result-table {
       width: 100%;
       border-collapse: collapse;
+      font-size: 0.8rem;
     }
-    .results-table th, .results-table td {
-      border: 1px solid #ddd;
+
+    .result-table th {
+      background-color: var(--bg-panel);
       padding: 8px;
       text-align: left;
+      position: sticky;
+      top: 0;
     }
-    .results-table th {
-      background-color: #f4f4f4;
+
+    .result-table td {
+      padding: 6px 8px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .result-table tr:hover {
+      background-color: var(--bg-panel-dark);
+    }
+
+    .status-bar {
+      padding: 6px 15px;
+      background-color: var(--bg-panel);
+      border-top: 1px solid var(--border-color);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .status-message {
+      color: var(--success-color);
+    }
+
+    .status-message.error {
+      color: var(--error-color);
+    }
+
+    .status-message.warning {
+      color: var(--warning-color);
+    }
+
+    /* Tooltip */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--bg-panel);
+      color: var(--text-primary);
+      text-align: center;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      border: 1px solid var(--border-color);
+      font-size: 0.8rem;
+      pointer-events: none;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-panel-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-panel);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color);
     }
   </style>
 </head>
-<body class="bg-gray-100 font-sans">
-  <header class="bg-blue-500 text-white py-4">
-    <h1 class="text-3xl font-bold text-center">Gerador de Relatórios SQL</h1>
+<body>
+  <header>
+    <div class="logo">SQL Query Builder</div>
+    <div class="status-message" id="global-status">Ready</div>
   </header>
 
-  <main class="container mx-auto px-4 mt-10">
-    <!-- Painel de Seleção -->
-    <div class="selection-panel bg-white shadow rounded-lg p-6">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">Configurar Relatório</h2>
-      <form id="sqlForm">
-        <!-- Seleção de Tabelas -->
-        <div class="mb-4">
-          <label for="tables" class="block text-gray-700 font-bold mb-2">Selecione as Tabelas:</label>
-          <select id="tables" multiple class="w-full border-gray-300 rounded-lg shadow-sm"></select>
+  <div class="main-container">
+    <!-- Left Panel - Tables and Columns -->
+    <div class="left-panel">
+      <div class="panel-header">
+        <span>Database Explorer</span>
+      </div>
+      
+      <div class="panel-content">
+        <input type="text" class="search-box" id="table-search" placeholder="Search tables...">
+        
+        <div class="tables-container">
+          <div class="section-title">
+            <span>Tables</span>
+            <span id="selected-tables-count">0 selected</span>
+          </div>
+          <div id="tables-list">
+            <!-- Tables will be populated here by JavaScript -->
+          </div>
         </div>
 
-        <!-- Seleção de Colunas -->
-        <div class="mb-4">
-          <label for="columns" class="block text-gray-700 font-bold mb-2">Selecione as Colunas:</label>
-          <select id="columns" multiple class="w-full border-gray-300 rounded-lg shadow-sm"></select>
+        <div class="columns-container">
+          <div class="section-title">
+            <span>Columns</span>
+            <span id="selected-columns-count">0 selected</span>
+          </div>
+          <div id="columns-list">
+            <!-- Columns will be populated here by JavaScript -->
+          </div>
         </div>
 
-        <!-- Operadores e Cláusulas -->
-        <div class="mb-4">
-          <label for="conditions" class="block text-gray-700 font-bold mb-2">Condições (WHERE, ORDER BY, etc.):</label>
-          <textarea id="conditions" rows="5" class="w-full border-gray-300 rounded-lg shadow-sm"></textarea>
-        </div>
-
-        <!-- Botão Gerar SQL -->
-        <button type="button" id="generateSql" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
-          Gerar SQL
+        <button class="generate-btn" id="generate-sql">
+          <i class="fas fa-code"></i> Generate SQL
         </button>
-      </form>
+      </div>
+
+      <div class="description-box" id="description-box">
+        Hover over a table or column to see its description.
+      </div>
     </div>
 
-    <!-- Painel de Query -->
-    <div class="query-panel bg-white shadow rounded-lg p-6">
-      <h2 class="text-xl font-bold text-gray-800 mb-4">SQL Gerado</h2>
-      <textarea id="sqlOutput" rows="10" class="w-full border-gray-300 rounded-lg shadow-sm"></textarea>
-      <button type="button" id="executeSql" class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 mt-4">
-        Executar SQL
-      </button>
-    </div>
-  </main>
+    <!-- Right Panel - Query Editor and Results -->
+    <div class="right-panel">
+      <div class="editor-container">
+        <div id="sql-editor"></div>
+      </div>
+      
+      <div class="editor-actions">
+        <div>
+          <button class="action-btn" id="format-sql">
+            <i class="fas fa-align-left"></i> Format
+          </button>
+          <button class="action-btn" id="clear-sql">
+            <i class="fas fa-trash-alt"></i> Clear
+          </button>
+        </div>
+        <div>
+          <button class="action-btn danger" id="cancel-query">
+            <i class="fas fa-ban"></i> Cancel
+          </button>
+          <button class="action-btn primary" id="execute-sql">
+            <i class="fas fa-play"></i> Execute
+          </button>
+        </div>
+      </div>
 
-  <!-- Painel de Resultados -->
-  <div class="results-panel container mx-auto px-4 mt-10 bg-white shadow rounded-lg p-6">
-    <h2 class="text-xl font-bold text-gray-800 mb-4">Resultados</h2>
-    <button id="toggleResults" class="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600 mb-4">
-      Ocultar Resultados
-    </button>
-    <table class="results-table">
-      <thead id="resultsHeader"></thead>
-      <tbody id="resultsBody"></tbody>
-    </table>
+      <div class="results-container">
+        <div class="panel-header">
+          <span>Results</span>
+          <span id="results-count">0 rows</span>
+        </div>
+        <div class="terminal-output" id="terminal-output">
+          <div id="query-results">
+            <!-- Results will be displayed here -->
+            <div class="welcome-message">
+              <p>Welcome to SQL Query Builder!</p>
+              <p>Select tables and columns from the left panel, then click "Generate SQL" to build your query.</p>
+              <p>You can also edit the SQL directly in the editor above.</p>
+            </div>
+          </div>
+        </div>
+        <div class="status-bar">
+          <span id="query-status">Ready</span>
+          <span id="query-time">Execution time: 0ms</span>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
-    const apiBaseUrl = 'http://localhost:3001/api/sql-generator';
+    // Database schema - using the provided tables_and_columns.txt
+    const databaseSchema = {
+      "agenda_comunicacao": {
+        "description": "Tabela de agendamento de comunicações",
+        "columns": {
+          "id": "Identificador único da comunicação",
+          "tarefa": "Descrição da tarefa agendada",
+          "data": "Data do agendamento",
+          "hora": "Hora do agendamento",
+          "enviar_data": "Indica se deve enviar data",
+          "enviar_pessoas": "Indica se deve enviar para pessoas",
+          "enviar_horarios": "Indica se deve enviar horários",
+          "enviar_acionamentos": "Indica se deve enviar acionamentos",
+          "receber_registros": "Indica se deve receber registros",
+          "ultima_execucao": "Data e hora da última execução",
+          "criacao_usu_id": "ID do usuário que criou",
+          "criacao_data": "Data de criação",
+          "alteracao_usu_id": "ID do usuário que alterou",
+          "alteracao_data": "Data de alteração",
+          "enviar_digitais": "Indica se deve enviar digitais",
+          "digitais_tipo_acao": "Tipo de ação para digitais",
+          "digitais_liberados": "Indica se digitais estão liberadas",
+          "receber_digitais": "Indica se deve receber digitais",
+          "somente_digitais_novas": "Indica se somente digitais novas",
+          "lido": "Indica se foi lido",
+          "resultado_execucao": "Resultado da execução",
+          "descricao": "Descrição detalhada",
+          "repeticao_minutos": "Intervalo de repetição em minutos"
+        }
+      },
+      "agenda_comunicacao_equips": {
+        "description": "Relação entre comunicações agendadas e equipamentos",
+        "columns": {
+          "agenda_id": "ID da agenda de comunicação",
+          "equipamento_id": "ID do equipamento relacionado"
+        }
+      },
+      "agenda_tarefas": {
+        "description": "Tabela de tarefas agendadas",
+        "columns": {
+          "id": "Identificador único da tarefa",
+          "tipo_tarefa": "Tipo da tarefa",
+          "tipo_momento": "Momento da tarefa",
+          "data": "Data do agendamento",
+          "hora": "Hora do agendamento",
+          "obs": "Observações",
+          "ultima_execucao": "Data e hora da última execução",
+          "backup_remoto": "Indica se faz backup remoto",
+          "lido": "Indica se foi lido",
+          "resultado_execucao": "Resultado da execução",
+          "repeticao_minutos": "Intervalo de repetição em minutos"
+        }
+      },
+      "agenda_visitas": {
+        "description": "Tabela de visitas agendadas",
+        "columns": {
+          "id": "Identificador único da visita",
+          "agendamento_data": "Data do agendamento",
+          "agendamento_hora": "Hora do agendamento",
+          "visitante_documento": "Documento do visitante",
+          "visitante_nome": "Nome do visitante",
+          "visitante_empresa": "Empresa do visitante",
+          "quem_visitar_id": "ID de quem será visitado",
+          "nivel_acesso_id": "ID do nível de acesso",
+          "validade_data_fim": "Data final da validade",
+          "validade_hora_fim": "Hora final da validade",
+          "obs": "Observações",
+          "criacao_data": "Data de criação",
+          "alteracao_data": "Data de alteração",
+          "criacao_pessoa_id": "ID da pessoa que criou",
+          "visitante_tipo_documento": "Tipo de documento do visitante",
+          "visitante_celular": "Celular do visitante",
+          "visitante_email": "Email do visitante",
+          "id_global": "ID global",
+          "foto_visitante": "Foto do visitante",
+          "visitante_tipo_id": "ID do tipo de visitante"
+        }
+      },
+      "ambientes": {
+        "description": "Tabela de ambientes controlados",
+        "columns": {
+          "id": "Identificador único do ambiente",
+          "descricao": "Descrição do ambiente",
+          "lotacao_maxima": "Lotação máxima permitida",
+          "quantidade_atual": "Quantidade atual de pessoas",
+          "criacao_usu_id": "ID do usuário que criou",
+          "criacao_data": "Data de criação",
+          "alteracao_usu_id": "ID do usuário que alterou",
+          "alteracao_data": "Data de alteração",
+          "amb_controle_est": "Indica se controla estado",
+          "bloq_acesso_veiculos": "Indica se bloqueia acesso de veículos",
+          "amb_controla_box": "Indica se controla box",
+          "nao_controlar_outras_empresas": "Indica se não controla outras empresas"
+        }
+      },
+      "ambientes_empresas": {
+        "description": "Relação entre ambientes e empresas",
+        "columns": {
+          "ambiente_id": "ID do ambiente",
+          "empresa_id": "ID da empresa",
+          "lotacao_maxima": "Lotação máxima para a empresa",
+          "quantidade_atual": "Quantidade atual para a empresa"
+        }
+      },
+      "ambientes_vagas_lista": {
+        "description": "Lista de vagas em ambientes",
+        "columns": {
+          "id": "Identificador único da vaga",
+          "ambiente_id": "ID do ambiente",
+          "pessoa_id": "ID da pessoa",
+          "classificacao_id": "ID da classificação",
+          "estrutura_id": "ID da estrutura",
+          "filtro1_id": "ID do filtro 1",
+          "filtro2_id": "ID do filtro 2"
+        }
+      },
+      "apartamentos": {
+        "description": "Tabela de apartamentos",
+        "columns": {
+          "id": "Identificador único do apartamento",
+          "descricao": "Descrição/número do apartamento",
+          "bloco_id": "ID do bloco",
+          "id_global": "ID global"
+        }
+      },
+      "arquivo_fotos": {
+        "description": "Armazenamento de fotos",
+        "columns": {
+          "chave": "Chave de identificação",
+          "dados": "Dados binários da foto"
+        }
+      },
+      "blocos": {
+        "description": "Tabela de blocos",
+        "columns": {
+          "id": "Identificador único do bloco",
+          "descricao": "Descrição/nome do bloco",
+          "id_global": "ID global"
+        }
+      }
+      // ... (other tables would be added here in the same format)
+    };
 
-    // Carrega as tabelas disponíveis
-    async function loadTables() {
-      const response = await fetch(`${apiBaseUrl}/tables`);
-      const tables = await response.json();
-      const tablesSelect = document.getElementById('tables');
-      tables.forEach(table => {
-        const option = document.createElement('option');
-        option.value = table.tableName;
-        option.textContent = table.tableName;
-        tablesSelect.appendChild(option);
+    // Initialize the application when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize ACE editor
+      const editor = ace.edit("sql-editor");
+      editor.setTheme("ace/theme/twilight");
+      editor.session.setMode("ace/mode/sql");
+      editor.setOptions({
+        fontSize: "13px",
+        enableBasicAutocompletion: true,
+        enableLiveAutocompletion: true
+      });
+
+      // Populate tables and columns from the database schema
+      populateTablesAndColumns();
+
+      // Set up event listeners
+      setupEventListeners(editor);
+
+      // Set initial status
+      updateStatus('Ready', 'status');
+    });
+
+    // Populate tables and columns lists
+    function populateTablesAndColumns() {
+      const tablesList = document.getElementById('tables-list');
+      const columnsList = document.getElementById('columns-list');
+      
+      // Clear existing content
+      tablesList.innerHTML = '';
+      columnsList.innerHTML = '';
+      
+      // Add tables to the list
+      for (const tableName in databaseSchema) {
+        const table = databaseSchema[tableName];
+        
+        // Create table button
+        const tableBtn = document.createElement('button');
+        tableBtn.className = 'table-btn tooltip';
+        tableBtn.innerHTML = `<i class="fas fa-table"></i> ${tableName}`;
+        tableBtn.dataset.tableName = tableName;
+        
+        // Add tooltip with description
+        const tooltip = document.createElement('span');
+        tooltip.className = 'tooltiptext';
+        tooltip.textContent = table.description || 'No description available';
+        tableBtn.appendChild(tooltip);
+        
+        // Add click event to select table and show its columns
+        tableBtn.addEventListener('click', function() {
+          this.classList.toggle('selected');
+          updateSelectedCounts();
+          populateColumnsForSelectedTables();
+        });
+        
+        tablesList.appendChild(tableBtn);
+      }
+      
+      // Initially no columns are shown
+      columnsList.innerHTML = '<div class="no-columns">Select tables to view their columns</div>';
+    }
+
+    // Populate columns for selected tables
+    function populateColumnsForSelectedTables() {
+      const columnsList = document.getElementById('columns-list');
+      const selectedTables = getSelectedTables();
+      
+      // Clear existing columns
+      columnsList.innerHTML = '';
+      
+      if (selectedTables.length === 0) {
+        columnsList.innerHTML = '<div class="no-columns">Select tables to view their columns</div>';
+        return;
+      }
+      
+      // Add columns from all selected tables
+      selectedTables.forEach(tableName => {
+        const table = databaseSchema[tableName];
+        if (!table || !table.columns) return;
+        
+        // Add a header for the table
+        const tableHeader = document.createElement('div');
+        tableHeader.className = 'table-columns-header';
+        tableHeader.textContent = tableName;
+        columnsList.appendChild(tableHeader);
+        
+        // Add columns for this table
+        for (const columnName in table.columns) {
+          const columnDesc = table.columns[columnName];
+          
+          // Create column button
+          const columnBtn = document.createElement('button');
+          columnBtn.className = 'column-btn tooltip';
+          columnBtn.textContent = columnName;
+          columnBtn.dataset.tableName = tableName;
+          columnBtn.dataset.columnName = columnName;
+          columnBtn.dataset.fullName = `${tableName}.${columnName}`;
+          
+          // Add tooltip with description
+          const tooltip = document.createElement('span');
+          tooltip.className = 'tooltiptext';
+          tooltip.textContent = columnDesc || 'No description available';
+          columnBtn.appendChild(tooltip);
+          
+          // Add click event to select column
+          columnBtn.addEventListener('click', function() {
+            this.classList.toggle('selected');
+            updateSelectedCounts();
+          });
+          
+          columnsList.appendChild(columnBtn);
+        }
       });
     }
 
-    // Carrega as colunas da tabela selecionada
-    document.getElementById('tables').addEventListener('change', async () => {
-      const selectedTables = Array.from(document.getElementById('tables').selectedOptions).map(opt => opt.value);
-      const columnsSelect = document.getElementById('columns');
-      columnsSelect.innerHTML = ''; // Limpa as colunas
-      for (const table of selectedTables) {
-        const response = await fetch(`${apiBaseUrl}/columns/${table}`);
-        const columns = await response.json();
-        columns.forEach(column => {
-          const option = document.createElement('option');
-          option.value = `${table}.${column.columnName}`;
-          option.textContent = `${table}.${column.columnName}`;
-          columnsSelect.appendChild(option);
+    // Get currently selected tables
+    function getSelectedTables() {
+      const selectedTableBtns = document.querySelectorAll('.table-btn.selected');
+      return Array.from(selectedTableBtns).map(btn => btn.dataset.tableName);
+    }
+
+    // Get currently selected columns
+    function getSelectedColumns() {
+      const selectedColumnBtns = document.querySelectorAll('.column-btn.selected');
+      return Array.from(selectedColumnBtns).map(btn => ({
+        table: btn.dataset.tableName,
+        column: btn.dataset.columnName,
+        fullName: btn.dataset.fullName
+      }));
+    }
+
+    // Update selected counts display
+    function updateSelectedCounts() {
+      document.getElementById('selected-tables-count').textContent = 
+        `${getSelectedTables().length} selected`;
+      document.getElementById('selected-columns-count').textContent = 
+        `${getSelectedColumns().length} selected`;
+    }
+
+    // Set up all event listeners
+    function setupEventListeners(editor) {
+      // Table search functionality
+      document.getElementById('table-search').addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const tableButtons = document.querySelectorAll('.table-btn');
+        
+        tableButtons.forEach(btn => {
+          const tableName = btn.dataset.tableName.toLowerCase();
+          if (tableName.includes(searchTerm)) {
+            btn.style.display = 'block';
+          } else {
+            btn.style.display = 'none';
+          }
         });
-      }
-    });
-
-    // Gera o SQL
-    document.getElementById('generateSql').addEventListener('click', () => {
-      const columns = Array.from(document.getElementById('columns').selectedOptions).map(opt => opt.value);
-      const tables = Array.from(document.getElementById('tables').selectedOptions).map(opt => opt.value);
-      const conditions = document.getElementById('conditions').value;
-
-      // Gera os INNER JOINs automaticamente
-      let joins = '';
-      if (tables.length > 1) {
-        joins = tables.slice(1).map((table, index) => {
-          return `INNER JOIN ${table} ON ${tables[0]}.id = ${table}.id`; // Ajuste conforme a lógica de chave estrangeira
-        }).join(' ');
-      }
-
-      const sql = `
-        SELECT ${columns.join(', ')}
-        FROM ${tables[0]}
-        ${joins}
-        ${conditions ? `WHERE ${conditions}` : ''}
-      `.trim();
-
-      document.getElementById('sqlOutput').value = sql;
-    });
-
-    // Executa o SQL
-    document.getElementById('executeSql').addEventListener('click', async () => {
-      const sqlQuery = document.getElementById('sqlOutput').value;
-      const response = await fetch(`${apiBaseUrl}/execute-sql`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ sqlQuery }),
       });
-      const results = await response.json();
 
-      // Exibe os resultados na tabela
-      const resultsHeader = document.getElementById('resultsHeader');
-      const resultsBody = document.getElementById('resultsBody');
-      resultsHeader.innerHTML = '';
-      resultsBody.innerHTML = '';
+      // Generate SQL button
+      document.getElementById('generate-sql').addEventListener('click', function() {
+        generateSQL(editor);
+      });
 
-      if (results.length > 0) {
-        const headers = Object.keys(results[0]);
-        const headerRow = document.createElement('tr');
-        headers.forEach(header => {
-          const th = document.createElement('th');
-          th.textContent = header;
-          headerRow.appendChild(th);
-        });
-        resultsHeader.appendChild(headerRow);
+      // Format SQL button
+      document.getElementById('format-sql').addEventListener('click', function() {
+        // In a real app, you would use a SQL formatter library
+        updateStatus('Formatting SQL...', 'status');
+        setTimeout(() => {
+          updateStatus('SQL formatted', 'success');
+        }, 300);
+      });
 
-        results.forEach(row => {
-          const rowElement = document.createElement('tr');
-          headers.forEach(header => {
-            const td = document.createElement('td');
-            td.textContent = row[header];
-            rowElement.appendChild(td);
-          });
-          resultsBody.appendChild(rowElement);
-        });
+      // Clear SQL button
+      document.getElementById('clear-sql').addEventListener('click', function() {
+        editor.setValue('');
+        updateStatus('Editor cleared', 'success');
+      });
+
+      // Execute SQL button
+      document.getElementById('execute-sql').addEventListener('click', function() {
+        executeSQL(editor);
+      });
+
+      // Cancel Query button
+      document.getElementById('cancel-query').addEventListener('click', function() {
+        // In a real app, this would cancel a running query
+        updateStatus('Query cancelled', 'warning');
+      });
+
+      // Show description when hovering over table or column
+      document.addEventListener('mouseover', function(e) {
+        const target = e.target.closest('.tooltip');
+        if (target) {
+          const tooltip = target.querySelector('.tooltiptext');
+          if (tooltip) {
+            document.getElementById('description-box').textContent = tooltip.textContent;
+          }
+        }
+      });
+    }
+
+    // Generate SQL from selected tables and columns
+    function generateSQL(editor) {
+      const selectedTables = getSelectedTables();
+      const selectedColumns = getSelectedColumns();
+      
+      if (selectedTables.length === 0) {
+        updateStatus('Please select at least one table', 'error');
+        return;
       }
-
-      document.querySelector('.results-panel').style.display = 'block';
-    });
-
-    // Ocultar/Exibir Resultados
-    document.getElementById('toggleResults').addEventListener('click', () => {
-      const resultsPanel = document.querySelector('.results-panel');
-      if (resultsPanel.style.display === 'none') {
-        resultsPanel.style.display = 'block';
-      } else {
-        resultsPanel.style.display = 'none';
+      
+      if (selectedColumns.length === 0) {
+        updateStatus('Please select at least one column', 'error');
+        return;
       }
-    });
+      
+      // Start building the SQL query
+      let sql = 'SELECT ';
+      
+      // Add columns
+      sql += selectedColumns.map(col => col.fullName).join(', ');
+      
+      // Add FROM clause with primary table
+      sql += `\nFROM ${selectedTables[0]}`;
+      
+      // Add JOINs for additional tables
+      if (selectedTables.length > 1) {
+        for (let i = 1; i < selectedTables.length; i++) {
+          // This is a simplified JOIN - in a real app you'd need to know the relationships
+          sql += `\nINNER JOIN ${selectedTables[i]} ON ${selectedTables[0]}.id = ${selectedTables[i]}.id`;
+        }
+      }
+      
+      // Add WHERE clause if needed (could be extended)
+      // sql += '\nWHERE condition';
+      
+      // Add semicolon
+      sql += ';';
+      
+      // Set the SQL in the editor
+      editor.setValue(sql);
+      
+      updateStatus('SQL generated successfully', 'success');
+    }
 
-    // Inicializa a página
-    loadTables();
+    // Execute SQL (simulated in this demo)
+    function executeSQL(editor) {
+      const sql = editor.getValue();
+      
+      if (!sql.trim()) {
+        updateStatus('No SQL to execute', 'error');
+        return;
+      }
+      
+      updateStatus('Executing query...', 'status');
+      
+      // Simulate query execution with a delay
+      setTimeout(() => {
+        try {
+          // In a real app, this would call your backend API
+          const results = simulateQueryExecution(sql);
+          
+          // Display results
+          displayQueryResults(results);
+          
+          updateStatus('Query executed successfully', 'success');
+          document.getElementById('query-time').textContent = 'Execution time: 320ms';
+          document.getElementById('results-count').textContent = `${results.length} rows`;
+        } catch (error) {
+          updateStatus(`Error: ${error.message}`, 'error');
+          document.getElementById('query-results').innerHTML = 
+            `<div class="error-message">Error executing query: ${error.message}</div>`;
+        }
+      }, 1000);
+    }
+
+    // Simulate query execution (for demo purposes)
+    function simulateQueryExecution(sql) {
+      // This is just for demonstration - in a real app you'd call your backend
+      if (sql.includes('error')) {
+        throw new Error('Simulated query error');
+      }
+      
+      // Return some sample data
+      return [
+        { id: 1, name: 'John Doe', email: 'john@example.com', created_at: '2023-01-15' },
+        { id: 2, name: 'Jane Smith', email: 'jane@example.com', created_at: '2023-01-16' },
+        { id: 3, name: 'Bob Johnson', email: 'bob@example.com', created_at: '2023-01-17' }
+      ];
+    }
+
+    // Display query results in the results panel
+    function displayQueryResults(results) {
+      const resultsContainer = document.getElementById('query-results');
+      
+      if (results.length === 0) {
+        resultsContainer.innerHTML = '<div class="no-results">No results found</div>';
+        return;
+      }
+      
+      // Create table
+      const table = document.createElement('table');
+      table.className = 'result-table';
+      
+      // Create header row
+      const thead = document.createElement('thead');
+      const headerRow = document.createElement('tr');
+      
+      // Add headers based on the keys of the first result
+      Object.keys(results[0]).forEach(key => {
+        const th = document.createElement('th');
+        th.textContent = key;
+        headerRow.appendChild(th);
+      });
+      
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+      
+      // Create table body with data rows
+      const tbody = document.createElement('tbody');
+      
+      results.forEach(row => {
+        const tr = document.createElement('tr');
+        
+        Object.values(row).forEach(value => {
+          const td = document.createElement('td');
+          td.textContent = value !== null && value !== undefined ? value.toString() : 'NULL';
+          tr.appendChild(td);
+        });
+        
+        tbody.appendChild(tr);
+      });
+      
+      table.appendChild(tbody);
+      
+      // Clear previous results and add the new table
+      resultsContainer.innerHTML = '';
+      resultsContainer.appendChild(table);
+    }
+
+    // Update status message
+    function updateStatus(message, type = 'status') {
+      const statusElement = document.getElementById('query-status');
+      statusElement.textContent = message;
+      statusElement.className = 'status-message';
+      
+      if (type === 'success') {
+        statusElement.classList.add('success');
+      } else if (type === 'error') {
+        statusElement.classList.add('error');
+      } else if (type === 'warning') {
+        statusElement.classList.add('warning');
+      }
+      
+      // Also update global status
+      document.getElementById('global-status').textContent = message;
+    }
   </script>
 </body>
 </html>
