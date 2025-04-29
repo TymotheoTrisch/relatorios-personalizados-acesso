@@ -4676,4 +4676,300 @@
         }
       }
     }
+  },
+  {
+    "tipos_documentos": {
+      "description": "Tipos de documentos aceitos pelo sistema",
+      "columns": {
+        "id": {
+          "description": "Identificador do tipo de documento",
+          "type": "integer"
+        },
+        "descricao": {
+          "description": "Descrição do tipo de documento",
+          "type": "varchar"
+        },
+        "permitir_zeros_esquerda": {
+          "description": "Permite zeros à esquerda",
+          "type": "bit"
+        },
+        "permitir_alfa_numerico": {
+          "description": "Permite caracteres alfanuméricos",
+          "type": "bit"
+        },
+        "id_global": {
+          "description": "Identificador global do tipo de documento",
+          "type": "uniqueidentifier"
+        }
+      }
+    },
+    "tipos_ocorrencias": {
+      "description": "Classificação de tipos de ocorrências",
+      "columns": {
+        "id": {
+          "description": "Identificador do tipo de ocorrência",
+          "type": "integer"
+        },
+        "descricao": {
+          "description": "Descrição da ocorrência",
+          "type": "varchar"
+        }
+      }
+    },
+    "tipos_refeicoes": {
+      "description": "Tipos de refeições oferecidas",
+      "columns": {
+        "id": {
+          "description": "Identificador do tipo de refeição",
+          "type": "integer"
+        },
+        "pessoa_id": {
+          "description": "Identificador da pessoa associada",
+          "type": "integer"
+        },
+        "inicio": {
+          "description": "Horário de início da refeição",
+          "type": "integer"
+        },
+        "fim": {
+          "description": "Horário de término da refeição",
+          "type": "integer"
+        },
+        "seg": {
+          "description": "Disponível na segunda-feira",
+          "type": "bit"
+        },
+        "ter": {
+          "description": "Disponível na terça-feira",
+          "type": "bit"
+        },
+        "qua": {
+          "description": "Disponível na quarta-feira",
+          "type": "bit"
+        },
+        "qui": {
+          "description": "Disponível na quinta-feira",
+          "type": "bit"
+        },
+        "sex": {
+          "description": "Disponível na sexta-feira",
+          "type": "bit"
+        },
+        "sab": {
+          "description": "Disponível no sábado",
+          "type": "bit"
+        },
+        "dom": {
+          "description": "Disponível no domingo",
+          "type": "bit"
+        },
+        "fer": {
+          "description": "Disponível em feriados",
+          "type": "bit"
+        },
+        "descricao": {
+          "description": "Descrição do tipo de refeição",
+          "type": "varchar"
+        },
+        "valor": {
+          "description": "Valor da refeição",
+          "type": "smallmoney"
+        },
+        "grupo_refeicao_id": {
+          "description": "Grupo de refeição associado",
+          "type": "integer"
+        },
+        "codigo": {
+          "description": "Código identificador",
+          "type": "nvarchar"
+        },
+        "sobrepor_faixas_existentes": {
+          "description": "Indica se sobrepõe faixas existentes",
+          "type": "bit"
+        },
+        "equipamento_funcao_id": {
+          "description": "Função do equipamento relacionada",
+          "type": "integer"
+        }
+      }
+    },
+    "tipos_refeicoes_faixas": {
+      "description": "Faixas de quantidade e valor por tipo de refeição",
+      "columns": {
+        "id": {
+          "description": "Identificador da faixa",
+          "type": "integer"
+        },
+        "tipo_refeicao_id": {
+          "description": "Tipo de refeição associado",
+          "type": "integer"
+        },
+        "quantidade": {
+          "description": "Quantidade de refeições permitidas",
+          "type": "integer"
+        },
+        "valor": {
+          "description": "Valor correspondente",
+          "type": "smallmoney"
+        }
+      }
+    },
+    "tipos_refeicoes_grupo": {
+      "description": "Grupos de tipos de refeições",
+      "columns": {
+        "id": {
+          "description": "Identificador do grupo",
+          "type": "integer"
+        },
+        "descricao": {
+          "description": "Descrição do grupo",
+          "type": "varchar"
+        }
+      }
+    },
+    "usuarios": {
+      "description": "Cadastro de usuários do sistema",
+      "columns": {
+        "id": {
+          "description": "Identificador do usuário",
+          "type": "integer"
+        },
+        "nome": {
+          "description": "Nome do usuário",
+          "type": "varchar"
+        },
+        "administrador": {
+          "description": "Indica se é administrador",
+          "type": "bit"
+        },
+        "senha_entrada": {
+          "description": "Senha para entrada no sistema",
+          "type": "varchar"
+        },
+        "senha_alteracao": {
+          "description": "Senha para alteração de dados",
+          "type": "varchar"
+        },
+        "senha_comunicacao": {
+          "description": "Senha para comunicação entre módulos",
+          "type": "varchar"
+        },
+        "senha_cadastro": {
+          "description": "Senha para cadastramento",
+          "type": "varchar"
+        },
+        "senha_exclusao": {
+          "description": "Senha para exclusão",
+          "type": "varchar"
+        },
+        "dica_senha_entrada": {
+          "description": "Dica para senha de entrada",
+          "type": "varchar"
+        },
+        "validade_senha_entrada": {
+          "description": "Validade da senha de entrada",
+          "type": "smalldatetime"
+        },
+        "mensalidade_alterar": {
+          "description": "Pode alterar mensalidade",
+          "type": "bit"
+        },
+        "mensalidade_excluir": {
+          "description": "Pode excluir mensalidade",
+          "type": "bit"
+        },
+        "bloqueado": {
+          "description": "Usuário bloqueado",
+          "type": "bit"
+        },
+        "desativado": {
+          "description": "Usuário desativado",
+          "type": "bit"
+        },
+        "ultimo_login": {
+          "description": "Data e hora do último login",
+          "type": "datetime"
+        },
+        "criacao_usu_id": {
+          "description": "Usuário que criou o registro",
+          "type": "integer"
+        },
+        "criacao_data": {
+          "description": "Data de criação do registro",
+          "type": "datetime"
+        },
+        "alteracao_usu_id": {
+          "description": "Usuário que realizou a última alteração",
+          "type": "integer"
+        },
+        "alteracao_data": {
+          "description": "Data da última alteração",
+          "type": "datetime"
+        },
+        "bloquear_estado_pessoas": {
+          "description": "Bloqueia alteração do estado das pessoas",
+          "type": "bit"
+        },
+        "bloquear_principal": {
+          "description": "Bloqueia tela principal",
+          "type": "bit"
+        },
+        "somente_liberacoes_extras": {
+          "description": "Somente pode realizar liberações extras",
+          "type": "bit"
+        },
+        "grupo_id": {
+          "description": "Grupo ao qual o usuário pertence",
+          "type": "integer"
+        },
+        "visualizar_pessoas_bloqueadas": {
+          "description": "Pode visualizar pessoas bloqueadas",
+          "type": "bit"
+        },
+        "bloquear_validade_pessoas": {
+          "description": "Bloqueia alteração da validade das pessoas",
+          "type": "bit"
+        },
+        "permitir_dados_sensiveis": {
+          "description": "Pode acessar dados sensíveis",
+          "type": "bit"
+        },
+        "aceitou_dados_sensiveis": {
+          "description": "Aceitou o termo de dados sensíveis",
+          "type": "bit"
+        },
+        "data_aut_dados_sensiveis": {
+          "description": "Data de autorização dos dados sensíveis",
+          "type": "smalldatetime"
+        },
+        "usu_aut_dados_sensiveis_id": {
+          "description": "Usuário que autorizou acesso a dados sensíveis",
+          "type": "integer"
+        },
+        "usa_act_dir_entrada": {
+          "description": "Usa autenticação por diretório na entrada",
+          "type": "bit"
+        },
+        "usa_act_dir_alteracao": {
+          "description": "Usa autenticação por diretório para alteração",
+          "type": "bit"
+        },
+        "usa_act_dir_comunicacao": {
+          "description": "Usa autenticação por diretório para comunicação",
+          "type": "bit"
+        },
+        "usa_act_dir_cadastramento": {
+          "description": "Usa autenticação por diretório para cadastramento",
+          "type": "bit"
+        },
+        "usa_act_dir_exclusao": {
+          "description": "Usa autenticação por diretório para exclusão",
+          "type": "bit"
+        },
+        "data_termo_dados_sensiveis": {
+          "description": "Data de aceite do termo de dados sensíveis",
+          "type": "smalldatetime"
+        }
+      }
+    }
   }
