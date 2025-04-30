@@ -1,385 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SQL Query Builder</title>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript" charset="utf-8"></script>
-  <style>
-    :root {
-      --bg-dark: #1a1a1a;
-      --bg-darker: #121212;
-      --bg-panel: #252525;
-      --bg-panel-dark: #1e1e1e;
-      --accent-color: #4d8bf0;
-      --accent-hover: #3a7bd5;
-      --text-primary: #e0e0e0;
-      --text-secondary: #a0a0a0;
-      --border-color: #333;
-      --success-color: #4CAF50;
-      --error-color: #f44336;
-      --warning-color: #ff9800;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--bg-dark);
-      color: var(--text-primary);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    header {
-      background-color: var(--bg-darker);
-      padding: 12px 20px;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-weight: bold;
-      font-size: 1.2rem;
-      color: var(--accent-color);
-    }
-
-    .main-container {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-    }
-
-    /* Left Panel - Tables and Columns */
-    .left-panel {
-      width: 30%;
-      background-color: var(--bg-panel-dark);
-      border-right: 1px solid var(--border-color);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .panel-header {
-      padding: 12px 15px;
-      background-color: var(--bg-panel);
-      border-bottom: 1px solid var(--border-color);
-      font-weight: bold;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .panel-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 10px;
-    }
-
-    .search-box {
-      width: 100%;
-      padding: 8px 12px;
-      background-color: var(--bg-darker);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--text-primary);
-      margin-bottom: 10px;
-    }
-
-    .search-box:focus {
-      outline: none;
-      border-color: var(--accent-color);
-    }
-
-    .tables-container, .columns-container {
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .table-btn, .column-btn {
-      display: block;
-      width: 100%;
-      text-align: left;
-      padding: 6px 10px;
-      margin-bottom: 4px;
-      background-color: var(--bg-panel);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--text-primary);
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .table-btn:hover, .column-btn:hover {
-      background-color: var(--bg-panel-dark);
-    }
-
-    .table-btn.selected, .column-btn.selected {
-      background-color: var(--accent-color);
-      color: white;
-      border-color: var(--accent-color);
-    }
-
-    .table-btn i {
-      margin-right: 6px;
-      font-size: 0.7rem;
-    }
-
-    .column-type {
-      float: right;
-      font-size: 0.7rem;
-      color: var(--text-secondary);
-      font-style: italic;
-    }
-
-    .generate-btn {
-      width: 100%;
-      padding: 10px;
-      background-color: var(--accent-color);
-      color: white;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      margin-top: 10px;
-    }
-
-    .generate-btn:hover {
-      background-color: var(--accent-hover);
-    }
-
-    .description-box {
-      padding: 10px;
-      background-color: var(--bg-panel);
-      border-top: 1px solid var(--border-color);
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      max-height: 150px;
-      overflow-y: auto;
-    }
-
-    /* Right Panel - Query Editor and Results */
-    .right-panel {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .editor-container {
-      flex: 1;
-      position: relative;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    #sql-editor {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      font-size: 14px;
-    }
-
-    .editor-actions {
-      padding: 8px 15px;
-      background-color: var(--bg-panel);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .action-btn {
-      padding: 6px 12px;
-      background-color: var(--bg-panel-dark);
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.8rem;
-      margin-left: 8px;
-    }
-
-    .action-btn:hover {
-      background-color: var(--bg-panel);
-    }
-
-    .action-btn.primary {
-      background-color: var(--success-color);
-      border-color: var(--success-color);
-      color: white;
-    }
-
-    .action-btn.primary:hover {
-      background-color: #3d8b40;
-    }
-
-    .action-btn.danger {
-      background-color: var(--error-color);
-      border-color: var(--error-color);
-      color: white;
-    }
-
-    .action-btn.danger:hover {
-      background-color: #d32f2f;
-    }
-
-    .results-container {
-      height: 40%;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-
-    .terminal-output {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9rem;
-      background-color: var(--bg-darker);
-    }
-
-    .result-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.8rem;
-    }
-
-    .result-table th {
-      background-color: var(--bg-panel);
-      padding: 8px;
-      text-align: left;
-      position: sticky;
-      top: 0;
-    }
-
-    .result-table td {
-      padding: 6px 8px;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .result-table tr:hover {
-      background-color: var(--bg-panel-dark);
-    }
-
-    .status-bar {
-      padding: 6px 15px;
-      background-color: var(--bg-panel);
-      border-top: 1px solid var(--border-color);
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .status-message {
-      color: var(--success-color);
-    }
-
-    .status-message.error {
-      color: var(--error-color);
-    }
-
-    .status-message.warning {
-      color: var(--warning-color);
-    }
-
-    /* Tooltip */
-    .tooltip {
-      position: relative;
-      display: inline-block;
-    }
-
-    .tooltip .tooltiptext {
-      visibility: hidden;
-      width: 200px;
-      background-color: var(--bg-panel);
-      color: var(--text-primary);
-      text-align: center;
-      border-radius: 6px;
-      padding: 8px;
-      position: absolute;
-      z-index: 1;
-      bottom: 125%;
-      left: 50%;
-      transform: translateX(-50%);
-      opacity: 0;
-      transition: opacity 0.3s;
-      border: 1px solid var(--border-color);
-      font-size: 0.8rem;
-      pointer-events: none;
-    }
-
-    .tooltip:hover .tooltiptext {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg-panel-dark);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--bg-panel);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-color);
-    }
-
-    /* Date formatting */
-    .date-value {
-      color: #4fc3f7;
-    }
-
-    .time-value {
-      color: #81c784;
-    }
-
-    .datetime-value {
-      color: #ffb74d;
-    }
-
-    .numeric-value {
-      color: #ba68c8;
-    }
-
-    .boolean-value {
-      color: #ff8a65;
-    }
-  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js" type="text/javascript"
+    charset="utf-8"></script>
+  <link rel="stylesheet" href="./assets/css/s-gerar-script-sql.css">
 </head>
+
 <body>
   <header>
     <div class="logo">Gerar Queries SQL</div>
@@ -392,10 +23,10 @@
       <div class="panel-header">
         <span>Base de Dados</span>
       </div>
-      
+
       <div class="panel-content">
         <input type="text" class="search-box" id="table-search" placeholder="Pesquise tabelas...">
-        
+
         <div class="tables-container">
           <div class="section-title">
             <span>Tabelas</span>
@@ -421,6 +52,88 @@
         </button>
       </div>
 
+      <!-- Menu Suspenso Avançado -->
+      <div class="advanced-options-container">
+        <button class="advanced-toggle" id="advanced-toggle">
+          <i class="fas fa-cogs"></i> Opções Avançadas <i class="fas fa-chevron-down"></i>
+        </button>
+
+        <div class="advanced-content" id="advanced-content">
+          <div class="advanced-scroll-container"> <!-- Novo container para o scroll -->
+            <div class="advanced-section">
+              <h4><i class="fas fa-filter"></i> Filtros</h4>
+              <div class="form-group">
+                <label for="start-date">Data Início:</label>
+                <input type="date" id="start-date" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label for="end-date">Data Fim:</label>
+                <input type="date" id="end-date" class="form-control">
+              </div>
+
+              <div class="form-group">
+                <label for="name-filter">Filtrar por nome:</label>
+                <input type="text" id="name-filter" class="form-control" placeholder="Parte do nome">
+              </div>
+            </div>
+
+            <div class="advanced-section">
+              <h4><i class="fas fa-layer-group"></i> Agregação</h4>
+              <div class="form-check">
+                <input type="checkbox" id="use-groupby" class="form-check-input">
+                <label for="use-groupby" class="form-check-label">Usar GROUP BY</label>
+              </div>
+
+              <div class="form-group" id="groupby-columns-container" style="display: none;">
+                <label>Colunas para GROUP BY:</label>
+                <div id="groupby-columns-list"></div>
+              </div>
+            </div>
+
+            <div class="advanced-section">
+              <h4><i class="fas fa-random"></i> JOINs</h4>
+              <div class="form-group">
+                <label>Tipo de JOIN:</label>
+                <select id="join-type" class="form-control">
+                  <option value="INNER">INNER JOIN</option>
+                  <option value="LEFT">LEFT JOIN</option>
+                  <option value="RIGHT">RIGHT JOIN</option>
+                  <option value="FULL">FULL JOIN</option>
+                </select>
+              </div>
+
+              <div id="join-conditions-container">
+                <!-- As condições de JOIN serão geradas aqui -->
+              </div>
+            </div>
+
+            <div class="advanced-section">
+              <h4><i class="fas fa-code-branch"></i> Condições</h4>
+              <div class="form-group">
+                <label for="where-clause">Condição WHERE:</label>
+                <input type="text" id="where-clause" class="form-control" placeholder="Ex: status = 1">
+              </div>
+
+
+              <div class="form-group">
+                <label for="having-clause">Condição HAVING:</label>
+                <input type="text" id="having-clause" class="form-control" placeholder="Ex: COUNT(*) > 1">
+              </div>
+            </div>
+          </div>
+
+          <div class="advanced-actions">
+            <button id="apply-advanced" class="generate-btn small">
+              <i class="fas fa-check"></i> Aplicar
+            </button>
+            <button id="generate-advanced-sql" class="generate-btn small primary">
+              <i class="fas fa-cogs"></i> Gerar SQL Avançado
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="description-box" id="description-box">
         Passe o mouse sobre uma tabela ou coluna para ver sua descrição.
       </div>
@@ -431,7 +144,7 @@
       <div class="editor-container">
         <div id="sql-editor"></div>
       </div>
-      
+
       <div class="editor-actions">
         <div>
           <button class="action-btn" id="format-sql">
@@ -474,482 +187,9 @@
     </div>
   </div>
 
-  <script>
-    // Database schema with types - using the provided tables_and_columns.txt
-    const databaseSchema = {
-      "agenda_comunicacao": {
-        "description": "Tabela de agendamento de comunicações",
-        "columns": {
-          "id": {"description": "Identificador único da comunicação", "type": "integer"},
-          "tarefa": {"description": "Descrição da tarefa agendada", "type": "text"},
-          "data": {"description": "Data do agendamento", "type": "date"},
-          "hora": {"description": "Hora do agendamento", "type": "time"},
-          "enviar_data": {"description": "Indica se deve enviar data", "type": "boolean"},
-          "enviar_pessoas": {"description": "Indica se deve enviar para pessoas", "type": "boolean"},
-          "enviar_horarios": {"description": "Indica se deve enviar horários", "type": "boolean"},
-          "enviar_acionamentos": {"description": "Indica se deve enviar acionamentos", "type": "boolean"},
-          "receber_registros": {"description": "Indica se deve receber registros", "type": "boolean"},
-          "ultima_execucao": {"description": "Data e hora da última execução", "type": "datetime"},
-          "criacao_usu_id": {"description": "ID do usuário que criou", "type": "integer"},
-          "criacao_data": {"description": "Data de criação", "type": "datetime"},
-          "alteracao_usu_id": {"description": "ID do usuário que alterou", "type": "integer"},
-          "alteracao_data": {"description": "Data de alteração", "type": "datetime"},
-          "enviar_digitais": {"description": "Indica se deve enviar digitais", "type": "boolean"},
-          "digitais_tipo_acao": {"description": "Tipo de ação para digitais", "type": "text"},
-          "digitais_liberados": {"description": "Indica se digitais estão liberadas", "type": "boolean"},
-          "receber_digitais": {"description": "Indica se deve receber digitais", "type": "boolean"},
-          "somente_digitais_novas": {"description": "Indica se somente digitais novas", "type": "boolean"},
-          "lido": {"description": "Indica se foi lido", "type": "boolean"},
-          "resultado_execucao": {"description": "Resultado da execução", "type": "text"},
-          "descricao": {"description": "Descrição detalhada", "type": "text"},
-          "repeticao_minutos": {"description": "Intervalo de repetição em minutos", "type": "integer"}
-        }
-      },
-      "agenda_comunicacao_equips": {
-        "description": "Relação entre comunicações agendadas e equipamentos",
-        "columns": {
-          "agenda_id": {"description": "ID da agenda de comunicação", "type": "integer"},
-          "equipamento_id": {"description": "ID do equipamento relacionado", "type": "integer"}
-        }
-      },
-      "agenda_tarefas": {
-        "description": "Tabela de tarefas agendadas",
-        "columns": {
-          "id": {"description": "Identificador único da tarefa", "type": "integer"},
-          "tipo_tarefa": {"description": "Tipo da tarefa", "type": "text"},
-          "tipo_momento": {"description": "Momento da tarefa", "type": "text"},
-          "data": {"description": "Data do agendamento", "type": "date"},
-          "hora": {"description": "Hora do agendamento", "type": "time"},
-          "obs": {"description": "Observações", "type": "text"},
-          "ultima_execucao": {"description": "Data e hora da última execução", "type": "datetime"},
-          "backup_remoto": {"description": "Indica se faz backup remoto", "type": "boolean"},
-          "lido": {"description": "Indica se foi lido", "type": "boolean"},
-          "resultado_execucao": {"description": "Resultado da execução", "type": "text"},
-          "repeticao_minutos": {"description": "Intervalo de repetição em minutos", "type": "integer"}
-        }
-      },
-      "agenda_visitas": {
-        "description": "Tabela de visitas agendadas",
-        "columns": {
-          "id": {"description": "Identificador único da visita", "type": "integer"},
-          "agendamento_data": {"description": "Data do agendamento", "type": "date"},
-          "agendamento_hora": {"description": "Hora do agendamento", "type": "time"},
-          "visitante_documento": {"description": "Documento do visitante", "type": "text"},
-          "visitante_nome": {"description": "Nome do visitante", "type": "text"},
-          "visitante_empresa": {"description": "Empresa do visitante", "type": "text"},
-          "quem_visitar_id": {"description": "ID de quem será visitado", "type": "integer"},
-          "nivel_acesso_id": {"description": "ID do nível de acesso", "type": "integer"},
-          "validade_data_fim": {"description": "Data final da validade", "type": "date"},
-          "validade_hora_fim": {"description": "Hora final da validade", "type": "time"},
-          "obs": {"description": "Observações", "type": "text"},
-          "criacao_data": {"description": "Data de criação", "type": "datetime"},
-          "alteracao_data": {"description": "Data de alteração", "type": "datetime"},
-          "criacao_pessoa_id": {"description": "ID da pessoa que criou", "type": "integer"},
-          "visitante_tipo_documento": {"description": "Tipo de documento do visitante", "type": "text"},
-          "visitante_celular": {"description": "Celular do visitante", "type": "text"},
-          "visitante_email": {"description": "Email do visitante", "type": "text"},
-          "id_global": {"description": "ID global", "type": "text"},
-          "foto_visitante": {"description": "Foto do visitante", "type": "binary"},
-          "visitante_tipo_id": {"description": "ID do tipo de visitante", "type": "integer"}
-        }
-      }
-      // ... (other tables would be added here in the same format)
-    };
-
-    // Initialize the application when DOM is loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      // Initialize ACE editor
-      const editor = ace.edit("sql-editor");
-      editor.setTheme("ace/theme/twilight");
-      editor.session.setMode("ace/mode/sql");
-      editor.setOptions({
-        fontSize: "13px",
-        enableBasicAutocompletion: true,
-        enableLiveAutocompletion: true
-      });
-
-      // Populate tables and columns from the database schema
-      populateTablesAndColumns();
-
-      // Set up event listeners
-      setupEventListeners(editor);
-
-      // Set initial status
-      updateStatus('Pronto', 'status');
-    });
-
-    // Populate tables and columns lists
-    function populateTablesAndColumns() {
-      const tablesList = document.getElementById('tables-list');
-      const columnsList = document.getElementById('columns-list');
-      
-      // Clear existing content
-      tablesList.innerHTML = '';
-      columnsList.innerHTML = '';
-      
-      // Add tables to the list
-      for (const tableName in databaseSchema) {
-        const table = databaseSchema[tableName];
-        
-        // Create table button
-        const tableBtn = document.createElement('button');
-        tableBtn.className = 'table-btn tooltip';
-        tableBtn.innerHTML = `<i class="fas fa-table"></i> ${tableName}`;
-        tableBtn.dataset.tableName = tableName;
-        
-        // Add tooltip with description
-        const tooltip = document.createElement('span');
-        tooltip.className = 'tooltiptext';
-        tooltip.textContent = table.description || 'Nenhuma descrição disponível';
-        tableBtn.appendChild(tooltip);
-        
-        // Add click event to select table and show its columns
-        tableBtn.addEventListener('click', function() {
-          this.classList.toggle('selected');
-          updateSelectedCounts();
-          populateColumnsForSelectedTables();
-        });
-        
-        tablesList.appendChild(tableBtn);
-      }
-      
-      // Initially no columns are shown
-      columnsList.innerHTML = '<div class="no-columns">Selecione tabelas para visualizar suas colunas</div>';
-    }
-
-    // Populate columns for selected tables
-    function populateColumnsForSelectedTables() {
-      const columnsList = document.getElementById('columns-list');
-      const selectedTables = getSelectedTables();
-      
-      // Clear existing columns
-      columnsList.innerHTML = '';
-      
-      if (selectedTables.length === 0) {
-        columnsList.innerHTML = '<div class="no-columns">Selecione tabelas para visualizar suas colunas</div>';
-        return;
-      }
-      
-      // Add columns from all selected tables
-      selectedTables.forEach(tableName => {
-        const table = databaseSchema[tableName];
-        if (!table || !table.columns) return;
-        
-        // Add a header for the table
-        const tableHeader = document.createElement('div');
-        tableHeader.className = 'table-columns-header';
-        tableHeader.textContent = tableName;
-        columnsList.appendChild(tableHeader);
-        
-        // Add columns for this table
-        for (const columnName in table.columns) {
-          const columnInfo = table.columns[columnName];
-          
-          // Create column button
-          const columnBtn = document.createElement('button');
-          columnBtn.className = 'column-btn tooltip';
-          columnBtn.innerHTML = `${columnName} <span class="column-type">${columnInfo.type}</span>`;
-          columnBtn.dataset.tableName = tableName;
-          columnBtn.dataset.columnName = columnName;
-          columnBtn.dataset.type = columnInfo.type;
-          columnBtn.dataset.fullName = `${tableName}.${columnName}`;
-          
-          // Add tooltip with description
-          const tooltip = document.createElement('span');
-          tooltip.className = 'tooltiptext';
-          tooltip.textContent = columnInfo.description || 'Nenhuma descrição disponível';
-          columnBtn.appendChild(tooltip);
-          
-          // Add click event to select column
-          columnBtn.addEventListener('click', function() {
-            this.classList.toggle('selected');
-            updateSelectedCounts();
-          });
-          
-          columnsList.appendChild(columnBtn);
-        }
-      });
-    }
-
-    // Get currently selected tables
-    function getSelectedTables() {
-      const selectedTableBtns = document.querySelectorAll('.table-btn.selected');
-      return Array.from(selectedTableBtns).map(btn => btn.dataset.tableName);
-    }
-
-    // Get currently selected columns
-    function getSelectedColumns() {
-      const selectedColumnBtns = document.querySelectorAll('.column-btn.selected');
-      return Array.from(selectedColumnBtns).map(btn => ({
-        table: btn.dataset.tableName,
-        column: btn.dataset.columnName,
-        type: btn.dataset.type,
-        fullName: btn.dataset.fullName
-      }));
-    }
-
-    // Update selected counts display
-    function updateSelectedCounts() {
-      document.getElementById('selected-tables-count').textContent = 
-        `${getSelectedTables().length} selecionados`;
-      document.getElementById('selected-columns-count').textContent = 
-        `${getSelectedColumns().length} selecionados`;
-    }
-
-    // Set up all event listeners
-    function setupEventListeners(editor) {
-      // Table search functionality
-      document.getElementById('table-search').addEventListener('input', function() {
-        const searchTerm = this.value.toLowerCase();
-        const tableButtons = document.querySelectorAll('.table-btn');
-        
-        tableButtons.forEach(btn => {
-          const tableName = btn.dataset.tableName.toLowerCase();
-          if (tableName.includes(searchTerm)) {
-            btn.style.display = 'block';
-          } else {
-            btn.style.display = 'none';
-          }
-        });
-      });
-
-      // Generate SQL button
-      document.getElementById('generate-sql').addEventListener('click', function() {
-        generateSQL(editor);
-      });
-
-      // Format SQL button
-      document.getElementById('format-sql').addEventListener('click', function() {
-        // In a real app, you would use a SQL formatter library
-        updateStatus('Formatando SQL...', 'status');
-        setTimeout(() => {
-          updateStatus('SQL formatado', 'success');
-        }, 300);
-      });
-
-      // Clear SQL button
-      document.getElementById('clear-sql').addEventListener('click', function() {
-        editor.setValue('');
-        updateStatus('Editor limpo', 'success');
-      });
-
-      // Execute SQL button
-      document.getElementById('execute-sql').addEventListener('click', function() {
-        executeSQL(editor);
-      });
-
-      // Cancel Query button
-      document.getElementById('cancel-query').addEventListener('click', function() {
-        // In a real app, this would cancel a running query
-        updateStatus('Query cancelada', 'warning');
-      });
-
-      // Show description when hovering over table or column
-      document.addEventListener('mouseover', function(e) {
-        const target = e.target.closest('.tooltip');
-        if (target) {
-          const tooltip = target.querySelector('.tooltiptext');
-          if (tooltip) {
-            document.getElementById('description-box').textContent = tooltip.textContent;
-          }
-        }
-      });
-    }
-
-    // Generate SQL from selected tables and columns
-    function generateSQL(editor) {
-      const selectedTables = getSelectedTables();
-      const selectedColumns = getSelectedColumns();
-      
-      if (selectedTables.length === 0) {
-        updateStatus('Selecione pelo menos uma tabela', 'error');
-        return;
-      }
-      
-      if (selectedColumns.length === 0) {
-        updateStatus('Selecione pelo menos uma coluna', 'error');
-        return;
-      }
-      
-      // Start building the SQL query
-      let sql = 'SELECT ';
-      
-      // Add columns
-      sql += selectedColumns.map(col => col.fullName).join(', ');
-      
-      // Add FROM clause with primary table
-      sql += `\nFROM ${selectedTables[0]}`;
-      
-      // Add JOINs for additional tables
-      if (selectedTables.length > 1) {
-        for (let i = 1; i < selectedTables.length; i++) {
-          // This is a simplified JOIN - in a real app you'd need to know the relationships
-          sql += `\nINNER JOIN ${selectedTables[i]} ON ${selectedTables[0]}.id = ${selectedTables[i]}.id`;
-        }
-      }
-      
-      // Add WHERE clause if needed (could be extended)
-      // sql += '\nWHERE condition';
-      
-      // Add semicolon
-      sql += ';';
-      
-      // Set the SQL in the editor
-      editor.setValue(sql);
-      
-      updateStatus('SQL gerado com sucesso', 'success');
-    }
-
-    // Execute SQL (now with real database connection)
-    async function executeSQL(editor) {
-      const sql = editor.getValue();
-      
-      if (!sql.trim()) {
-        updateStatus('Nenhum SQL para executar', 'error');
-        return;
-      }
-      
-      updateStatus('Executando query...', 'status');
-      
-      try {
-        // Call backend API to execute the query
-        const response = await fetch('http://localhost:3001/api/sql-generator/execute-sql', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ sqlQuery: sql }),
-        });
-        
-        if (!response.ok) {
-          throw new Error(`Erro no servidor: ${response.status}`);
-        }
-        
-        const results = await response.json();
-        
-        // Display results with proper formatting based on column types
-        displayQueryResults(results, getSelectedColumns());
-        
-        updateStatus('Query executada com sucesso', 'success');
-        document.getElementById('query-time').textContent = 'Tempo de execução: 320ms';
-        document.getElementById('results-count').textContent = `${results.length} linhas`;
-      } catch (error) {
-        console.error('Erro ao executar query:', error);
-        updateStatus(`Erro: ${error.message}`, 'error');
-        document.getElementById('query-results').innerHTML = 
-          `<div class="error-message">Erro ao executar query: ${error.message}</div>`;
-      }
-    }
-
-    // Display query results with proper formatting
-    function displayQueryResults(results, selectedColumns = []) {
-      const resultsContainer = document.getElementById('query-results');
-      
-      if (!results || results.length === 0) {
-        resultsContainer.innerHTML = '<div class="no-results">Nenhum resultado encontrado</div>';
-        return;
-      }
-      
-      // Create table
-      const table = document.createElement('table');
-      table.className = 'result-table';
-      
-      // Create header row
-      const thead = document.createElement('thead');
-      const headerRow = document.createElement('tr');
-      
-      // Add headers based on the keys of the first result
-      Object.keys(results[0]).forEach(key => {
-        const th = document.createElement('th');
-        th.textContent = key;
-        headerRow.appendChild(th);
-      });
-      
-      thead.appendChild(headerRow);
-      table.appendChild(thead);
-      
-      // Create table body with data rows
-      const tbody = document.createElement('tbody');
-      
-      results.forEach(row => {
-        const tr = document.createElement('tr');
-        
-        Object.entries(row).forEach(([key, value]) => {
-          const td = document.createElement('td');
-          
-          // Find column type if available
-          const columnInfo = selectedColumns.find(col => col.fullName.endsWith(key) || {});
-          const columnType = columnInfo.type || '';
-          
-          // Format value based on type
-          if (value === null || value === undefined) {
-            td.textContent = 'NULL';
-            td.className = 'null-value';
-          } else {
-            const formattedValue = formatValueByType(value, columnType);
-            td.innerHTML = formattedValue;
-          }
-          
-          tr.appendChild(td);
-        });
-        
-        tbody.appendChild(tr);
-      });
-      
-      table.appendChild(tbody);
-      
-      // Clear previous results and add the new table
-      resultsContainer.innerHTML = '';
-      resultsContainer.appendChild(table);
-    }
-
-    // Format values based on their type
-    function formatValueByType(value, type) {
-      if (value === null || value === undefined) {
-        return '<span class="null-value">NULL</span>';
-      }
-      
-      const strValue = value.toString();
-      
-      // Apply formatting based on type
-      switch (type.toLowerCase()) {
-        case 'date':
-          return `<span class="date-value">${strValue}</span>`;
-        case 'time':
-          return `<span class="time-value">${strValue}</span>`;
-        case 'datetime':
-        case 'timestamp':
-          return `<span class="datetime-value">${strValue}</span>`;
-        case 'integer':
-        case 'numeric':
-        case 'decimal':
-        case 'float':
-          return `<span class="numeric-value">${strValue}</span>`;
-        case 'boolean':
-        case 'bool':
-          return `<span class="boolean-value">${strValue}</span>`;
-        default:
-          return strValue;
-      }
-    }
-
-    // Update status message
-    function updateStatus(message, type = 'status') {
-      const statusElement = document.getElementById('query-status');
-      statusElement.textContent = message;
-      statusElement.className = 'status-message';
-      
-      if (type === 'success') {
-        statusElement.classList.add('success');
-      } else if (type === 'error') {
-        statusElement.classList.add('error');
-      } else if (type === 'warning') {
-        statusElement.classList.add('warning');
-      }
-      
-      // Also update global status
-      document.getElementById('global-status').textContent = message;
-    }
-  </script>
+  <script src="./assets/js/j-gerar-script-sql.js"></script>
+  <!-- Adicione isso no <head> do seu HTML -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sql-formatter/4.0.2/sql-formatter.min.js"></script>
 </body>
+
 </html>
