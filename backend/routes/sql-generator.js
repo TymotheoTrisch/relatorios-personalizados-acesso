@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db');
 
+
+
 // Rota para listar todas as tabelas
 router.get('/tables', async (req, res) => {
   try {
@@ -14,6 +16,8 @@ router.get('/tables', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
 
 // Rota para listar colunas de uma tabela específica
 router.get('/columns/:tableName', async (req, res) => {
@@ -32,15 +36,26 @@ router.get('/columns/:tableName', async (req, res) => {
   }
 });
 
-// Rota para executar o SQL gerado
+
+
+
+// Rota para executar o SQL gerado (j-gerar-script-sql.js)
+// Esta rota deve ser chamada com um POST contendo o SQL a ser executado no corpo da requisição
 router.post('/execute-sql', async (req, res) => {
   const { sqlQuery } = req.body;
   try {
     const pool = await db;
     const result = await pool.request().query(sqlQuery);
     res.json(result.recordset);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+  } catch (error) {
+    // Captura detalhes do erro do SQL Server
+    const errorDetails = {
+      message: error.message,
+      code: error.code,
+      originalError: error.originalError?.info?.message || error.originalError?.message,
+      lineNumber: error.lineNumber || null
+    };
+    res.status(500).json({ error: errorDetails });
   }
 });
 

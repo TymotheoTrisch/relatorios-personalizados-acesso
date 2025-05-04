@@ -1,5 +1,5 @@
-const db = require('./db'); // Importa a conexão do arquivo db.js
-const fs = require('fs'); // Para salvar em um arquivo TXT
+import db from './db'; // Importa o módulo de conexão
+import { writeFileSync } from 'fs'; // Para salvar em um arquivo JSON
 
 async function gerarJsonDeTabelasEColunas() {
     try {
@@ -26,24 +26,30 @@ async function gerarJsonDeTabelasEColunas() {
             return;
         }
 
-        console.log('Montando o conteúdo formatado...');
-        // Monta o conteúdo formatado
-        let resultadoFormatado = '';
-        let tabelaAtual = '';
+        console.log('Montando o JSON formatado...');
+        // Monta o JSON formatado
+        const resultadoJson = {};
+
         rows.forEach(row => {
             const { table_name, column_name, data_type } = row;
-            if (tabelaAtual !== table_name) {
-                tabelaAtual = table_name;
-                resultadoFormatado += `\nTabela: ${table_name}\n`;
-                resultadoFormatado += 'Colunas:\n';
+
+            if (!resultadoJson[table_name]) {
+                resultadoJson[table_name] = {
+                    description: `Tabela ${table_name}`,
+                    columns: {}
+                };
             }
-            resultadoFormatado += `  - ${column_name} (${data_type})\n`;
+
+            resultadoJson[table_name].columns[column_name] = {
+                description: `Coluna ${column_name}`,
+                type: data_type
+            };
         });
 
-        console.log('Salvando o resultado no arquivo...');
-        // Salva o resultado em um arquivo TXT
-        fs.writeFileSync('tabelas_e_colunas.txt', resultadoFormatado.trim());
-        console.log('Resultado salvo no arquivo tabelas_e_colunas.txt');
+        console.log('Salvando o resultado no arquivo JSON...');
+        // Salva o resultado em um arquivo JSON
+        writeFileSync('dados.json', JSON.stringify(resultadoJson, null, 4));
+        console.log('Resultado salvo no arquivo dados.json');
 
     } catch (error) {
         console.error('Erro ao buscar tabelas e colunas:', error);
