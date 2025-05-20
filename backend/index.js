@@ -19,6 +19,6 @@ routeFiles.forEach(file => {
 const sqlGeneratorRoute = require('./routes/sql-generator');
 app.use('/api/sql-generator', sqlGeneratorRoute);
 
-app.listen(3001, () => {
-  console.log('API rodando na porta 3001');
+app.listen(3002, () => {
+  console.log('API rodando na porta 3002');
 });
