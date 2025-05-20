@@ -611,3 +611,54 @@ header {
 .groupby-column-item input {
     margin-right: 8px;
 }
+
+/* Estilos para as variáveis */
+.variable-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.variable-row input,
+.variable-row select {
+    flex: 1;
+}
+
+.remove-variable {
+    flex: 0 0 30px;
+}
+
+/* Melhorias no tratamento de erros */
+.error-message {
+    color: #ff6b6b;
+    padding: 15px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.error-message pre {
+    white-space: pre-wrap;
+    margin-top: 10px;
+    font-family: monospace;
+}
+
+/* Estilos para o GROUP BY */
+.groupby-options {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border-radius: 5px;
+}
+
+.groupby-column-item {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.groupby-column-item input {
+    margin-right: 8px;
+}
